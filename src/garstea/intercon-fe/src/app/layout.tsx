@@ -7,6 +7,7 @@ import ReduxProvider from '@/app/redux/provider';
 import { cn } from '@/lib/utils';
 
 import './styles/globals.css';
+import AppWrapper from './providers/AppWrapper';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -33,11 +34,7 @@ export default function RootLayout({
         )}
       >
         <ReduxProvider>
-          <div className='flex min-h-screen'>
-            <div className='flex-1 bg-gray-100'>
-              <>{children}</>
-            </div>
-          </div>
+          <AppWrapper>{children}</AppWrapper>
         </ReduxProvider>
       </body>
     </html>
