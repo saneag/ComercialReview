@@ -5,6 +5,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   output: 'standalone',
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;

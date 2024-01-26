@@ -6,8 +6,9 @@ import { Inter as FontSans } from 'next/font/google';
 import ReduxProvider from '@/app/redux/provider';
 import { cn } from '@/lib/utils';
 
-import './styles/globals.css';
 import AppWrapper from './providers/AppWrapper';
+
+import './styles/globals.css';
 
 const fontSans = FontSans({
   subsets: ['latin'],
