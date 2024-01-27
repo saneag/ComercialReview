@@ -1,5 +1,3 @@
-import { Button } from '@/app/components/ui/button';
-
-export default function AdminDashboard() {
-  return <div></div>;
+export default function AdminDashboardPage() {
+  return <div>Admin dashboard page</div>;
 }
