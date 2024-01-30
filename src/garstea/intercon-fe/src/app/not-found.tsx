@@ -30,7 +30,7 @@ export default function NotFoundPage() {
   };
 
   return (
-    <div className='flex-col-center h-screen gap-y-2 bg-gray-400'>
+    <div className='flex-col-center h-screen gap-y-2 bg-gray-300'>
       <Frown className='h-52 w-52' />
       <p className='text-6xl'>404</p>
       <p className='text-4xl text-gray-600'>Page not found</p>
