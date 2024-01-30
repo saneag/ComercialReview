@@ -2,7 +2,7 @@ import NotAuthComponent from '@/app/components/auth/components/notAuthComponent'
 
 export default function RouteGuard(Component: any) {
   return function RouteGuardWrapper(props: any) {
-    const isAuth = true;
+    const isAuth = false;
 
     if (!isAuth) {
       return <NotAuthComponent />;
