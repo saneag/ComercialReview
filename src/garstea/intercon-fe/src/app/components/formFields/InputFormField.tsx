@@ -26,7 +26,11 @@ export default function InputFormField({
       name={label}
       render={({ field }) => (
         <FormItem>
-          {displayLabel && <FormLabel>{displayLabel}</FormLabel>}
+          {displayLabel && (
+            <FormLabel className='text-lg text-gray-500'>
+              {displayLabel}
+            </FormLabel>
+          )}
           <FormControl>
             <Input
               {...field}

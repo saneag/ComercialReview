@@ -31,22 +31,24 @@ export default function LoginPage() {
   };
 
   return (
-    <AuthForm
-      defaultValues={defaultValues}
-      authSchema={loginFormSchema}
-      inputFields={loginFields}
-      onSubmit={onSubmit}
-      buttonLabel='Login'
-      formTitle='Login'
-    >
-      <div className='flex w-full justify-between'>
-        <Link href='/auth/signup' className='text-blue-500'>
-          Create Account
-        </Link>
-        <Link href='/auth/reset-password' className='text-blue-500'>
-          Forgot Password?
-        </Link>
-      </div>
-    </AuthForm>
+    <div className='flex-center w-full max-md:pb-20'>
+      <AuthForm
+        defaultValues={defaultValues}
+        authSchema={loginFormSchema}
+        inputFields={loginFields}
+        onSubmit={onSubmit}
+        buttonLabel='Login'
+        formTitle='Login'
+      >
+        <div className='flex w-full justify-between'>
+          <Link href='/auth/signup' className='text-blue-500'>
+            Create Account
+          </Link>
+          <Link href='/auth/reset-password' className='text-blue-500'>
+            Forgot Password?
+          </Link>
+        </div>
+      </AuthForm>
+    </div>
   );
 }

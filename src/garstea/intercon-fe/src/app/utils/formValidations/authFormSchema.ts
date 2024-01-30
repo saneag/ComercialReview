@@ -56,3 +56,35 @@ export const registerFormSchema = z
     message: 'Passwords do not match.',
     path: ['confirmPassword'],
   });
+
+export const resetPasswordFormSchema = z.object({
+  email: z
+    .string({
+      invalid_type_error: 'Invalid email format.',
+      required_error: 'Email is required.',
+    })
+    .email({ message: 'Email is required.' })
+    .min(1, { message: 'Email is required.' }),
+});
+
+export const resetPasswordConfirmFormSchema = z
+  .object({
+    email: z
+      .string({
+        invalid_type_error: 'Invalid email format.',
+        required_error: 'Email is required.',
+      })
+      .email({ message: 'Email is required.' })
+      .min(1, { message: 'Email is required.' }),
+    password: z
+      .string({
+        invalid_type_error: 'Invalid password format.',
+        required_error: 'Password is required.',
+      })
+      .min(1, { message: 'Password is required.' }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match.',
+    path: ['confirmPassword'],
+  });
