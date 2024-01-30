@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import AuthForm from '@/app/components/auth/components/authForm';
 import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
 import { LoginType } from '@/app/types/auth/AuthType';
@@ -35,6 +37,16 @@ export default function LoginPage() {
       inputFields={loginFields}
       onSubmit={onSubmit}
       buttonLabel='Login'
-    />
+      formTitle='Login'
+    >
+      <div className='flex w-full justify-between'>
+        <Link href='/auth/signup' className='text-blue-500'>
+          Create Account
+        </Link>
+        <Link href='/auth/reset-password' className='text-blue-500'>
+          Forgot Password?
+        </Link>
+      </div>
+    </AuthForm>
   );
 }

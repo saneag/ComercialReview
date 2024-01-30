@@ -9,10 +9,6 @@ export interface BaseFieldType {
 
 export interface LoginFieldType extends BaseFieldType {}
 
-export interface RegisterFieldType extends BaseFieldType {
-  firstName: string;
-  lastName: string;
-  confirmPassword: string;
-}
+export interface RegisterFieldType extends BaseFieldType {}
 
 export type AuthFormFieldsType = LoginFieldType | RegisterFieldType;

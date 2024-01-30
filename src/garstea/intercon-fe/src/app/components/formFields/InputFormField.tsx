@@ -32,7 +32,7 @@ export default function InputFormField({
               {...field}
               placeholder={placeholder}
               type={type ?? 'text'}
-              className='nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
+              className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
             />
           </FormControl>
           <FormMessage />

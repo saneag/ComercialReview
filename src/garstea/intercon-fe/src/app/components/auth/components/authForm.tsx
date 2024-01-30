@@ -1,6 +1,9 @@
+import { ReactNode } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import InputFormField from '@/app/components/formFields/InputFormField';
 import { Button } from '@/app/components/ui/button';
@@ -17,6 +20,9 @@ interface AuthFormProps {
   inputFields: AuthFormFieldsType[];
   onSubmit: (data: AuthFormSchemaState) => Promise<void>;
   buttonLabel: string;
+  formTitle: string;
+  children?: ReactNode;
+  isArrowBack?: boolean;
 }
 
 export default function AuthForm({
@@ -25,7 +31,12 @@ export default function AuthForm({
   inputFields,
   onSubmit,
   buttonLabel,
+  formTitle,
+  children,
+  isArrowBack,
 }: AuthFormProps) {
+  const router = useRouter();
+
   const form = useForm<AuthFormSchemaState>({
     defaultValues,
     mode: 'onChange',
@@ -33,12 +44,28 @@ export default function AuthForm({
   });
 
   return (
-    <div className='rounded-lg px-14 py-8 nm-flat-white'>
+    <div className='w-11/12 space-y-4 rounded-lg px-8 py-8 nm-flat-white sm:w-[500px] md:px-14'>
+      <div className='flex flex-wrap items-center justify-between space-y-2'>
+        <div>
+          {isArrowBack && (
+            <ArrowLeft
+              onClick={() => {
+                router.push('/auth/login');
+              }}
+              className='h-6 w-6 cursor-pointer'
+            />
+          )}
+        </div>
+        <h1 className={`text-3xl font-bold ${isArrowBack && '-ml-6'}`}>
+          {formTitle}
+        </h1>
+        <div></div>
+      </div>
       <FormProvider {...form}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className='flex flex-col items-center space-y-5'>
-              <div className='flex flex-col space-y-5'>
+              <div className='flex w-full flex-col space-y-5'>
                 {inputFields.map((field) => (
                   <InputFormField
                     key={field.label}
@@ -49,9 +76,10 @@ export default function AuthForm({
                   />
                 ))}
               </div>
+              {children && <>{children}</>}
               <Button
                 type='submit'
-                className='w-6/12 nm-concave-blue-500-sm hover:nm-concave-blue-600-sm'
+                className='w-44 nm-concave-blue-500-sm hover:nm-concave-blue-600-sm'
               >
                 {buttonLabel}
               </Button>
