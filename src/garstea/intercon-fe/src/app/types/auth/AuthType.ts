@@ -12,4 +12,14 @@ export interface RegisterType extends BaseAuthType {
   username?: string;
 }
 
-export type AuthType = LoginType | RegisterType;
+export interface ResetPasswordType extends Omit<BaseAuthType, 'password'> {}
+
+export interface ResetPasswordConfirmType extends BaseAuthType {
+  confirmPassword: string;
+}
+
+export type AuthType =
+  | LoginType
+  | RegisterType
+  | ResetPasswordType
+  | ResetPasswordConfirmType;
