@@ -16,6 +16,7 @@ interface DropdownProps {
   triggerText: ReactNode;
   contentLabel: string;
   contentFields: DropdownContentFields[];
+  additionalContent?: DropdownContentFields[];
   children?: ReactNode;
 }
 
@@ -23,6 +24,7 @@ export default function Dropdown({
   triggerText,
   contentFields,
   contentLabel,
+  additionalContent,
 }: DropdownProps) {
   return (
     <DropdownMenu>
@@ -36,6 +38,12 @@ export default function Dropdown({
             {field.label}
           </DropdownMenuItem>
         ))}
+        {additionalContent &&
+          additionalContent.map((field) => (
+            <DropdownMenuItem className='cursor-pointer' key={field.value}>
+              {field.label}
+            </DropdownMenuItem>
+          ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

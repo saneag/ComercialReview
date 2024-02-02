@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { UserRound } from 'lucide-react';
 import Link from 'next/link';
 
@@ -5,6 +7,12 @@ import Dropdown from '@/app/components/dropdown';
 import { DropdownContentFields } from '@/app/types/dropdown/DropdownContentFields';
 
 export default function UserDropdown() {
+  const isAuth = false;
+
+  const [additionalContent, setAdditionalContent] = useState<
+    DropdownContentFields[]
+  >([]);
+
   const contentFields: DropdownContentFields[] = [
     {
       label: <Link href='/profile'>Profile</Link>,
@@ -14,15 +22,25 @@ export default function UserDropdown() {
       label: 'Settings',
       value: 'settings',
     },
-    {
-      label: <Link href='/auth/login'>Login</Link>,
-      value: 'login',
-    },
-    {
-      label: 'Logout',
-      value: 'logout',
-    },
   ];
+
+  useEffect(() => {
+    if (isAuth) {
+      setAdditionalContent([
+        {
+          label: 'Logout',
+          value: 'logout',
+        },
+      ]);
+    } else {
+      setAdditionalContent([
+        {
+          label: <Link href='/auth/login'>Login</Link>,
+          value: 'login',
+        },
+      ]);
+    }
+  }, [isAuth]);
 
   return (
     <div>
@@ -33,7 +51,8 @@ export default function UserDropdown() {
           </div>
         }
         contentLabel='User menu'
-        contentFields={contentFields}
+        contentFields={isAuth ? contentFields : []}
+        additionalContent={additionalContent}
       />
     </div>
   );
