@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
+import RequiredFieldStar from '@/app/components/requiredFieldStar';
 import {
   FormControl,
   FormField,
@@ -17,6 +18,7 @@ export default function InputFormField({
   displayLabel,
   placeholder,
   type,
+  isRequired,
 }: InputFormFieldProps) {
   const form = useFormContext();
 
@@ -28,7 +30,7 @@ export default function InputFormField({
         <FormItem>
           {displayLabel && (
             <FormLabel className='text-lg text-gray-500'>
-              {displayLabel}
+              {displayLabel} {isRequired && <RequiredFieldStar />}
             </FormLabel>
           )}
           <FormControl>
