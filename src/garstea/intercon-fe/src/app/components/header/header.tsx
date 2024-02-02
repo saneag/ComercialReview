@@ -9,7 +9,7 @@ export default function Header() {
   const role = 'admin';
 
   return (
-    <div className='flex h-16 w-full items-center justify-between bg-gray-300 px-5'>
+    <div className='flex h-16 w-full items-center justify-between px-5 nm-flat-white'>
       <Logo />
       <Links />
       <UserDropdown />
