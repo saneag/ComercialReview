@@ -18,7 +18,7 @@ export default function ReviewsFilters() {
   };
 
   return (
-    <div className='sticky top-0 flex w-full justify-center'>
+    <div className='sticky top-5 flex w-full justify-center'>
       <Card className='w-full max-w-[350px] shadow-md'>
         <CardHeader>Filters</CardHeader>
         <CardContent className='space-y-3'>
