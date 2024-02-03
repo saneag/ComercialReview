@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace('/reviews');
+    router.replace('/businesses');
   }, [router]);
 
   return <div></div>;

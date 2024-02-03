@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Logo() {
   return (
-    <Link href='/reviews'>
+    <Link href='/businesses'>
       <Image
         src='/assets/images/intercon-logo-no-text.png'
         width={40}
