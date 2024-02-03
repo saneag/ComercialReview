@@ -38,6 +38,20 @@ export const userApi = createApi({
         },
       }),
     }),
+    resetPassword: builder.mutation({
+      query: (body) => ({
+        url: '/users/reset-password',
+        method: 'POST',
+        data: body,
+      }),
+    }),
+    resetPasswordConfirm: builder.mutation({
+      query: (body) => ({
+        url: '/users/reset-password-confirm',
+        method: 'POST',
+        data: body,
+      }),
+    }),
     updateUser: builder.mutation({
       query: (body) => ({
         url: '/users',
@@ -62,6 +76,8 @@ export const {
   useLazyGetUsersQuery,
   useLoginUserMutation,
   useCreateUserMutation,
+  useResetPasswordMutation,
+  useResetPasswordConfirmMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
 } = userApi;
