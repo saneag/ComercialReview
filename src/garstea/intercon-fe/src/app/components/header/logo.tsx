@@ -9,6 +9,8 @@ export default function Logo() {
         width={40}
         height={40}
         alt=''
+        priority
+        className='h-auto w-auto'
       />
     </Link>
   );

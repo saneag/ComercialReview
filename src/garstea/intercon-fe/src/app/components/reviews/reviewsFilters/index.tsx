@@ -5,8 +5,11 @@ import { useState } from 'react';
 import FiltersAccordion from '@/app/components/reviews/reviewsFilters/filtersAccordion';
 import SearchInput from '@/app/components/searchInput';
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
+import { useAppSelector } from '@/app/redux/store';
 
 export default function ReviewsFilters() {
+  const filters = useAppSelector((state) => state.reviewsFilter);
+
   const [search, setSearch] = useState('');
 
   const onSearch = (value: string) => {
@@ -18,7 +21,7 @@ export default function ReviewsFilters() {
     <div className='sticky top-0 flex w-full justify-center'>
       <Card className='w-full max-w-[350px] shadow-md'>
         <CardHeader>Filters</CardHeader>
-        <CardContent>
+        <CardContent className='space-y-3'>
           <SearchInput
             search={search}
             setSearch={setSearch}
