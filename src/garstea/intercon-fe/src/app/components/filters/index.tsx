@@ -1,15 +1,17 @@
-'use client';
-
 import { useState } from 'react';
 
-import FiltersAccordion from '@/app/components/reviews/reviewsFilters/filtersAccordion';
+import FiltersAccordion from '@/app/components/filters/filtersAccordion';
 import SearchInput from '@/app/components/searchInput';
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
-import { useAppSelector } from '@/app/redux/store';
+import { FilterAccordionItemType } from '@/app/types/FilterAccordionItemType';
 
-export default function ReviewsFilters() {
-  const filters = useAppSelector((state) => state.reviewsFilter);
+interface FiltersCardProps {
+  filterAccordionItems: FilterAccordionItemType[];
+}
 
+export default function FiltersCard({
+  filterAccordionItems,
+}: FiltersCardProps) {
   const [search, setSearch] = useState('');
 
   const onSearch = (value: string) => {
@@ -29,7 +31,7 @@ export default function ReviewsFilters() {
             className='shadow-md focus:ring-0 focus:ring-offset-0 focus-visible:bg-gray-100/50 focus-visible:ring-0 focus-visible:ring-offset-0'
             placeholder='Search reviews...'
           />
-          <FiltersAccordion />
+          <FiltersAccordion filterAccordionItems={filterAccordionItems} />
         </CardContent>
       </Card>
     </div>
