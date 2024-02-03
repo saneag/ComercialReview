@@ -4,10 +4,16 @@ import { Star } from 'lucide-react';
 
 import { Checkbox } from '@/app/components/ui/checkbox';
 import { Label } from '@/app/components/ui/label';
-import { setRatingFilter } from '@/app/redux/features/slices/reviewsFilterSlice';
 import { useAppDispatch } from '@/app/redux/store';
+import { RatingFilterType } from '@/app/types/filter/EntityFilterType';
 
-export default function RatingAccordionItems() {
+interface RatingAccordionItemsProps {
+  setFilter: RatingFilterType;
+}
+
+export default function RatingAccordionItems({
+  setFilter,
+}: RatingAccordionItemsProps) {
   const dispatch = useAppDispatch();
 
   const ratings = [
@@ -19,7 +25,7 @@ export default function RatingAccordionItems() {
   ];
 
   const handleCheckboxChange = (ratingValue: number) => {
-    dispatch(setRatingFilter(ratingValue));
+    dispatch(setFilter(ratingValue));
   };
 
   return (

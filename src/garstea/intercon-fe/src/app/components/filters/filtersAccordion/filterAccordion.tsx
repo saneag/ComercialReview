@@ -1,6 +1,6 @@
 import FilterAccordionItem from '@/app/components/filters/filtersAccordion/filterAccordionItems';
 import { Accordion } from '@/app/components/ui/accordion';
-import { FilterAccordionItemType } from '@/app/types/FilterAccordionItemType';
+import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
 interface FiltersAccordionProps {
   filterAccordionItems: FilterAccordionItemType[];

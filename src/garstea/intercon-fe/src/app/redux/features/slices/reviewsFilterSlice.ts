@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ReviewFilterType } from '@/app/types/ReviewFilterType';
+import { ReviewFilterType } from '@/app/types/filter/EntityFilterType';
 
 const initialState: ReviewFilterType = {
   rating: [],
@@ -10,7 +10,7 @@ const reviewsFilterSlice = createSlice({
   name: 'reviewsFilter',
   initialState,
   reducers: {
-    setRatingFilter(state, action: PayloadAction<number>) {
+    setReviewRatingFilter(state, action: PayloadAction<number>) {
       const index = state.rating.indexOf(action.payload);
       if (index === -1) {
         state.rating.push(action.payload);
@@ -21,6 +21,6 @@ const reviewsFilterSlice = createSlice({
   },
 });
 
-export const { setRatingFilter } = reviewsFilterSlice.actions;
+export const { setReviewRatingFilter } = reviewsFilterSlice.actions;
 
 export default reviewsFilterSlice.reducer;

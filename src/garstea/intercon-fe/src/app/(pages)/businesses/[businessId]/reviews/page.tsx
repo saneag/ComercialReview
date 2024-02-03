@@ -1,10 +1,11 @@
 'use client';
 
 import FiltersCard from '@/app/components/filters';
-import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterAccordionItems/ratingAccordionItems';
+import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/ratingAccordionItems';
 import ReviewsList from '@/app/components/reviewsList';
+import { setReviewRatingFilter } from '@/app/redux/features/slices/reviewsFilterSlice';
 import { useAppSelector } from '@/app/redux/store';
-import { FilterAccordionItemType } from '@/app/types/FilterAccordionItemType';
+import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
 export default function ReviewsPage() {
   const filters = useAppSelector((state) => state.reviewsFilter.rating);
@@ -13,7 +14,7 @@ export default function ReviewsPage() {
     {
       filterValue: 'rating',
       triggerLabel: 'Rating',
-      children: <RatingAccordionItems />,
+      children: <RatingAccordionItems setFilter={setReviewRatingFilter} />,
     },
   ];
 

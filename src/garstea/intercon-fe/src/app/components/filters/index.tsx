@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import FiltersAccordion from '@/app/components/filters/filtersAccordion';
+import FiltersAccordion from '@/app/components/filters/filtersAccordion/filterAccordion';
 import SearchInput from '@/app/components/searchInput';
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
-import { FilterAccordionItemType } from '@/app/types/FilterAccordionItemType';
+import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
 interface FiltersCardProps {
   filterAccordionItems: FilterAccordionItemType[];

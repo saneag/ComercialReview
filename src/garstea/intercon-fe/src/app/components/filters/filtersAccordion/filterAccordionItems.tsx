@@ -4,7 +4,7 @@ import {
   AccordionTrigger,
 } from '@/app/components/ui/accordion';
 import { Card, CardContent } from '@/app/components/ui/card';
-import { FilterAccordionItemType } from '@/app/types/FilterAccordionItemType';
+import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
 interface AccordionItemProps extends FilterAccordionItemType {}
 
