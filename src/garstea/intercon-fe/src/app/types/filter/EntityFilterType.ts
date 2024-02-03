@@ -2,13 +2,15 @@ import { setBusinessRatingFilter } from '@/app/redux/features/slices/businessFil
 import { setReviewRatingFilter } from '@/app/redux/features/slices/reviewsFilterSlice';
 
 export interface BaseFilterType {
-  rating: number[];
+  rating: RatingFilterType;
 }
+
+export type RatingFilterType = number[];
 
 export interface ReviewFilterType extends BaseFilterType {}
 
 export interface BusinessFilterType extends BaseFilterType {}
 
-export type RatingFilterType =
+export type SetRatingFilterType =
   | typeof setReviewRatingFilter
   | typeof setBusinessRatingFilter;

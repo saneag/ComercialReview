@@ -8,13 +8,18 @@ import { useAppSelector } from '@/app/redux/store';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
 export default function ReviewsPage() {
-  const filters = useAppSelector((state) => state.reviewsFilter.rating);
+  const filters = useAppSelector((state) => state.reviewsFilter);
 
   const filterAccordionItems: FilterAccordionItemType[] = [
     {
       filterValue: 'rating',
       triggerLabel: 'Rating',
-      children: <RatingAccordionItems setFilter={setReviewRatingFilter} />,
+      children: (
+        <RatingAccordionItems
+          ratingFilter={filters.rating}
+          setFilter={setReviewRatingFilter}
+        />
+      ),
     },
   ];
 
