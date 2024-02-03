@@ -3,10 +3,15 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
+import reviewsFilterSlice from '@/app/redux/features/slices/reviewsFilterSlice';
+import userSlice from '@/app/redux/features/slices/userSlice';
 import { userApi } from '@/app/redux/features/userApi/userApi';
+import { rtkQueryErrorLogger } from '@/app/redux/rtkQueryErrorLogger';
 
 const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
+  user: userSlice,
+  reviewsFilter: reviewsFilterSlice,
 });
 
 export const store = configureStore({
@@ -14,7 +19,10 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(userApi.middleware),
+    })
+      .concat(userApi.middleware)
+      .concat(rtkQueryErrorLogger),
+  devTools: process.env.NEXT_PUBLIC_NODE_ENV !== 'production',
 });
 
 setupListeners(store.dispatch);

@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className='flex min-h-screen'>
       <div className='flex-1 bg-gray-100'>
         <Header />
-        <div className='h-[200vh] pt-16'>{children}</div>
+        <div className='container'>{children}</div>
       </div>
     </div>
   );

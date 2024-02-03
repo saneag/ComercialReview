@@ -19,10 +19,11 @@ interface AuthFormProps {
   authSchema: AuthFormSchemaType;
   inputFields: AuthFormFieldsType[];
   onSubmit: (data: AuthFormSchemaState) => Promise<void>;
-  buttonLabel: string;
+  buttonLabel: ReactNode;
   formTitle: string;
   children?: ReactNode;
   isArrowBack?: boolean;
+  isLoading: boolean;
 }
 
 export default function AuthForm({
@@ -34,6 +35,7 @@ export default function AuthForm({
   formTitle,
   children,
   isArrowBack,
+  isLoading,
 }: AuthFormProps) {
   const router = useRouter();
 
@@ -73,6 +75,7 @@ export default function AuthForm({
                     displayLabel={field.displayLabel}
                     placeholder={field.placeholder}
                     type={field.type}
+                    isRequired={field.isRequired}
                   />
                 ))}
               </div>
@@ -80,6 +83,7 @@ export default function AuthForm({
               <Button
                 type='submit'
                 className='w-44 nm-concave-blue-500-sm hover:nm-concave-blue-600-sm'
+                disabled={isLoading || !form.formState.isValid}
               >
                 {buttonLabel}
               </Button>

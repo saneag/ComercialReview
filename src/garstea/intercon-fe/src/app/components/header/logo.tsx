@@ -5,11 +5,12 @@ export default function Logo() {
   return (
     <Link href='/reviews'>
       <Image
-        src='/assets/images/intercon-logo.png'
+        src='/assets/images/intercon-logo-no-text.png'
         width={40}
         height={40}
         alt=''
-        className='rounded-full'
+        priority
+        className='h-auto w-auto'
       />
     </Link>
   );

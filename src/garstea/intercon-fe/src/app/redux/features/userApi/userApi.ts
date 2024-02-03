@@ -9,33 +9,59 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     getUsers: builder.query<UserType[], void>({
       query: () => ({
-        url: '/user',
+        url: '/users',
         method: 'GET',
       }),
     }),
     getUser: builder.query<UserType, number>({
       query: (id) => ({
-        url: '/user',
+        url: '/users',
         method: 'GET',
+      }),
+    }),
+    loginUser: builder.mutation({
+      query: (body) => ({
+        url: '/users/login',
+        method: 'POST',
+        data: body,
       }),
     }),
     createUser: builder.mutation({
       query: (body) => ({
-        url: '/user',
+        url: '/users',
+        method: 'POST',
+        data: {
+          firstName: body.firstName,
+          lastName: body.lastName,
+          email: body.email,
+          password: body.password,
+        },
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (body) => ({
+        url: '/users/reset-password',
+        method: 'POST',
+        data: body,
+      }),
+    }),
+    resetPasswordConfirm: builder.mutation({
+      query: (body) => ({
+        url: '/users/reset-password-confirm',
         method: 'POST',
         data: body,
       }),
     }),
     updateUser: builder.mutation({
       query: (body) => ({
-        url: '/user',
+        url: '/users',
         method: 'PUT',
         data: body,
       }),
     }),
     deleteUser: builder.mutation({
       query: (body) => ({
-        url: '/user',
+        url: '/users',
         method: 'DELETE',
         data: body,
       }),
@@ -43,4 +69,15 @@ export const userApi = createApi({
   }),
 });
 
-export const { useGetUserQuery, useGetUsersQuery } = userApi;
+export const {
+  useGetUserQuery,
+  useGetUsersQuery,
+  useLazyGetUserQuery,
+  useLazyGetUsersQuery,
+  useLoginUserMutation,
+  useCreateUserMutation,
+  useResetPasswordMutation,
+  useResetPasswordConfirmMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
+} = userApi;

@@ -48,7 +48,11 @@ export const registerFormSchema = z
         required_error: 'Password is required.',
       })
       .min(1, { message: 'Password is required.' })
-      .max(50),
+      .max(50)
+      .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
+        message:
+          'Password must contain at least 8 characters, including at least one letter and one number.',
+      }),
     confirmPassword: z.string(),
     username: z.string().optional(),
   })
@@ -81,7 +85,12 @@ export const resetPasswordConfirmFormSchema = z
         invalid_type_error: 'Invalid password format.',
         required_error: 'Password is required.',
       })
-      .min(1, { message: 'Password is required.' }),
+      .min(1, { message: 'Password is required.' })
+      .max(50)
+      .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
+        message:
+          'Password must contain at least 8 characters, including at least one letter and one number.',
+      }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {

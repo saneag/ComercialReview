@@ -5,6 +5,7 @@ export interface BaseFieldType {
   displayLabel?: string;
   type?: InputFieldType;
   placeholder?: string;
+  isRequired?: boolean;
 }
 
 export interface LoginFieldType extends BaseFieldType {}
