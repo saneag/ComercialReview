@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import FiltersAccordion from '@/app/components/filters/filtersAccordion/filterAccordion';
+import FiltersAccordion from '@/app/components/filters/filtersAccordion';
 import SearchInput from '@/app/components/searchInput';
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
