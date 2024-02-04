@@ -1,8 +1,12 @@
 'use client';
 
 import FiltersCard from '@/app/components/filters';
+import CategoryAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/categoryAccordionItems';
 import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/ratingAccordionItems';
-import { setBusinessRatingFilter } from '@/app/redux/features/slices/businessFilterSlice';
+import {
+  setBusinessesCategoryFilter,
+  setBusinessRatingFilter,
+} from '@/app/redux/features/slices/businessFilterSlice';
 import { useAppSelector } from '@/app/redux/store';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
@@ -20,6 +24,16 @@ export default function Businesses() {
         />
       ),
     },
+    {
+      filterValue: 'category',
+      triggerLabel: 'Category',
+      children: (
+        <CategoryAccordionItems
+          categoryFilter={filters.category}
+          setFilter={setBusinessesCategoryFilter}
+        />
+      ),
+    },
   ];
 
   return (
@@ -27,7 +41,9 @@ export default function Businesses() {
       <div className='w-full md:w-4/12'>
         <FiltersCard filterAccordionItems={filterAccordionItems} />
       </div>
-      <div className='w-full flex-1'></div>
+      <div className='w-full flex-1'>
+        <p>Businesses list</p>
+      </div>
     </div>
   );
 }

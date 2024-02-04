@@ -6,6 +6,7 @@ import { Star } from 'lucide-react';
 import { Checkbox } from '@/app/components/ui/checkbox';
 import { Label } from '@/app/components/ui/label';
 import { useAppDispatch } from '@/app/redux/store';
+import { ratingFilterArray } from '@/app/types/enums/RatingFilterEnum';
 import {
   RatingFilterType,
   SetRatingFilterType,
@@ -22,14 +23,6 @@ export default function RatingAccordionItems({
 }: RatingAccordionItemsProps) {
   const dispatch = useAppDispatch();
 
-  const ratings = [
-    { value: 5, label: '5' },
-    { value: 4, label: '4' },
-    { value: 3, label: '3' },
-    { value: 2, label: '2' },
-    { value: 1, label: '1' },
-  ];
-
   const handleCheckboxChecked = (ratingValue: number): CheckedState => {
     return ratingFilter.includes(ratingValue);
   };
@@ -40,7 +33,7 @@ export default function RatingAccordionItems({
 
   return (
     <div className='flex flex-col space-y-3 pt-5'>
-      {ratings.map((rating) => (
+      {ratingFilterArray.map((rating) => (
         <div className='flex items-center space-x-2' key={rating.value}>
           <Checkbox
             id={String(rating.value)}
