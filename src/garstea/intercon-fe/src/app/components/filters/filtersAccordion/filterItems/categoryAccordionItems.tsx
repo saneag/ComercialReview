@@ -36,6 +36,8 @@ export default function CategoryAccordionItems({
             id={String(category.value)}
             onCheckedChange={() => handleCheckboxChange(category.value)}
             checked={handleCheckboxChecked(category.value)}
+            className='from-purple-500/70 to-blue-500/70 
+            [&[data-state=checked]]:bg-gradient-to-br'
           />
           <Label
             htmlFor={String(category.value)}

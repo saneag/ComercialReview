@@ -39,6 +39,8 @@ export default function RatingAccordionItems({
             id={String(rating.value)}
             onCheckedChange={() => handleCheckboxChange(rating.value)}
             checked={handleCheckboxChecked(rating.value)}
+            className='from-purple-500/70 to-blue-500/70 
+            [&[data-state=checked]]:bg-gradient-to-br'
           />
           <Label
             htmlFor={String(rating.value)}
