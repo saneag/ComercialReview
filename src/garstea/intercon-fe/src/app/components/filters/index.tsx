@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { History } from 'lucide-react';
 
@@ -9,14 +9,17 @@ import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
 import { useAppDispatch } from '@/app/redux/store';
 import { ResetFiltersType } from '@/app/types/filter/EntityFilterType';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
+
 interface FiltersCardProps {
   filterAccordionItems: FilterAccordionItemType[];
   resetFilters: ResetFiltersType;
+  filtersDisplayChildren: ReactNode;
 }
 
 export default function FiltersCard({
   resetFilters,
   filterAccordionItems,
+  filtersDisplayChildren,
 }: FiltersCardProps) {
   const dispatch = useAppDispatch();
 
@@ -56,6 +59,7 @@ export default function FiltersCard({
             placeholder='Search reviews...'
           />
           <FiltersAccordion filterAccordionItems={filterAccordionItems} />
+          {filtersDisplayChildren}
         </CardContent>
       </Card>
     </div>

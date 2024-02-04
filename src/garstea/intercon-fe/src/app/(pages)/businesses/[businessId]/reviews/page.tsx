@@ -2,12 +2,15 @@
 
 import FiltersCard from '@/app/components/filters';
 import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/ratingAccordionItems';
+import FiltersDisplay from '@/app/components/filters/filtersDisplay';
 import ReviewsList from '@/app/components/reviewsList';
 import {
   resetReviewFilters,
   setReviewRatingFilter,
 } from '@/app/redux/features/slices/reviewsFilterSlice';
 import { useAppSelector } from '@/app/redux/store';
+import { ratingEnumToText } from '@/app/types/enums/RatingFilterEnum';
+import { DisplayFilterType } from '@/app/types/filter/EntityFilterType';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
 export default function ReviewsPage() {
@@ -26,10 +29,20 @@ export default function ReviewsPage() {
     },
   ];
 
+  const reviewsFiltersDisplay: DisplayFilterType[] = [
+    {
+      filterLabel: 'Rating',
+      filterValue: filters.rating.map((rating) => ratingEnumToText(rating)),
+    },
+  ];
+
   return (
     <div className='mt-5 flex flex-col gap-10 md:flex-row'>
       <div className='w-full md:w-4/12'>
         <FiltersCard
+          filtersDisplayChildren={
+            <FiltersDisplay filters={reviewsFiltersDisplay} />
+          }
           resetFilters={resetReviewFilters}
           filterAccordionItems={filterAccordionItems}
         />

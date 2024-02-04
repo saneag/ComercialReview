@@ -32,3 +32,10 @@ export type SetCategoryFilterType =
 export type ResetFiltersType =
   | typeof resetBusinessFilters
   | typeof resetReviewFilters;
+
+export type FilterType = RatingFilterType | CategoryFilterType;
+
+export type DisplayFilterType = {
+  filterLabel: string;
+  filterValue: string[];
+};

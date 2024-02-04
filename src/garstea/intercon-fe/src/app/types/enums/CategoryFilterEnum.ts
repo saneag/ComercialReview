@@ -26,6 +26,35 @@ export enum CategoryFilterEnumLabel {
   FURNITURE = 'Furniture',
 }
 
+export const categoryEnumToText = (category: CategoryFilterEnum): string => {
+  switch (category) {
+    case CategoryFilterEnum.ALL:
+      return CategoryFilterEnumLabel.ALL;
+    case CategoryFilterEnum.SUPERMARKET:
+      return CategoryFilterEnumLabel.SUPERMARKET;
+    case CategoryFilterEnum.RESTAURANT:
+      return CategoryFilterEnumLabel.RESTAURANT;
+    case CategoryFilterEnum.CAFE:
+      return CategoryFilterEnumLabel.CAFE;
+    case CategoryFilterEnum.BAR:
+      return CategoryFilterEnumLabel.BAR;
+    case CategoryFilterEnum.BAKERY:
+      return CategoryFilterEnumLabel.BAKERY;
+    case CategoryFilterEnum.PHARMACY:
+      return CategoryFilterEnumLabel.PHARMACY;
+    case CategoryFilterEnum.GYM:
+      return CategoryFilterEnumLabel.GYM;
+    case CategoryFilterEnum.CLOTHING:
+      return CategoryFilterEnumLabel.CLOTHING;
+    case CategoryFilterEnum.ELECTRONICS:
+      return CategoryFilterEnumLabel.ELECTRONICS;
+    case CategoryFilterEnum.FURNITURE:
+      return CategoryFilterEnumLabel.FURNITURE;
+    default:
+      return '';
+  }
+};
+
 export const categoryFilterArray = [
   {
     value: CategoryFilterEnum.ALL,
