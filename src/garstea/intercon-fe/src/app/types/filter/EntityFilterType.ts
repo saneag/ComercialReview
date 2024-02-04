@@ -1,9 +1,13 @@
 import {
+  removeBusinessCategoryFilter,
+  removeBusinessRatingFilter,
   resetBusinessFilters,
   setBusinessesCategoryFilter,
   setBusinessRatingFilter,
 } from '@/app/redux/features/slices/businessFilterSlice';
 import {
+  removeReviewCategoryFilter,
+  removeReviewRatingFilter,
   resetReviewFilters,
   setReviewCategoryFilter,
   setReviewRatingFilter,
@@ -35,7 +39,25 @@ export type ResetFiltersType =
 
 export type FilterType = RatingFilterType | CategoryFilterType;
 
+export type RemoveRatingFilterOnClickType =
+  | typeof removeBusinessRatingFilter
+  | typeof removeReviewRatingFilter;
+
+export type RemoveCategoryFilterOnClickType =
+  | typeof removeBusinessCategoryFilter
+  | typeof removeReviewCategoryFilter;
+
+export type RemoveFilterOnClickType =
+  | RemoveRatingFilterOnClickType
+  | RemoveCategoryFilterOnClickType;
+
+export interface FilterValueType {
+  label: string;
+  value: number;
+}
+
 export type DisplayFilterType = {
-  filterLabel: string;
-  filterValue: string[];
+  filterByLabel: string;
+  filterValues: FilterValueType[];
+  removeOnClick: RemoveFilterOnClickType;
 };

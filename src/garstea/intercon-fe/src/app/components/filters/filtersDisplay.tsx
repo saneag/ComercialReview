@@ -2,6 +2,7 @@ import { X } from 'lucide-react';
 
 import { Badge } from '@/app/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
+import { useAppDispatch } from '@/app/redux/store';
 import { DisplayFilterType } from '@/app/types/filter/EntityFilterType';
 
 interface FiltersDisplayProps {
@@ -9,6 +10,8 @@ interface FiltersDisplayProps {
 }
 
 export default function FiltersDisplay({ filters }: FiltersDisplayProps) {
+  const dispatch = useAppDispatch();
+
   return (
     <Card className='bg-gray-100 px-1'>
       <CardHeader className='px-6 pb-3 pt-5'>
@@ -16,16 +19,17 @@ export default function FiltersDisplay({ filters }: FiltersDisplayProps) {
       </CardHeader>
       <CardContent>
         {filters.map((filter) => (
-          <div key={filter.filterLabel}>
-            <p>{filter.filterLabel}</p>
+          <div key={filter.filterByLabel}>
+            <p>{filter.filterByLabel}</p>
             <div className='my-2 flex flex-wrap gap-2'>
-              {filter.filterValue.map((value) => (
+              {filter.filterValues.map((it) => (
                 <Badge
-                  key={value}
+                  key={it.value}
                   className='cursor-pointer space-x-1 bg-gradient-to-tr from-purple-500/70 to-blue-500/70 px-2'
+                  onClick={() => dispatch(filter.removeOnClick(it.value))}
                 >
                   <X className='h-4 w-4' />
-                  <span>{value}</span>
+                  <span>{it.label}</span>
                 </Badge>
               ))}
             </div>

@@ -5,6 +5,8 @@ import CategoryAccordionItems from '@/app/components/filters/filtersAccordion/fi
 import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/ratingAccordionItems';
 import FiltersDisplay from '@/app/components/filters/filtersDisplay';
 import {
+  removeBusinessCategoryFilter,
+  removeBusinessRatingFilter,
   resetBusinessFilters,
   setBusinessesCategoryFilter,
   setBusinessRatingFilter,
@@ -43,14 +45,20 @@ export default function Businesses() {
 
   const businessFiltersDisplay: DisplayFilterType[] = [
     {
-      filterLabel: 'Rating',
-      filterValue: filters.rating.map((rating) => ratingEnumToText(rating)),
+      filterByLabel: 'Rating',
+      filterValues: filters.rating.map((rating) => ({
+        label: ratingEnumToText(rating),
+        value: rating,
+      })),
+      removeOnClick: removeBusinessRatingFilter,
     },
     {
-      filterLabel: 'Category',
-      filterValue: filters.category.map((category) =>
-        categoryEnumToText(category)
-      ),
+      filterByLabel: 'Category',
+      filterValues: filters.category.map((category) => ({
+        label: categoryEnumToText(category),
+        value: category,
+      })),
+      removeOnClick: removeBusinessCategoryFilter,
     },
   ];
 

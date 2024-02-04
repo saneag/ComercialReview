@@ -54,6 +54,34 @@ const businessFilterSlice = createSlice({
         state.category.splice(index, 1);
       }
     },
+    removeBusinessRatingFilter(state, action: PayloadAction<number>) {
+      if (action.payload === RatingFilterEnum.ALL) {
+        return;
+      }
+
+      const index = state.rating.indexOf(action.payload);
+      if (index !== -1) {
+        state.rating.splice(index, 1);
+      }
+
+      if (state.rating.length === 0) {
+        state.rating = [RatingFilterEnum.ALL];
+      }
+    },
+    removeBusinessCategoryFilter(state, action: PayloadAction<number>) {
+      if (action.payload === CategoryFilterEnum.ALL) {
+        return;
+      }
+
+      const index = state.category.indexOf(action.payload);
+      if (index !== -1) {
+        state.category.splice(index, 1);
+      }
+
+      if (state.category.length === 0) {
+        state.category = [CategoryFilterEnum.ALL];
+      }
+    },
     resetBusinessFilters(state) {
       state.rating = [RatingFilterEnum.ALL];
       state.category = [CategoryFilterEnum.ALL];
@@ -64,6 +92,8 @@ const businessFilterSlice = createSlice({
 export const {
   setBusinessRatingFilter,
   setBusinessesCategoryFilter,
+  removeBusinessRatingFilter,
+  removeBusinessCategoryFilter,
   resetBusinessFilters,
 } = businessFilterSlice.actions;
 

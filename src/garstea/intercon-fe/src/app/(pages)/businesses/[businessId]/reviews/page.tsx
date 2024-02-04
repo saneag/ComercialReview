@@ -5,6 +5,7 @@ import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filt
 import FiltersDisplay from '@/app/components/filters/filtersDisplay';
 import ReviewsList from '@/app/components/reviewsList';
 import {
+  removeReviewRatingFilter,
   resetReviewFilters,
   setReviewRatingFilter,
 } from '@/app/redux/features/slices/reviewsFilterSlice';
@@ -31,8 +32,12 @@ export default function ReviewsPage() {
 
   const reviewsFiltersDisplay: DisplayFilterType[] = [
     {
-      filterLabel: 'Rating',
-      filterValue: filters.rating.map((rating) => ratingEnumToText(rating)),
+      filterByLabel: 'Rating',
+      filterValues: filters.rating.map((rating) => ({
+        label: ratingEnumToText(rating),
+        value: rating,
+      })),
+      removeOnClick: removeReviewRatingFilter,
     },
   ];
 
