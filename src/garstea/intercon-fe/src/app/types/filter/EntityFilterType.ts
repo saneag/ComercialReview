@@ -1,8 +1,13 @@
 import {
+  resetBusinessFilters,
   setBusinessesCategoryFilter,
   setBusinessRatingFilter,
 } from '@/app/redux/features/slices/businessFilterSlice';
-import { setReviewRatingFilter } from '@/app/redux/features/slices/reviewsFilterSlice';
+import {
+  resetReviewFilters,
+  setReviewCategoryFilter,
+  setReviewRatingFilter,
+} from '@/app/redux/features/slices/reviewsFilterSlice';
 
 export interface BaseFilterType {
   rating: RatingFilterType;
@@ -20,4 +25,10 @@ export type SetRatingFilterType =
   | typeof setReviewRatingFilter
   | typeof setBusinessRatingFilter;
 
-export type SetCategoryFilterType = typeof setBusinessesCategoryFilter;
+export type SetCategoryFilterType =
+  | typeof setBusinessesCategoryFilter
+  | typeof setReviewCategoryFilter;
+
+export type ResetFiltersType =
+  | typeof resetBusinessFilters
+  | typeof resetReviewFilters;

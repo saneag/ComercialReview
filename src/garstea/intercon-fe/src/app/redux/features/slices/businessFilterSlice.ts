@@ -54,10 +54,17 @@ const businessFilterSlice = createSlice({
         state.category.splice(index, 1);
       }
     },
+    resetBusinessFilters(state) {
+      state.rating = [RatingFilterEnum.ALL];
+      state.category = [CategoryFilterEnum.ALL];
+    },
   },
 });
 
-export const { setBusinessRatingFilter, setBusinessesCategoryFilter } =
-  businessFilterSlice.actions;
+export const {
+  setBusinessRatingFilter,
+  setBusinessesCategoryFilter,
+  resetBusinessFilters,
+} = businessFilterSlice.actions;
 
 export default businessFilterSlice.reducer;
