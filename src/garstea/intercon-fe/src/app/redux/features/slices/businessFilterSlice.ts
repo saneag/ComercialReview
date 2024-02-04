@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { RatingFilterEnum } from '@/app/types/enums/RatingFilterEnum';
-import { ReviewFilterType } from '@/app/types/filter/EntityFilterType';
+import { BusinessFilterType } from '@/app/types/filter/EntityFilterType';
 
-const initialState: ReviewFilterType = {
+const initialState: BusinessFilterType = {
   rating: [RatingFilterEnum.ALL],
-  category: [RatingFilterEnum.ALL],
+  category: [CategoryFilterEnum.ALL],
 };
 
-const reviewsFilterSlice = createSlice({
-  name: 'reviewsFilter',
+const businessFilterSlice = createSlice({
+  name: 'businessFilter',
   initialState,
   reducers: {
-    setReviewRatingFilter(state, action: PayloadAction<number>) {
+    setBusinessRatingFilter(state, action: PayloadAction<number>) {
       if (action.payload === RatingFilterEnum.ALL) {
         state.rating = [RatingFilterEnum.ALL];
         return;
@@ -33,15 +34,15 @@ const reviewsFilterSlice = createSlice({
         state.rating.splice(index, 1);
       }
     },
-    setReviewCategoryFilter(state, action: PayloadAction<number>) {
-      if (action.payload === RatingFilterEnum.ALL) {
-        state.category = [RatingFilterEnum.ALL];
+    setBusinessesCategoryFilter(state, action: PayloadAction<number>) {
+      if (action.payload === CategoryFilterEnum.ALL) {
+        state.category = [CategoryFilterEnum.ALL];
         return;
       }
 
       if (
         state.category.length === 1 &&
-        state.category[0] === RatingFilterEnum.ALL
+        state.category[0] === CategoryFilterEnum.ALL
       ) {
         state.category = [];
       }
@@ -53,7 +54,7 @@ const reviewsFilterSlice = createSlice({
         state.category.splice(index, 1);
       }
     },
-    removeReviewRatingFilter(state, action: PayloadAction<number>) {
+    removeBusinessRatingFilter(state, action: PayloadAction<number>) {
       if (action.payload === RatingFilterEnum.ALL) {
         return;
       }
@@ -64,11 +65,11 @@ const reviewsFilterSlice = createSlice({
       }
 
       if (state.rating.length === 0) {
-        state.rating.push(RatingFilterEnum.ALL);
+        state.rating = [RatingFilterEnum.ALL];
       }
     },
-    removeReviewCategoryFilter(state, action: PayloadAction<number>) {
-      if (action.payload === RatingFilterEnum.ALL) {
+    removeBusinessCategoryFilter(state, action: PayloadAction<number>) {
+      if (action.payload === CategoryFilterEnum.ALL) {
         return;
       }
 
@@ -78,22 +79,22 @@ const reviewsFilterSlice = createSlice({
       }
 
       if (state.category.length === 0) {
-        state.category.push(RatingFilterEnum.ALL);
+        state.category = [CategoryFilterEnum.ALL];
       }
     },
-    resetReviewFilters(state) {
+    resetBusinessFilters(state) {
       state.rating = [RatingFilterEnum.ALL];
-      state.category = [RatingFilterEnum.ALL];
+      state.category = [CategoryFilterEnum.ALL];
     },
   },
 });
 
 export const {
-  setReviewRatingFilter,
-  setReviewCategoryFilter,
-  removeReviewRatingFilter,
-  removeReviewCategoryFilter,
-  resetReviewFilters,
-} = reviewsFilterSlice.actions;
+  setBusinessRatingFilter,
+  setBusinessesCategoryFilter,
+  removeBusinessRatingFilter,
+  removeBusinessCategoryFilter,
+  resetBusinessFilters,
+} = businessFilterSlice.actions;
 
-export default reviewsFilterSlice.reducer;
+export default businessFilterSlice.reducer;

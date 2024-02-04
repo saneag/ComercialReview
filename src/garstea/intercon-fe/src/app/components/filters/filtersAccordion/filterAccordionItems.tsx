@@ -1,17 +1,12 @@
-import { ReactNode } from 'react';
-
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/app/components/ui/accordion';
 import { Card, CardContent } from '@/app/components/ui/card';
+import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
-interface AccordionItemProps {
-  filterValue: string;
-  triggerLabel: ReactNode;
-  children: ReactNode;
-}
+interface AccordionItemProps extends FilterAccordionItemType {}
 
 export default function FilterAccordionItem({
   filterValue,
