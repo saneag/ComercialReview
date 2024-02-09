@@ -1,7 +1,7 @@
 import React from 'react';
 
 import type { Metadata } from 'next';
-import { Open_Sans as FontSans } from 'next/font/google';
+import { Nunito as FontSans } from 'next/font/google';
 
 import ReduxProvider from '@/app/redux/provider';
 import { cn } from '@/lib/utils';
