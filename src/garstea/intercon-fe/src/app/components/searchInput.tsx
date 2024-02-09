@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import debounce from 'lodash.debounce';
+import { debounce } from 'lodash';
 import { X } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/button';
