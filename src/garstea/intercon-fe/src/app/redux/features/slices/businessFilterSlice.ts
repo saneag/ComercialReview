@@ -32,6 +32,10 @@ const businessFilterSlice = createSlice({
         state.rating.push(action.payload);
       } else {
         state.rating.splice(index, 1);
+
+        if (state.rating.length === 0) {
+          state.rating.push(RatingFilterEnum.ALL);
+        }
       }
     },
     setBusinessesCategoryFilter(state, action: PayloadAction<number>) {
@@ -52,6 +56,10 @@ const businessFilterSlice = createSlice({
         state.category.push(action.payload);
       } else {
         state.category.splice(index, 1);
+
+        if (state.category.length === 0) {
+          state.category.push(CategoryFilterEnum.ALL);
+        }
       }
     },
     removeBusinessRatingFilter(state, action: PayloadAction<number>) {
