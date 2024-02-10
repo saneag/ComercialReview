@@ -3,9 +3,10 @@
 import Links from '@/app/components/header/links';
 import Logo from '@/app/components/header/logo';
 import UserDropdown from '@/app/components/header/userDropdown';
+import { useAppSelector } from '@/app/redux/store';
 
 export default function Header() {
-  const isAuth = false;
+  const isAuth = useAppSelector((state) => state.user.isAuth);
   const role = 'admin';
 
   return (
