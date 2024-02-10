@@ -1,4 +1,5 @@
 import BusinessCardBody from '@/app/components/businessesList/businessCard/businessCardBody';
+import BusinessCardFooter from '@/app/components/businessesList/businessCard/businessCardFooter';
 import BusinessCardHeader from '@/app/components/businessesList/businessCard/businessCardHeader';
 import { Card } from '@/app/components/ui/card';
 import { BusinessType } from '@/app/types/BusinessType';
@@ -12,6 +13,7 @@ export default function BusinessCard({ business }: BusinessCardProps) {
     <Card>
       <BusinessCardHeader business={business} />
       <BusinessCardBody business={business} />
+      <BusinessCardFooter business={business} />
     </Card>
   );
 }

@@ -13,8 +13,8 @@ export default function BusinessesList() {
       rating: 5,
       address: {
         street: 'street',
-        latitude: 'latitude',
-        longitude: 'longitude',
+        latitude: '46.99158130449987',
+        longitude: '28.857582784660487',
       },
       reviewsCount: 5,
       category: CategoryFilterEnum.BAKERY,
