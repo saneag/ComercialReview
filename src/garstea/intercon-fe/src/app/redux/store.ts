@@ -24,7 +24,7 @@ export const store = configureStore({
     })
       .concat(userApi.middleware)
       .concat(rtkQueryErrorLogger),
-  devTools: process.env.NEXT_PUBLIC_NODE_ENV !== 'production',
+  devTools: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production',
 });
 
 setupListeners(store.dispatch);
