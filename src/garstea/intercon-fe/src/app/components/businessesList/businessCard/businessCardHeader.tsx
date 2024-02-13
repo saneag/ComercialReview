@@ -12,7 +12,7 @@ export default function BusinessCardHeader({
   business,
 }: BusinessCardHeaderProps) {
   return (
-    <CardHeader className='flex flex-row gap-3'>
+    <CardHeader className='flex flex-col gap-x-3 xs:flex-row'>
       <div className='flex flex-1 flex-col'>
         <Link
           href={`/businesses/${business.id}`}
@@ -22,7 +22,7 @@ export default function BusinessCardHeader({
         </Link>
         <span className='break-all'>{business.shortDescription}</span>
       </div>
-      <div className='w-fit px-2 text-sm'>
+      <div className='w-fit text-sm xs:px-2'>
         <div className='mt-2 flex items-center justify-evenly gap-1 text-gray-500'>
           <span>{business.rating}</span>
           <div className='flex space-x-1'>
