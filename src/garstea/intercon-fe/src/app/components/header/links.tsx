@@ -1,16 +1,8 @@
 import Link from 'next/link';
 
-interface LinkType {
-  label: string;
-  path: string;
-  icon: string;
-}
+import { adminLinks, privateLinks, publicLinks } from '@/app/constants/routes';
 
 export default function Links() {
-  const publicLinks: LinkType[] = [];
-  const privateLinks: LinkType[] = [];
-  const adminLinks: LinkType[] = [];
-
   return (
     <div className='flex gap-2'>
       <div className='flex gap-2'>

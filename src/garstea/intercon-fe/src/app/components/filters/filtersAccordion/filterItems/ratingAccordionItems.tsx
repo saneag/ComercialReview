@@ -1,8 +1,8 @@
 'use client';
 
 import { CheckedState } from '@radix-ui/react-checkbox';
-import { Star } from 'lucide-react';
 
+import RatingStars from '@/app/components/ratingStars';
 import { Checkbox } from '@/app/components/ui/checkbox';
 import { Label } from '@/app/components/ui/label';
 import { useAppDispatch } from '@/app/redux/store';
@@ -48,14 +48,7 @@ export default function RatingAccordionItems({
           >
             <span>{rating.label}</span>
             <span className='flex space-x-1'>
-              {Array.from({ length: rating.value }, (_, index) => (
-                <Star
-                  key={rating.value + index}
-                  size={10}
-                  fill='#ffd250'
-                  color='#ffd250'
-                />
-              ))}
+              <RatingStars starsCount={rating.value} />
             </span>
           </Label>
         </div>

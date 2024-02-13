@@ -1,5 +1,6 @@
 'use client';
 
+import BusinessesList from '@/app/components/businessesList';
 import FiltersCard from '@/app/components/filters';
 import CategoryAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/categoryAccordionItems';
 import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/ratingAccordionItems';
@@ -74,7 +75,7 @@ export default function Businesses() {
         />
       </div>
       <div className='w-full flex-1'>
-        <p>Businesses list</p>
+        <BusinessesList />
       </div>
     </div>
   );

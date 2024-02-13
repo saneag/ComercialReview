@@ -31,6 +31,10 @@ const reviewsFilterSlice = createSlice({
         state.rating.push(action.payload);
       } else {
         state.rating.splice(index, 1);
+
+        if (state.rating.length === 0) {
+          state.rating.push(RatingFilterEnum.ALL);
+        }
       }
     },
     setReviewCategoryFilter(state, action: PayloadAction<number>) {
@@ -51,6 +55,10 @@ const reviewsFilterSlice = createSlice({
         state.category.push(action.payload);
       } else {
         state.category.splice(index, 1);
+
+        if (state.category.length === 0) {
+          state.category.push(RatingFilterEnum.ALL);
+        }
       }
     },
     removeReviewRatingFilter(state, action: PayloadAction<number>) {

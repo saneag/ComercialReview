@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className='flex-col-center min-h-screen space-y-4 bg-gray-100'>
+    <div className='flex-col-center min-h-screen space-y-4 bg-gray-100 max-md:py-5'>
       <Link href='/businesses' replace={true}>
         <Image
           src='/assets/images/intercon-logo-no-text.png'
