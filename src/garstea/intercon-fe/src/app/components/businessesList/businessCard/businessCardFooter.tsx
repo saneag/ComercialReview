@@ -19,10 +19,12 @@ export default function BusinessCardFooter({
           target='_blank'
           className='group flex items-center gap-1 transition-colors hover:text-black/80'
         >
-          <MapPinIcon
-            size={16}
-            className='transition-colors group-hover:text-red-400'
-          />
+          <div>
+            <MapPinIcon
+              size={16}
+              className='transition-colors group-hover:text-red-400'
+            />
+          </div>
           <span>{business.address.street}</span>
         </a>
       </div>

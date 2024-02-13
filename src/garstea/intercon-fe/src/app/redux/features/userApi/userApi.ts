@@ -1,7 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { axiosBaseQuery } from '@/app/redux/features/axiosBaseQuery';
-import { UserType } from '@/app/types/UserType';
+import { LoginType, RegisterType } from '@/app/types/auth/AuthType';
+import { UserLoginType, UserType } from '@/app/types/UserType';
 
 export const userApi = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: '' }),
@@ -20,14 +21,14 @@ export const userApi = createApi({
         method: 'GET',
       }),
     }),
-    loginUser: builder.mutation({
+    loginUser: builder.mutation<UserLoginType, Partial<LoginType>>({
       query: (body) => ({
         url: '/users/login',
         method: 'POST',
         data: body,
       }),
     }),
-    createUser: builder.mutation({
+    createUser: builder.mutation<void, Partial<RegisterType>>({
       query: (body) => ({
         url: '/users/create',
         method: 'POST',
@@ -54,20 +55,23 @@ export const userApi = createApi({
         data: body,
       }),
     }),
-    updateUser: builder.mutation({
+    updateUser: builder.mutation<
+      UserType,
+      { body: Partial<UserType>; userId: number }
+    >({
       query: ({ body, userId }) => ({
         url: `/users/${userId}`,
         method: 'PUT',
         data: body,
       }),
     }),
-    deleteUser: builder.mutation({
+    deleteUser: builder.mutation<void, number>({
       query: (userId) => ({
         url: `/users/${userId}`,
         method: 'DELETE',
       }),
     }),
-    checkUserName: builder.query({
+    checkUserName: builder.query<void, string>({
       query: (userName) => ({
         url: `/users/checkUserName?nameToCheck=${userName}`,
         method: 'GET',
