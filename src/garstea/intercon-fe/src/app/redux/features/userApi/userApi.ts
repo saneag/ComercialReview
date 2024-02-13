@@ -15,8 +15,8 @@ export const userApi = createApi({
       }),
     }),
     getUser: builder.query<UserType, number>({
-      query: (id) => ({
-        url: '/users',
+      query: (userId) => ({
+        url: `/users/${userId}`,
         method: 'GET',
       }),
     }),
@@ -29,13 +29,14 @@ export const userApi = createApi({
     }),
     createUser: builder.mutation({
       query: (body) => ({
-        url: '/users',
+        url: '/users/create',
         method: 'POST',
         data: {
           firstName: body.firstName,
           lastName: body.lastName,
           email: body.email,
           password: body.password,
+          userName: body?.userName,
         },
       }),
     }),
@@ -54,17 +55,22 @@ export const userApi = createApi({
       }),
     }),
     updateUser: builder.mutation({
-      query: (body) => ({
-        url: '/users',
+      query: ({ body, userId }) => ({
+        url: `/users/${userId}`,
         method: 'PUT',
         data: body,
       }),
     }),
     deleteUser: builder.mutation({
-      query: (body) => ({
-        url: '/users',
+      query: (userId) => ({
+        url: `/users/${userId}`,
         method: 'DELETE',
-        data: body,
+      }),
+    }),
+    checkUserName: builder.query({
+      query: (userName) => ({
+        url: `/users/checkUserName?nameToCheck=${userName}`,
+        method: 'GET',
       }),
     }),
   }),
@@ -81,4 +87,5 @@ export const {
   useResetPasswordConfirmMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useCheckUserNameQuery,
 } = userApi;
