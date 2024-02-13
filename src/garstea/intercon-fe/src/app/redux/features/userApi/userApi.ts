@@ -36,7 +36,7 @@ export const userApi = createApi({
           lastName: body.lastName,
           email: body.email,
           password: body.password,
-          userName: body?.userName,
+          userName: body.userName || null,
         },
       }),
     }),

@@ -18,6 +18,7 @@ export default function SignUpPage() {
     email: '',
     password: '',
     confirmPassword: '',
+    userName: '',
   };
 
   const registerFields: RegisterFieldType[] = [
@@ -47,6 +48,11 @@ export default function SignUpPage() {
       displayLabel: 'Confirm Password',
       type: 'password',
       isRequired: true,
+    },
+    {
+      label: 'userName',
+      displayLabel: 'Username',
+      isRequired: false,
     },
   ];
 

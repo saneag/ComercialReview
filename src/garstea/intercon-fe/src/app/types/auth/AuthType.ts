@@ -9,7 +9,7 @@ export interface RegisterType extends BaseAuthType {
   firstName: string;
   lastName: string;
   confirmPassword: string;
-  username?: string;
+  userName?: string;
 }
 
 export interface ResetPasswordType extends Omit<BaseAuthType, 'password'> {}

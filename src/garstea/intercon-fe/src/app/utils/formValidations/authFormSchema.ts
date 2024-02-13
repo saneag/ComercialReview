@@ -54,7 +54,7 @@ export const registerFormSchema = z
           'Password must contain at least 8 characters, including at least one letter and one number.',
       }),
     confirmPassword: z.string(),
-    username: z.string().optional(),
+    userName: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match.',
