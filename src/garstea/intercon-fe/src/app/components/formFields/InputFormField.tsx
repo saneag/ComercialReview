@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
+import { Eye, X } from 'lucide-react';
+
 import RequiredFieldStar from '@/app/components/requiredFieldStar';
+import { Button } from '@/app/components/ui/button';
 import {
   FormControl,
   FormField,
@@ -22,6 +26,16 @@ export default function InputFormField({
 }: InputFormFieldProps) {
   const form = useFormContext();
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleButtonClick = () => {
+    if (type === 'password') {
+      setShowPassword(!showPassword);
+    } else {
+      form.setValue(label, '');
+    }
+  };
+
   return (
     <FormField
       control={form.control}
@@ -34,12 +48,26 @@ export default function InputFormField({
             </FormLabel>
           )}
           <FormControl>
-            <Input
-              {...field}
-              placeholder={placeholder}
-              type={type ?? 'text'}
-              className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
-            />
+            <div className='relative'>
+              <Input
+                {...field}
+                placeholder={placeholder}
+                type={type === 'password' && showPassword ? 'text' : type}
+                className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
+                autoComplete='new-password'
+              />
+              {form.watch(label) !== '' && (
+                <Button
+                  variant='link'
+                  size='icon'
+                  type='button'
+                  className='absolute right-0 top-0'
+                  onClick={handleButtonClick}
+                >
+                  {type !== 'password' ? <X size={20} /> : <Eye size={20} />}
+                </Button>
+              )}
+            </div>
           </FormControl>
           <FormMessage />
         </FormItem>
