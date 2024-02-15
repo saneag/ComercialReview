@@ -6,6 +6,7 @@ import { ChevronRight, MoreHorizontal } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import HomeLogoLink from '@/app/components/homeLogoLink';
 import { Button } from '@/app/components/ui/button';
 import {
   DropdownMenu,
@@ -57,11 +58,14 @@ export default function NavBar() {
         <div
           className={`h-full flex-col lg:flex ${
             isSidebarOpen
-              ? 'fixed left-10 top-0 z-10 flex border-r bg-white px-5 py-5 pt-12 animate-in slide-in-from-left-10'
+              ? 'fixed left-10 top-0 z-10 flex border-r bg-white px-5 py-5 animate-in slide-in-from-left-10'
               : 'hidden'
           }`}
         >
-          <div>
+          <div className='space-y-3'>
+            <div className='flex justify-center'>
+              <HomeLogoLink className='w-14' />
+            </div>
             <ul className='space-y-3'>
               {adminLinks.map((link) => (
                 <li key={link.label}>
@@ -78,7 +82,7 @@ export default function NavBar() {
               ))}
             </ul>
           </div>
-          <div className='mt-auto flex w-full justify-between'>
+          <div className='mt-auto flex w-full justify-between space-x-2'>
             <div className='space-x-1'>
               <span className='font-semibold'>{user.firstName}</span>
               <span className='font-semibold'>{user.lastName}</span>

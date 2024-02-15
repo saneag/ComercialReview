@@ -1,8 +1,8 @@
 'use client';
 
 import Links from '@/app/components/header/links';
-import Logo from '@/app/components/header/logo';
 import UserDropdown from '@/app/components/header/userDropdown';
+import HomeLogoLink from '@/app/components/homeLogoLink';
 import { useAppSelector } from '@/app/redux/store';
 
 export default function Header() {
@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <div className='flex h-16 w-full items-center justify-between px-5 nm-flat-white'>
-      <Logo />
+      <HomeLogoLink className='w-12' />
       <Links />
       <UserDropdown />
     </div>
