@@ -16,7 +16,7 @@ export default function HomeLogoLink({ className }: HomeLogoLinkProps) {
         sizes='100vw'
         placeholder='blur'
         blurDataURL='/assets/images/intercon-logo-no-text.png'
-        className={`h-auto w-20 cursor-pointer ${className}`}
+        className={`h-auto cursor-pointer ${className}`}
       />
     </Link>
   );
