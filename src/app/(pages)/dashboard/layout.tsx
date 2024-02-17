@@ -3,7 +3,6 @@
 import { ReactNode } from 'react';
 
 import NavBar from '@/app/components/adminDashboard/components/navBar/navBar';
-import AdminRouteGuard from '@/app/providers/AdminRouteGuard';
 
 function Layout({ children }: { children: ReactNode }) {
   return (
@@ -14,4 +13,4 @@ function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-export default AdminRouteGuard(Layout);
+export default Layout;
