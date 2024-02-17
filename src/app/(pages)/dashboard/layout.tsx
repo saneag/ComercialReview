@@ -2,12 +2,12 @@
 
 import { ReactNode } from 'react';
 
-import NavBar from '@/app/components/adminDashboard/components/navBar/navBar';
+import Sidebar from '@/app/components/adminDashboard/components/sidebar/sidebar';
 
 function Layout({ children }: { children: ReactNode }) {
   return (
     <div className='flex'>
-      <NavBar />
+      <Sidebar />
       <div className='flex-1 bg-gray-100'>{children}</div>
     </div>
   );
