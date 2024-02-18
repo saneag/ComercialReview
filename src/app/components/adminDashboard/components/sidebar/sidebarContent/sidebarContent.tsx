@@ -4,24 +4,36 @@ import HomeLogoLink from '@/app/components/homeLogoLink';
 
 interface SidebarContentProps {
   isSidebarOpen: boolean;
+  setIsSidebarOpen: (value: boolean) => void;
 }
 
-export default function SidebarContent({ isSidebarOpen }: SidebarContentProps) {
+export default function SidebarContent({
+  isSidebarOpen,
+  setIsSidebarOpen,
+}: SidebarContentProps) {
   return (
-    <div
-      className={`h-full flex-col lg:flex ${
-        isSidebarOpen
-          ? 'fixed left-10 top-0 z-10 flex bg-white px-5 py-4 animate-in slide-in-from-left-10'
-          : 'hidden'
-      }`}
-    >
-      <div className='space-y-3'>
-        <HomeLogoLink className='w-10' replace={false}>
-          <span className='text-xl'>Intercon</span>
-        </HomeLogoLink>
-        <SidebarUser />
-        <SidebarLinks />
+    <div className='relative flex'>
+      <div
+        className={`h-full flex-col lg:flex ${
+          isSidebarOpen
+            ? 'fixed left-10 top-0 z-10 flex bg-white px-5 py-4 animate-in slide-in-from-left-10'
+            : 'hidden'
+        }`}
+      >
+        <div className='space-y-3'>
+          <HomeLogoLink className='w-10' replace={false}>
+            <span className='text-xl'>Intercon</span>
+          </HomeLogoLink>
+          <SidebarUser />
+          <SidebarLinks setIsSidebarOpen={setIsSidebarOpen} />
+        </div>
       </div>
+      {isSidebarOpen && (
+        <div
+          className='fixed inset-0 left-10 bg-black bg-opacity-20 lg:hidden'
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
     </div>
   );
 }

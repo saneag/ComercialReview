@@ -3,7 +3,11 @@ import { usePathname } from 'next/navigation';
 
 import { adminLinksDashboard } from '@/app/constants/routes';
 
-export default function SidebarLinks() {
+interface SidebarLinkProps {
+  setIsSidebarOpen: (value: boolean) => void;
+}
+
+export default function SidebarLinks({ setIsSidebarOpen }: SidebarLinkProps) {
   const pathname = usePathname();
 
   return (
@@ -15,6 +19,7 @@ export default function SidebarLinks() {
             className={`flex items-center gap-2 whitespace-nowrap rounded-md p-1 hover:bg-gray-100 ${
               pathname === link.path ? 'bg-gray-100' : 'text-gray-500'
             }`}
+            onClick={() => setIsSidebarOpen(false)}
           >
             {link?.icon}
             <span>{link.label}</span>

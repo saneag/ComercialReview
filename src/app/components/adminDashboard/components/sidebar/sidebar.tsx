@@ -16,7 +16,10 @@ export default function Sidebar() {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        <SidebarContent isSidebarOpen={isSidebarOpen} />
+        <SidebarContent
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
       </div>
     </aside>
   );
