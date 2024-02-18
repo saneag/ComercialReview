@@ -12,7 +12,18 @@ export default function SidebarContent({
   setIsSidebarOpen,
 }: SidebarContentProps) {
   return (
-    <div className='relative flex'>
+    <>
+      {!isSidebarOpen && (
+        <div className='mt-2 flex w-full flex-col items-center gap-3 lg:hidden'>
+          <div className='flex'>
+            <HomeLogoLink className='w-7' replace={false} />
+          </div>
+          <SidebarLinks
+            setIsSidebarOpen={setIsSidebarOpen}
+            includeLabel={false}
+          />
+        </div>
+      )}
       <div
         className={`h-full flex-col lg:flex ${
           isSidebarOpen
@@ -34,6 +45,6 @@ export default function SidebarContent({
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
-    </div>
+    </>
   );
 }
