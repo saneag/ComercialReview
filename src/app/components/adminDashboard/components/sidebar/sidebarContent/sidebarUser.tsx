@@ -21,10 +21,12 @@ export default function SidebarUser() {
     <div className='flex w-full items-center'>
       <div className='flex w-full items-center space-x-2'>
         <User size={20} />
-        <div className='space-x-1'>
-          <span className='font-semibold'>Test{user.firstName}</span>
-          <span className='font-semibold'>User{user.lastName}</span>
-        </div>
+        {user && (
+          <div className='space-x-1'>
+            <span className='font-semibold'>Test{user.firstName}</span>
+            <span className='font-semibold'>User{user.lastName}</span>
+          </div>
+        )}
       </div>
       <Button variant='ghost' size='icon' onClick={handleUserLogout}>
         <LogOut size={20} />

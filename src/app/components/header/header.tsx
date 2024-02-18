@@ -7,7 +7,7 @@ import { useAppSelector } from '@/app/redux/store';
 
 export default function Header() {
   const isAuth = useAppSelector((state) => state.user.isAuth);
-  const role = 'admin';
+  const role = useAppSelector((state) => state.user.role);
 
   return (
     <div className='flex h-16 w-full items-center justify-between px-5 nm-flat-white'>

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { UserRound } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import Dropdown from '@/app/components/dropdown';
 import {
@@ -10,11 +11,15 @@ import {
   AvatarImage,
 } from '@/app/components/ui/avatar';
 import { Button } from '@/app/components/ui/button';
-import { useAppSelector } from '@/app/redux/store';
+import { resetUserOnLogout } from '@/app/redux/features/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { DropdownContentFields } from '@/app/types/dropdown/DropdownContentFields';
 import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
 
 export default function UserDropdown() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const isAuth = useAppSelector((state) => state.user.isAuth);
   const user = useAppSelector((state) => state.user.user);
   const userRole = useAppSelector((state) => state.user.role);
@@ -29,10 +34,15 @@ export default function UserDropdown() {
       value: 'profile',
     },
     {
-      label: 'Settings',
+      label: <Link href='/settings'>Settings</Link>,
       value: 'settings',
     },
   ];
+
+  const handleUserLogout = useCallback(() => {
+    dispatch(resetUserOnLogout());
+    localStorage.removeItem('user');
+  }, [dispatch]);
 
   useEffect(() => {
     if (isAuth) {
@@ -42,7 +52,7 @@ export default function UserDropdown() {
             <Button
               variant='link'
               className='h-5 w-full justify-start p-0 hover:no-underline'
-              onClick={() => {}}
+              onClick={handleUserLogout}
             >
               Logout
             </Button>
@@ -62,7 +72,7 @@ export default function UserDropdown() {
         },
       ]);
     }
-  }, [isAuth]);
+  }, [handleUserLogout, isAuth]);
 
   return (
     <div>
