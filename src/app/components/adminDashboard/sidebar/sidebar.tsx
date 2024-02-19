@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import SidebarContent from '@/app/components/adminDashboard/components/sidebar/sidebarContent/sidebarContent';
-import SidebarOpenButton from '@/app/components/adminDashboard/components/sidebar/sidebarOpenButton';
+import SidebarContent from '@/app/components/adminDashboard/sidebar/sidebarContent/sidebarContent';
+import SidebarOpenButton from '@/app/components/adminDashboard/sidebar/sidebarOpenButton';
 
 export default function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

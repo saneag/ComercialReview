@@ -1,5 +1,5 @@
-import SidebarLinks from '@/app/components/adminDashboard/components/sidebar/sidebarContent/sidebarLinks';
-import SidebarUser from '@/app/components/adminDashboard/components/sidebar/sidebarContent/sidebarUser';
+import SidebarLinks from '@/app/components/adminDashboard/sidebar/sidebarContent/sidebarLinks';
+import SidebarUser from '@/app/components/adminDashboard/sidebar/sidebarContent/sidebarUser';
 import HomeLogoLink from '@/app/components/homeLogoLink';
 
 interface SidebarContentProps {
