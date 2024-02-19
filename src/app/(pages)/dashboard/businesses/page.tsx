@@ -1,7 +1,9 @@
+import BusinessList from '@/app/components/adminDashboard/businesses/businessList';
+
 export default function DashboardBusinesses() {
   return (
     <div>
-      <h1>Dashboard Businesses</h1>
+      <BusinessList />
     </div>
   );
 }
