@@ -21,7 +21,7 @@ export interface BusinessType extends BaseBusinessType {
 }
 
 export interface BusinessCreateType extends BaseBusinessType {
-  ownerId: number;
+  ownerId: number | null;
   logo: {
     data: string;
   };
@@ -33,3 +33,5 @@ export interface BusinessUpdateType extends BaseBusinessType {
     data: string;
   };
 }
+
+export type BusinessCRUDType = BusinessCreateType | BusinessUpdateType;

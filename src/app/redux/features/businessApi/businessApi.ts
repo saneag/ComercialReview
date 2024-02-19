@@ -5,7 +5,7 @@ import {
   BusinessCreateType,
   BusinessType,
   BusinessUpdateType,
-} from '@/app/types/BusinessType';
+} from '@/app/types/business/BusinessType';
 
 export const businessApi = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: '' }),
