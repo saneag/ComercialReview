@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { debounce } from 'lodash';
 import { Info } from 'lucide-react';
 
-import HoverTooltip from '@/app/components/hoverTooltip';
+import HoverTooltip from '@/app/components/HoverTooltip';
 import RequiredFieldStar from '@/app/components/RequiredFieldStar';
 import {
   FormControl,
@@ -54,7 +54,7 @@ export default function BusinessAddressFormField() {
         <FormItem>
           <FormLabel className='flex items-center gap-2 text-lg text-gray-500'>
             <div>
-              <span>Business address</span> <RequiredFieldStar />
+              <span>Address</span> <RequiredFieldStar />
             </div>
             <HoverTooltip
               triggerChildren={<Info />}

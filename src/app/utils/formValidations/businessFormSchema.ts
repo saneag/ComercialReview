@@ -27,17 +27,14 @@ export const businessCreateFormSchema = z.object({
     .max(500, {
       message: 'Short description must be less than 500 characters',
     }),
-  fullDescription: z
-    .string({
-      invalid_type_error: 'Full description is required',
-      required_error: 'Full description is required',
-    })
-    .min(1, { message: 'Full description is required' }),
+  fullDescription: z.string().optional(),
   logo: z.object({
-    data: z.string({
-      invalid_type_error: 'Logo is required',
-      required_error: 'Logo is required',
-    }),
+    data: z
+      .string({
+        invalid_type_error: 'Logo is required',
+        required_error: 'Logo is required',
+      })
+      .min(1, { message: 'Logo is required' }),
   }),
   address: z.object({
     street: z

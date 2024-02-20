@@ -1,7 +1,8 @@
 'use client';
 
 import BusinessAddressFormField from '@/app/components/adminDashboard/businesses/businessesForm/BusinessAddressFormField';
-import BusinessesForm from '@/app/components/adminDashboard/businesses/businessesForm/businessesForm';
+import BusinessCategorySelect from '@/app/components/adminDashboard/businesses/businessesForm/BusinessCategorySelect';
+import BusinessesForm from '@/app/components/adminDashboard/businesses/businessesForm/BusinessesForm';
 import ImageInputFormField from '@/app/components/formFields/ImageInputFormField';
 import { useCreateBusinessMutation } from '@/app/redux/features/businessApi/businessApi';
 import { BusinessFormSchemaState } from '@/app/types/business/BusinessSchemaType';
@@ -46,7 +47,6 @@ export default function CreateBusiness() {
     {
       label: 'fullDescription',
       displayLabel: 'Full Description',
-      isRequired: true,
     },
   ];
 
@@ -69,6 +69,7 @@ export default function CreateBusiness() {
         buttonClassName='bg-green-600'
       >
         <BusinessAddressFormField />
+        <BusinessCategorySelect />
         <ImageInputFormField
           label='logo'
           displayLabel='Business Logo'
