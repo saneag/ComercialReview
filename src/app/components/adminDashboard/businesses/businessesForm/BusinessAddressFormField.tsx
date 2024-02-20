@@ -3,10 +3,11 @@ import { fromAddress, setKey, setLanguage, setRegion } from 'react-geocode';
 import { useFormContext } from 'react-hook-form';
 
 import { debounce } from 'lodash';
-import { Info } from 'lucide-react';
+import { Hand } from 'lucide-react';
 
-import HoverTooltip from '@/app/components/HoverTooltip';
+import BusinessAddressTooltip from '@/app/components/adminDashboard/businesses/businessesForm/BusinessAddressTooltip';
 import RequiredFieldStar from '@/app/components/RequiredFieldStar';
+import { Button } from '@/app/components/ui/button';
 import {
   FormControl,
   FormField,
@@ -14,13 +15,22 @@ import {
   FormLabel,
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
+import { BusinessAddressInputEnum } from '@/app/types/enums/BusinessAddressInputEnum';
 import { showToastError } from '@/app/utils/showToastMessage';
 
 setKey(process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string);
 setLanguage('ro');
 setRegion('md');
 
-export default function BusinessAddressFormField() {
+interface BusinessAddressFormFieldProps {
+  businessAddressInputType: BusinessAddressInputEnum;
+  handleInputTypeChange: (type: BusinessAddressInputEnum) => void;
+}
+
+export default function BusinessAddressFormField({
+  handleInputTypeChange,
+  businessAddressInputType,
+}: BusinessAddressFormFieldProps) {
   const form = useFormContext();
 
   const handleAddressSearch = (address: string, onChange: any) => {
@@ -52,29 +62,38 @@ export default function BusinessAddressFormField() {
       control={form.control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className='flex items-center gap-2 text-lg text-gray-500'>
+          <FormLabel
+            htmlFor='street'
+            className='flex w-fit items-center gap-2 text-lg text-gray-500'
+          >
             <div>
               <span>Address</span> <RequiredFieldStar />
             </div>
-            <HoverTooltip
-              triggerChildren={<Info />}
-              contentChildren={
-                <div className='max-w-[200px]'>
-                  <p>
-                    Addresses are searched using google maps search engine.
-                    Please enter an address that can be found on google maps.
-                  </p>
-                </div>
-              }
+            <BusinessAddressTooltip
+              businessAddressInputType={businessAddressInputType}
             />
           </FormLabel>
           <FormControl>
-            <Input
-              value={field.value}
-              onChange={({ target }) =>
-                handleAddressSearch(target.value, field.onChange)
-              }
-            />
+            <div className='relative'>
+              <Input
+                id='street'
+                value={field.value}
+                className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
+                onChange={({ target }) =>
+                  handleAddressSearch(target.value, field.onChange)
+                }
+              />
+              <Button
+                className='absolute right-0 top-0'
+                size='icon'
+                variant='ghost'
+                onClick={() =>
+                  handleInputTypeChange(BusinessAddressInputEnum.MANUAL)
+                }
+              >
+                <Hand size={20} />
+              </Button>
+            </div>
           </FormControl>
         </FormItem>
       )}

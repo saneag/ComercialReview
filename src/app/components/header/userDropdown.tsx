@@ -78,7 +78,7 @@ export default function UserDropdown() {
     <div>
       <Dropdown
         triggerText={
-          <div className='cursor-pointer rounded-full p-0.5 nm-flat-gray-400'>
+          <div className='cursor-pointer rounded-full p-0.5 nm-flat-gray-400-sm'>
             <Avatar>
               <AvatarImage></AvatarImage>
               <AvatarFallback className='nm-convex-gray-200'>

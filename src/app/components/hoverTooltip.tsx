@@ -19,7 +19,7 @@ export default function HoverTooltip({
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>{triggerChildren}</TooltipTrigger>
+        <TooltipTrigger type='button'>{triggerChildren}</TooltipTrigger>
         <TooltipContent>{contentChildren}</TooltipContent>
       </Tooltip>
     </TooltipProvider>

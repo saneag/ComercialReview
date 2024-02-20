@@ -29,7 +29,7 @@ export default function BusinessCategorySelect() {
       control={form.control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>
+          <FormLabel className='text-lg text-gray-500'>
             <span>Category</span> <RequiredFieldStar />
           </FormLabel>
           <Select
@@ -40,7 +40,7 @@ export default function BusinessCategorySelect() {
           >
             <FormControl>
               <>
-                <SelectTrigger>
+                <SelectTrigger className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'>
                   <SelectValue placeholder='Select a business category from dropdown' />
                 </SelectTrigger>
                 <SelectContent>
