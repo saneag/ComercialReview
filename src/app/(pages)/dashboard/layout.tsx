@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 
-import Sidebar from '@/app/components/adminDashboard/sidebar/sidebar';
+import Sidebar from '@/app/components/adminDashboard/sidebar/Sidebar';
 
 function Layout({ children }: { children: ReactNode }) {
   return (

@@ -24,12 +24,12 @@ export default function SidebarUser() {
           <User size={20} />
         </div>
         {user ? (
-          <div className='flex flex-wrap space-x-1'>
+          <div className='flex flex-wrap gap-x-1'>
             <span className='font-semibold'>{user.firstName}</span>
             <span className='font-semibold'>{user.lastName}</span>
           </div>
         ) : (
-          <div className='flex flex-wrap space-x-1'>
+          <div className='flex flex-wrap gap-x-1'>
             <span className='font-semibold'>Test</span>
             <span className='font-semibold'>User</span>
           </div>

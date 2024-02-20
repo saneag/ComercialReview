@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { Base64 } from 'js-base64';
+import { Image as ImagePlaceholder } from 'lucide-react';
+import Image from 'next/image';
 
 import RequiredFieldStar from '@/app/components/RequiredFieldStar';
 import {
@@ -43,6 +45,7 @@ export default function ImageInputFormField({
   placeholder,
   className,
 }: ImageInputFormFieldProps) {
+  const [showBigImage, setShowBigImage] = useState(false);
   const [preview, setPreview] = useState('');
   const form = useFormContext();
 
@@ -57,12 +60,39 @@ export default function ImageInputFormField({
     reader.readAsDataURL(files[0]);
   };
 
+  const handleImageClick = () => {
+    if (preview) {
+      setShowBigImage(!showBigImage);
+    }
+  };
+
+  console.log(preview);
+
   return (
     <div className={className}>
-      <Avatar className='h-24 w-24'>
+      <Avatar
+        className={`h-24 w-24 ${preview !== '' && 'cursor-pointer'}`}
+        onClick={handleImageClick}
+      >
         <AvatarImage src={preview} className='object-contain' />
-        <AvatarFallback>Logo</AvatarFallback>
+        <AvatarFallback>
+          <ImagePlaceholder />
+        </AvatarFallback>
       </Avatar>
+      {showBigImage && (
+        <div
+          className='fixed inset-0 z-10 flex cursor-pointer items-center justify-center bg-black/80'
+          onClick={handleImageClick}
+        >
+          <Image
+            src={preview}
+            alt='Image'
+            width={0}
+            height={0}
+            className='h-96 w-auto rounded-xl'
+          />
+        </div>
+      )}
       <FormField
         control={form.control}
         name={label}
@@ -80,6 +110,7 @@ export default function ImageInputFormField({
                   setPreview(displayUrl);
                   handleImageSave(files, onChange);
                 }}
+                className='max-w-[220px]'
               />
             </FormControl>
             <FormMessage />

@@ -3,12 +3,6 @@ import z from 'zod';
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 
 export const businessCreateFormSchema = z.object({
-  ownerId: z
-    .number()
-    .nullish()
-    .refine((data) => data !== null, {
-      message: 'Owner id is required',
-    }),
   title: z
     .string({
       invalid_type_error: 'Title is required',

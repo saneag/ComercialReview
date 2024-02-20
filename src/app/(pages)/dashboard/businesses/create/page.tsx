@@ -7,6 +7,7 @@ import { BusinessCreateType } from '@/app/types/business/BusinessType';
 import { BusinessCreateFieldType } from '@/app/types/business/FormFieldsType';
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { businessCreateFormSchema } from '@/app/utils/formValidations/businessFormSchema';
+import { showToastSuccess } from '@/app/utils/showToastMessage';
 
 export default function CreateBusiness() {
   const [createBusiness, { isLoading }] = useCreateBusinessMutation();
@@ -49,8 +50,12 @@ export default function CreateBusiness() {
 
   const onSubmit = async (data: BusinessFormSchemaState) => {
     try {
-      const response = await createBusiness(data).unwrap();
-      console.log(response);
+      // TODO: change ownerId to the current user id
+      await createBusiness({
+        ...data,
+        ownerId: Math.floor(Math.random() * 1000),
+      });
+      showToastSuccess('Business created');
     } catch (error) {}
   };
 

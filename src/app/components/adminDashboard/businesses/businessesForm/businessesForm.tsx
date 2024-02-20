@@ -56,7 +56,7 @@ export default function BusinessesForm({
   };
 
   return (
-    <div className='w-1/2 rounded-xl px-10 py-5 nm-flat-white'>
+    <div className='mx-5 w-full max-w-[600px] rounded-xl px-10 py-5 nm-flat-white'>
       <FormProvider {...form}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -95,7 +95,7 @@ export default function BusinessesForm({
             <ImageInputFormField
               label='logo'
               displayLabel='Business Logo'
-              className='flex justify-center gap-3'
+              className='flex flex-wrap justify-center gap-3 max-sm:text-center'
             />
             <div className='flex justify-center'>
               <Button type='submit' className={buttonClassName}>

@@ -1,4 +1,4 @@
-import BusinessList from '@/app/components/adminDashboard/businesses/businessList';
+import BusinessList from '@/app/components/adminDashboard/businesses/BusinessList';
 
 export default function DashboardBusinesses() {
   return (

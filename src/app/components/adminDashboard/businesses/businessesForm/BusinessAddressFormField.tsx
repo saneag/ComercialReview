@@ -43,8 +43,8 @@ export default function BusinessAddressFormField({
       const response = await fromAddress(address);
       form.setValue('address', {
         street: response.results[0].formatted_address,
-        latitude: response.results[0].geometry.location.lat,
-        longitude: response.results[0].geometry.location.lng,
+        latitude: String(response.results[0].geometry.location.lat),
+        longitude: String(response.results[0].geometry.location.lng),
       });
     } catch (error) {
       showToastError('Address not found');

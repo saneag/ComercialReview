@@ -1,4 +1,5 @@
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
+import { LogoType } from '@/app/types/LogoType';
 
 export interface BaseBusinessType {
   title: string;
@@ -6,6 +7,7 @@ export interface BaseBusinessType {
   fullDescription: string;
   address: AddressType;
   category: CategoryFilterEnum;
+  logo: LogoType;
 }
 
 export interface AddressType {
