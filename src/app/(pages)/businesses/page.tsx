@@ -2,9 +2,9 @@
 
 import BusinessesList from '@/app/components/businessesList';
 import FiltersCard from '@/app/components/filters';
-import CategoryAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/categoryAccordionItems';
-import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/ratingAccordionItems';
-import FiltersDisplay from '@/app/components/filters/filtersDisplay';
+import CategoryAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/CategoryAccordionItems';
+import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/RatingAccordionItems';
+import FiltersDisplay from '@/app/components/filters/FiltersDisplay';
 import {
   removeBusinessCategoryFilter,
   removeBusinessRatingFilter,

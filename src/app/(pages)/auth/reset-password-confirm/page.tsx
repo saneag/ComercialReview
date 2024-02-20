@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 
-import AuthForm from '@/app/components/auth/components/authForm';
+import AuthForm from '@/app/components/auth/components/AuthForm';
 import { useResetPasswordConfirmMutation } from '@/app/redux/features/userApi/userApi';
 import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
 import { ResetPasswordConfirmFieldType } from '@/app/types/auth/FormFieldsType';

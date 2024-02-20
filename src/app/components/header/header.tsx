@@ -1,8 +1,8 @@
 'use client';
 
-import Links from '@/app/components/header/links';
-import UserDropdown from '@/app/components/header/userDropdown';
-import HomeLogoLink from '@/app/components/homeLogoLink';
+import Links from '@/app/components/header/Links';
+import UserDropdown from '@/app/components/header/UserDropdown';
+import HomeLogoLink from '@/app/components/HomeLogoLink';
 import { useAppSelector } from '@/app/redux/store';
 
 export default function Header() {

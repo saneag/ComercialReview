@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { Base64 } from 'js-base64';
 
-import RequiredFieldStar from '@/app/components/requiredFieldStar';
+import RequiredFieldStar from '@/app/components/RequiredFieldStar';
 import {
   Avatar,
   AvatarFallback,

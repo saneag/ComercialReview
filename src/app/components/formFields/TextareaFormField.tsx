@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import RequiredFieldStar from '@/app/components/requiredFieldStar';
+import RequiredFieldStar from '@/app/components/RequiredFieldStar';
 import { Button } from '@/app/components/ui/button';
 import {
   FormControl,

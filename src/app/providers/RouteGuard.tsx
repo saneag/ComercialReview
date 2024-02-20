@@ -1,6 +1,6 @@
 'use client';
 
-import NotAuthComponent from '@/app/components/auth/components/notAuthComponent';
+import NotAuthComponent from '@/app/components/auth/components/NotAuthComponent';
 import { useAppSelector } from '@/app/redux/store';
 
 export default function RouteGuard(Component: any) {

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import RatingStars from '@/app/components/ratingStars';
+import RatingStars from '@/app/components/RatingStars';
 import { CardHeader } from '@/app/components/ui/card';
 import { BusinessType } from '@/app/types/business/BusinessType';
 

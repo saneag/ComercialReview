@@ -2,7 +2,7 @@
 
 import { Loader2 } from 'lucide-react';
 
-import AuthForm from '@/app/components/auth/components/authForm';
+import AuthForm from '@/app/components/auth/components/AuthForm';
 import { useCreateUserMutation } from '@/app/redux/features/userApi/userApi';
 import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
 import { RegisterType } from '@/app/types/auth/AuthType';

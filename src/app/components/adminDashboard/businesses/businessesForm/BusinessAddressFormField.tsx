@@ -6,7 +6,7 @@ import { debounce } from 'lodash';
 import { Info } from 'lucide-react';
 
 import HoverTooltip from '@/app/components/hoverTooltip';
-import RequiredFieldStar from '@/app/components/requiredFieldStar';
+import RequiredFieldStar from '@/app/components/RequiredFieldStar';
 import {
   FormControl,
   FormField,
