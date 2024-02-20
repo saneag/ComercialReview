@@ -28,11 +28,6 @@ export default function BusinessAddressFormField() {
     debounceSearch(address);
   };
 
-  const debounceSearch = useMemo(
-    () => debounce((address: string) => searchAddress(address), 2000),
-    []
-  );
-
   const searchAddress = async (address: string) => {
     try {
       const response = await fromAddress(address);
@@ -45,6 +40,11 @@ export default function BusinessAddressFormField() {
       showToastError('Address not found');
     }
   };
+
+  const debounceSearch = useMemo(
+    () => debounce((address: string) => searchAddress(address), 2000),
+    []
+  );
 
   return (
     <FormField
