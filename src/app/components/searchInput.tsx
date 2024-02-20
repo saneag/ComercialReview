@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import { debounce } from 'lodash';
 import { X } from 'lucide-react';
@@ -26,10 +26,8 @@ export default function SearchInput({
     debouncedSearch(value);
   };
 
-  const debouncedSearch = useCallback(
-    debounce((value) => {
-      onSearch(value);
-    }, 400),
+  const debouncedSearch = useMemo(
+    () => debounce((value) => onSearch(value), 400),
     []
   );
 
