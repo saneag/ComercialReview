@@ -15,6 +15,8 @@ export const rtkQueryErrorLogger: Middleware =
         showToastError(action.payload.data.errors);
       } else if (action.payload.status === 401) {
         showToastError('Unauthorized');
+      } else if (action.payload.status === 500) {
+        showToastError('Internal Server Error');
       }
     }
 

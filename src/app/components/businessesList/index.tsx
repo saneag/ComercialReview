@@ -1,4 +1,4 @@
-import BusinessCard from '@/app/components/businessesList/businessCard/businessCard';
+import BusinessCard from '@/app/components/businessesList/businessCard/BusinessCard';
 import { useGetBusinessesQuery } from '@/app/redux/features/businessApi/businessApi';
 
 export default function BusinessesList() {

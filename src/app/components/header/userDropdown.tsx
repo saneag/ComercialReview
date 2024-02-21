@@ -1,14 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { UserRound } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import Dropdown from '@/app/components/dropdown';
-import { Button } from '@/app/components/ui/button';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/app/components/ui/avatar';
+import { resetUserOnLogout } from '@/app/redux/features/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { DropdownContentFields } from '@/app/types/dropdown/DropdownContentFields';
+import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
 
 export default function UserDropdown() {
-  const isAuth = false;
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const isAuth = useAppSelector((state) => state.user.isAuth);
+  const user = useAppSelector((state) => state.user.user);
+  const userRole = useAppSelector((state) => state.user.role);
 
   const [additionalContent, setAdditionalContent] = useState<
     DropdownContentFields[]
@@ -20,23 +33,27 @@ export default function UserDropdown() {
       value: 'profile',
     },
     {
-      label: 'Settings',
+      label: <Link href='/settings'>Settings</Link>,
       value: 'settings',
     },
   ];
+
+  const handleUserLogout = useCallback(() => {
+    dispatch(resetUserOnLogout());
+    localStorage.removeItem('user');
+  }, [dispatch]);
 
   useEffect(() => {
     if (isAuth) {
       setAdditionalContent([
         {
           label: (
-            <Button
-              variant='link'
-              className='h-5 w-full justify-start p-0 hover:no-underline'
-              onClick={() => {}}
+            <span
+              className='w-full justify-start p-0 hover:no-underline'
+              onClick={handleUserLogout}
             >
               Logout
-            </Button>
+            </span>
           ),
           value: 'logout',
         },
@@ -53,14 +70,26 @@ export default function UserDropdown() {
         },
       ]);
     }
-  }, [isAuth]);
+  }, [handleUserLogout, isAuth]);
 
   return (
     <div>
       <Dropdown
         triggerText={
-          <div className='cursor-pointer rounded-full bg-gray-400 p-2'>
-            {<UserRound />}
+          <div className='cursor-pointer rounded-full p-0.5 nm-flat-gray-400-sm'>
+            <Avatar>
+              <AvatarImage></AvatarImage>
+              <AvatarFallback className='nm-convex-gray-200'>
+                {user && userRole !== UserRoleEnum.GUEST ? (
+                  <span className='text-capitalize'>
+                    {user.lastName[0]}
+                    {user.firstName[0]}
+                  </span>
+                ) : (
+                  <UserRound />
+                )}
+              </AvatarFallback>
+            </Avatar>
           </div>
         }
         contentLabel='User menu'

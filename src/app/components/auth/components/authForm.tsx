@@ -12,10 +12,11 @@ import {
   AuthFormSchemaState,
   AuthFormSchemaType,
 } from '@/app/types/auth/AuthSchemaType';
+import { AuthType } from '@/app/types/auth/AuthType';
 import { AuthFormFieldsType } from '@/app/types/auth/FormFieldsType';
 
 interface AuthFormProps {
-  defaultValues: any;
+  defaultValues: AuthType;
   authSchema: AuthFormSchemaType;
   inputFields: AuthFormFieldsType[];
   onSubmit: (data: AuthFormSchemaState) => Promise<void>;

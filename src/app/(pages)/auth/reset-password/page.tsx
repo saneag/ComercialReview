@@ -1,6 +1,6 @@
 'use client';
 
-import AuthForm from '@/app/components/auth/components/authForm';
+import AuthForm from '@/app/components/auth/components/AuthForm';
 import { useResetPasswordMutation } from '@/app/redux/features/userApi/userApi';
 import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
 import { ResetPasswordType } from '@/app/types/auth/AuthType';

@@ -2,7 +2,7 @@ import { MapPinIcon } from 'lucide-react';
 
 import { CardFooter } from '@/app/components/ui/card';
 import { GoogleMapsEndpoint } from '@/app/constants/googleMapsEndpoint';
-import { BusinessType } from '@/app/types/BusinessType';
+import { BusinessType } from '@/app/types/business/BusinessType';
 
 interface BusinessCardFooterProps {
   business: BusinessType;

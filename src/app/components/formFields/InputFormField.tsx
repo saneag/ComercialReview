@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { Eye, X } from 'lucide-react';
 
-import RequiredFieldStar from '@/app/components/requiredFieldStar';
+import RequiredFieldStar from '@/app/components/RequiredFieldStar';
 import { Button } from '@/app/components/ui/button';
 import {
   FormControl,
@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
-import { BaseFieldType } from '@/app/types/auth/FormFieldsType';
+import { BaseFieldType } from '@/app/types/BaseFormFieldType';
 
 interface InputFormFieldProps extends BaseFieldType {}
 
@@ -43,13 +43,14 @@ export default function InputFormField({
       render={({ field }) => (
         <FormItem>
           {displayLabel && (
-            <FormLabel className='text-lg text-gray-500'>
+            <FormLabel htmlFor={label} className='text-lg text-gray-500'>
               {displayLabel} {isRequired && <RequiredFieldStar />}
             </FormLabel>
           )}
           <FormControl>
             <div className='relative'>
               <Input
+                id={label}
                 {...field}
                 placeholder={placeholder}
                 type={type === 'password' && showPassword ? 'text' : type}

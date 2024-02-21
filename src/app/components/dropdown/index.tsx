@@ -3,13 +3,14 @@ import { ReactNode } from 'react';
 import { DropdownMenuArrow } from '@radix-ui/react-dropdown-menu';
 
 import {
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/app/components/ui/dropdown-menu';
-import { DropdownMenu } from '@/app/components/ui/dropdown-menu';
+import { Separator } from '@/app/components/ui/separator';
 import { DropdownContentFields } from '@/app/types/dropdown/DropdownContentFields';
 
 interface DropdownProps {
@@ -34,13 +35,22 @@ export default function Dropdown({
         <DropdownMenuLabel>{contentLabel}</DropdownMenuLabel>{' '}
         <DropdownMenuSeparator />
         {contentFields.map((field) => (
-          <DropdownMenuItem className='cursor-pointer' key={field.value}>
+          <DropdownMenuItem
+            className='cursor-pointer'
+            key={field.value}
+            asChild
+          >
             {field.label}
           </DropdownMenuItem>
         ))}
+        {contentFields.length !== 0 && <Separator />}
         {additionalContent &&
           additionalContent.map((field) => (
-            <DropdownMenuItem className='cursor-pointer' key={field.value}>
+            <DropdownMenuItem
+              className='cursor-pointer'
+              key={field.value}
+              asChild
+            >
               {field.label}
             </DropdownMenuItem>
           ))}

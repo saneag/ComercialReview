@@ -4,17 +4,17 @@ import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
 import { UserType } from '@/app/types/UserType';
 
 interface UserState {
-  user: UserType;
-  accessToken: string;
-  refreshToken: String;
+  user: UserType | null;
+  accessToken: string | null;
+  refreshToken: string | null;
   isAuth: boolean;
   role: UserRoleEnum;
 }
 
 const initialState: UserState = {
-  user: {} as UserType,
-  accessToken: '',
-  refreshToken: '',
+  user: null,
+  accessToken: null,
+  refreshToken: null,
   isAuth: false,
   role: UserRoleEnum.GUEST,
 };

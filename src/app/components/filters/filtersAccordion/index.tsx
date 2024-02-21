@@ -1,4 +1,4 @@
-import FilterAccordionItem from '@/app/components/filters/filtersAccordion/filterAccordionItems';
+import FilterAccordionItem from '@/app/components/filters/filtersAccordion/FilterAccordionItems';
 import { Accordion } from '@/app/components/ui/accordion';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 

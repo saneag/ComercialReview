@@ -1,21 +1,37 @@
 import z from 'zod';
 
+const email = z
+  .string({
+    invalid_type_error: 'Invalid email format.',
+    required_error: 'Email is required.',
+  })
+  .email({ message: 'Email is required.' })
+  .min(1, { message: 'Email is required.' })
+  .max(50);
+
+const password = z
+  .string({
+    invalid_type_error: 'Invalid password format.',
+    required_error: 'Password is required.',
+  })
+  .min(1, { message: 'Password is required.' })
+  .max(50);
+
+const advancedPassword = z
+  .string({
+    invalid_type_error: 'Invalid password format.',
+    required_error: 'Password is required.',
+  })
+  .min(1, { message: 'Password is required.' })
+  .max(50)
+  .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
+    message:
+      'Password must contain at least 8 characters, including at least one letter and one number.',
+  });
+
 export const loginFormSchema = z.object({
-  email: z
-    .string({
-      invalid_type_error: 'Invalid email format.',
-      required_error: 'Email is required.',
-    })
-    .email({ message: 'Email is required.' })
-    .min(1, { message: 'Email is required.' })
-    .max(50),
-  password: z
-    .string({
-      invalid_type_error: 'Invalid password format.',
-      required_error: 'Password is required.',
-    })
-    .min(1, { message: 'Password is required.' })
-    .max(50),
+  email,
+  password,
 });
 
 export const registerFormSchema = z
@@ -34,25 +50,8 @@ export const registerFormSchema = z
       })
       .min(1, { message: 'Last name is required.' })
       .max(50),
-    email: z
-      .string({
-        invalid_type_error: 'Invalid email format.',
-        required_error: 'Email is required.',
-      })
-      .email({ message: 'Email is required.' })
-      .min(1, { message: 'Email is required.' })
-      .max(50),
-    password: z
-      .string({
-        invalid_type_error: 'Invalid password format.',
-        required_error: 'Password is required.',
-      })
-      .min(1, { message: 'Password is required.' })
-      .max(50)
-      .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
-        message:
-          'Password must contain at least 8 characters, including at least one letter and one number.',
-      }),
+    email,
+    password: advancedPassword,
     confirmPassword: z.string(),
     userName: z.string().optional(),
   })
@@ -62,35 +61,13 @@ export const registerFormSchema = z
   });
 
 export const resetPasswordFormSchema = z.object({
-  email: z
-    .string({
-      invalid_type_error: 'Invalid email format.',
-      required_error: 'Email is required.',
-    })
-    .email({ message: 'Email is required.' })
-    .min(1, { message: 'Email is required.' }),
+  email,
 });
 
 export const resetPasswordConfirmFormSchema = z
   .object({
-    email: z
-      .string({
-        invalid_type_error: 'Invalid email format.',
-        required_error: 'Email is required.',
-      })
-      .email({ message: 'Email is required.' })
-      .min(1, { message: 'Email is required.' }),
-    password: z
-      .string({
-        invalid_type_error: 'Invalid password format.',
-        required_error: 'Password is required.',
-      })
-      .min(1, { message: 'Password is required.' })
-      .max(50)
-      .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
-        message:
-          'Password must contain at least 8 characters, including at least one letter and one number.',
-      }),
+    email,
+    password: advancedPassword,
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {

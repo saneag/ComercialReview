@@ -1,8 +1,8 @@
 'use client';
 
 import FiltersCard from '@/app/components/filters';
-import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/ratingAccordionItems';
-import FiltersDisplay from '@/app/components/filters/filtersDisplay';
+import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/RatingAccordionItems';
+import FiltersDisplay from '@/app/components/filters/FiltersDisplay';
 import ReviewsList from '@/app/components/reviewsList';
 import {
   removeReviewRatingFilter,

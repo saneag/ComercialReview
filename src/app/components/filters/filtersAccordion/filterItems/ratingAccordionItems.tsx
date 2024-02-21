@@ -2,7 +2,7 @@
 
 import { CheckedState } from '@radix-ui/react-checkbox';
 
-import RatingStars from '@/app/components/ratingStars';
+import RatingStars from '@/app/components/RatingStars';
 import { Checkbox } from '@/app/components/ui/checkbox';
 import { Label } from '@/app/components/ui/label';
 import { useAppDispatch } from '@/app/redux/store';

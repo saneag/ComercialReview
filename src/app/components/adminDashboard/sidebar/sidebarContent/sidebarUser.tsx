@@ -19,14 +19,28 @@ export default function SidebarUser() {
 
   return (
     <div className='flex w-full items-center'>
-      <div className='flex w-full items-center space-x-2'>
-        <User size={20} />
-        <div className='space-x-1'>
-          <span className='font-semibold'>Test{user.firstName}</span>
-          <span className='font-semibold'>User{user.lastName}</span>
+      <div className='flex w-full flex-1 items-center space-x-2'>
+        <div>
+          <User size={20} />
         </div>
+        {user ? (
+          <div className='flex flex-wrap gap-x-1'>
+            <span className='font-semibold'>{user.firstName}</span>
+            <span className='font-semibold'>{user.lastName}</span>
+          </div>
+        ) : (
+          <div className='flex flex-wrap gap-x-1'>
+            <span className='font-semibold'>Test</span>
+            <span className='font-semibold'>User</span>
+          </div>
+        )}
       </div>
-      <Button variant='ghost' size='icon' onClick={handleUserLogout}>
+      <Button
+        variant='ghost'
+        size='icon'
+        className='w-2/12'
+        onClick={handleUserLogout}
+      >
         <LogOut size={20} />
       </Button>
     </div>

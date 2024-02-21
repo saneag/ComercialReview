@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import HomeLogoLink from '@/app/components/homeLogoLink';
+import HomeLogoLink from '@/app/components/HomeLogoLink';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
