@@ -10,7 +10,6 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/app/components/ui/avatar';
-import { Button } from '@/app/components/ui/button';
 import { resetUserOnLogout } from '@/app/redux/features/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { DropdownContentFields } from '@/app/types/dropdown/DropdownContentFields';
@@ -49,13 +48,12 @@ export default function UserDropdown() {
       setAdditionalContent([
         {
           label: (
-            <Button
-              variant='link'
-              className='h-5 w-full justify-start p-0 hover:no-underline'
+            <span
+              className='w-full justify-start p-0 hover:no-underline'
               onClick={handleUserLogout}
             >
               Logout
-            </Button>
+            </span>
           ),
           value: 'logout',
         },

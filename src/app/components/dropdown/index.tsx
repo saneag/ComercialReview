@@ -35,14 +35,22 @@ export default function Dropdown({
         <DropdownMenuLabel>{contentLabel}</DropdownMenuLabel>{' '}
         <DropdownMenuSeparator />
         {contentFields.map((field) => (
-          <DropdownMenuItem className='cursor-pointer' key={field.value}>
+          <DropdownMenuItem
+            className='cursor-pointer'
+            key={field.value}
+            asChild
+          >
             {field.label}
           </DropdownMenuItem>
         ))}
         {contentFields.length !== 0 && <Separator />}
         {additionalContent &&
           additionalContent.map((field) => (
-            <DropdownMenuItem className='cursor-pointer' key={field.value}>
+            <DropdownMenuItem
+              className='cursor-pointer'
+              key={field.value}
+              asChild
+            >
               {field.label}
             </DropdownMenuItem>
           ))}
