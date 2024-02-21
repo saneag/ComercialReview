@@ -13,6 +13,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { BusinessAddressInputEnum } from '@/app/types/enums/BusinessAddressInputEnum';
@@ -61,7 +62,7 @@ export default function BusinessAddressFormField({
       name='address.street'
       control={form.control}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className='relative'>
           <FormLabel
             htmlFor='street'
             className='flex w-fit items-center gap-2 text-lg text-gray-500'
@@ -72,29 +73,28 @@ export default function BusinessAddressFormField({
             <BusinessAddressTooltip
               businessAddressInputType={businessAddressInputType}
             />
+            <Button
+              className='absolute right-0 top-0 h-fit py-1.5 text-black'
+              size='icon'
+              variant='ghost'
+              onClick={() =>
+                handleInputTypeChange(BusinessAddressInputEnum.MANUAL)
+              }
+            >
+              <Hand size={20} />
+            </Button>
           </FormLabel>
           <FormControl>
-            <div className='relative'>
-              <Input
-                id='street'
-                value={field.value}
-                className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
-                onChange={({ target }) =>
-                  handleAddressSearch(target.value, field.onChange)
-                }
-              />
-              <Button
-                className='absolute right-0 top-0'
-                size='icon'
-                variant='ghost'
-                onClick={() =>
-                  handleInputTypeChange(BusinessAddressInputEnum.MANUAL)
-                }
-              >
-                <Hand size={20} />
-              </Button>
-            </div>
+            <Input
+              id='street'
+              value={field.value}
+              className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
+              onChange={({ target }) =>
+                handleAddressSearch(target.value, field.onChange)
+              }
+            />
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />

@@ -28,7 +28,7 @@ export default function BusinessAddressInputManual({
           />
         </div>
         <Button
-          className='absolute bottom-0 right-0'
+          className='absolute right-0 top-0 h-fit py-1'
           variant='ghost'
           size='icon'
           onClick={() => handleInputTypeChange(BusinessAddressInputEnum.AUTO)}

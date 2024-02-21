@@ -66,8 +66,6 @@ export default function ImageInputFormField({
     }
   };
 
-  console.log(preview);
-
   return (
     <div className={className}>
       <Avatar
