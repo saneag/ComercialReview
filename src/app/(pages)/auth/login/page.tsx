@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import AuthForm from '@/app/components/auth/components/authForm';
+import AuthForm from '@/app/components/auth/components/AuthForm';
 import {
   setAccessToken,
   setRefreshToken,
