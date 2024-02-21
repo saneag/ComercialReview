@@ -3,7 +3,7 @@ import { ReactNode, useState } from 'react';
 import { History } from 'lucide-react';
 
 import FiltersAccordion from '@/app/components/filters/filtersAccordion';
-import SearchInput from '@/app/components/searchInput';
+import SearchInput from '@/app/components/SearchInput';
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
 import { useAppDispatch } from '@/app/redux/store';
