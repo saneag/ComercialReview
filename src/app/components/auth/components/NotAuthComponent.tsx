@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import LoadingScreen from '@/app/components/loadingScreen';
+import LoadingScreen from '@/app/components/LoadingScreen';
 
 export default function NotAuthComponent() {
   const router = useRouter();
