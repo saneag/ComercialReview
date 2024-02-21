@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import BusinessesForm from '@/app/components/adminDashboard/businesses/businessesForm/BusinessesForm';
 import { useCreateBusinessMutation } from '@/app/redux/features/businessApi/businessApi';
 import { BusinessFormSchemaState } from '@/app/types/business/BusinessSchemaType';
@@ -7,9 +9,9 @@ import { BusinessCreateType } from '@/app/types/business/BusinessType';
 import { BusinessCreateFieldType } from '@/app/types/business/FormFieldsType';
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { businessCreateFormSchema } from '@/app/utils/formValidations/businessFormSchema';
-import { showToastSuccess } from '@/app/utils/showToastMessage';
 
 export default function CreateBusiness() {
+  const router = useRouter();
   const [createBusiness, { isLoading }] = useCreateBusinessMutation();
 
   const defaultValues: BusinessCreateType = {
@@ -53,9 +55,9 @@ export default function CreateBusiness() {
       // TODO: change ownerId to the current user id
       await createBusiness({
         ...data,
-        ownerId: Math.floor(Math.random() * 1000),
+        ownerId: 4,
       });
-      showToastSuccess('Business created');
+      router.push('/dashboard/businesses');
     } catch (error) {}
   };
 

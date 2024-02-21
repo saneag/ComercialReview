@@ -1,6 +1,7 @@
 'use client';
 
 import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import AuthForm from '@/app/components/auth/components/AuthForm';
 import { useCreateUserMutation } from '@/app/redux/features/userApi/userApi';
@@ -10,6 +11,7 @@ import { RegisterFieldType } from '@/app/types/auth/FormFieldsType';
 import { registerFormSchema } from '@/app/utils/formValidations/authFormSchema';
 
 export default function SignUpPage() {
+  const router = useRouter();
   const [createUser, { isLoading, isError }] = useCreateUserMutation();
 
   const defaultValues: RegisterType = {
@@ -59,6 +61,7 @@ export default function SignUpPage() {
   const onSubmit = async (data: AuthFormSchemaState) => {
     try {
       const response = await createUser(data).unwrap();
+      router.replace('/auth/login');
     } catch (error) {}
   };
 
