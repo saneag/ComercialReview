@@ -16,7 +16,7 @@ export default function BusinessCardHeader({
 }: BusinessCardHeaderProps) {
   const { title, shortDescription, logo, rating, reviewsCount, id } = business;
 
-  const convertedImage = logo.data
+  const convertedImage = logo && logo.data
     ? `data:image/png;base64,${Base64.decode(logo.data)}`
     : null;
 

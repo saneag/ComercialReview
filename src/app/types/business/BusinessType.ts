@@ -7,7 +7,7 @@ export interface BaseBusinessType {
   fullDescription: string;
   address: AddressType;
   category: CategoryFilterEnum;
-  logo: LogoType;
+  logo?: LogoType | null;
 }
 
 export interface AddressType {
@@ -24,16 +24,10 @@ export interface BusinessType extends BaseBusinessType {
 
 export interface BusinessCreateType extends BaseBusinessType {
   ownerId: number | null;
-  logo: {
-    data: string;
-  };
 }
 
 export interface BusinessUpdateType extends BaseBusinessType {
   id: number;
-  logo: {
-    data: string;
-  };
 }
 
 export type BusinessCRUDType = BusinessCreateType | BusinessUpdateType;
