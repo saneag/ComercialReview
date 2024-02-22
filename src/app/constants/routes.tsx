@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 import {
   Building,
   LucideLayoutDashboard,
@@ -7,18 +5,26 @@ import {
   Settings,
 } from 'lucide-react';
 
-interface LinkType {
-  label: string;
-  path: string;
-  icon?: ReactNode;
-}
+import { LinkType } from '@/app/types/LinkType';
 
-export const publicLinks: LinkType[] = [];
+export const publicLinks: LinkType[] = [
+  {
+    label: 'Businesses',
+    path: '/businesses',
+    icon: <Building size={16} />,
+  },
+  {
+    label: 'Reviews',
+    path: '/reviews',
+    icon: <MessageCircle size={16} />,
+  },
+];
 export const privateLinks: LinkType[] = [];
 export const adminLinks: LinkType[] = [
   {
     label: 'Dashboard',
     path: '/dashboard',
+    icon: <LucideLayoutDashboard size={16} />,
   },
 ];
 export const adminLinksDashboard: LinkType[] = [
@@ -40,6 +46,6 @@ export const adminLinksDashboard: LinkType[] = [
   {
     label: 'Settings',
     path: '/dashboard/settings',
-    icon: <Settings />,
+    icon: <Settings size={20} />,
   },
 ];
