@@ -16,9 +16,10 @@ export default function BusinessCardHeader({
 }: BusinessCardHeaderProps) {
   const { title, shortDescription, logo, rating, reviewsCount, id } = business;
 
-  const convertedImage = logo && logo.data
-    ? `data:image/png;base64,${Base64.decode(logo.data)}`
-    : null;
+  const convertedImage =
+    logo && logo.data
+      ? `data:image/png;base64,${Base64.decode(logo.data)}`
+      : null;
 
   return (
     <CardHeader className='flex flex-col gap-x-3 xs:flex-row'>
@@ -32,10 +33,15 @@ export default function BusinessCardHeader({
         </Avatar>
       )}
       <div className='flex flex-1 flex-col'>
-        <Link href={`/businesses/${id}`} className='break-all text-3xl'>
+        <Link
+          href={`/businesses/${id}`}
+          className='whitespace-break-spaces text-3xl'
+        >
           {title}
         </Link>
-        <span className='break-all'>{shortDescription}</span>
+        <span className='line-clamp-3 whitespace-break-spaces'>
+          {shortDescription}
+        </span>
       </div>
       <div className='w-fit text-sm xs:px-2'>
         <div className='mt-2 flex items-center justify-evenly gap-1 text-gray-500'>
