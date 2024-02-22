@@ -82,8 +82,8 @@ export default function UserDropdown() {
               <AvatarFallback className='nm-convex-gray-200'>
                 {user && userRole !== UserRoleEnum.GUEST ? (
                   <span className='text-capitalize'>
-                    {user.lastName[0]}
                     {user.firstName[0]}
+                    {user.lastName[0]}
                   </span>
                 ) : (
                   <UserRound />
