@@ -5,7 +5,7 @@ import { UserType } from '@/app/types/UserType';
 
 interface UserState {
   user: UserType | null;
-  accessToken: string | null;
+  token: string | null;
   refreshToken: string | null;
   isAuth: boolean;
   role: UserRoleEnum;
@@ -13,7 +13,7 @@ interface UserState {
 
 const initialState: UserState = {
   user: null,
-  accessToken: null,
+  token: null,
   refreshToken: null,
   isAuth: false,
   role: UserRoleEnum.GUEST,
@@ -35,8 +35,9 @@ export const userSlice = createSlice({
       state.isAuth = action.payload.isAuth;
       state.role = action.payload.role;
     },
-    setAccessToken: (state, action: PayloadAction<string>) => {
-      state.accessToken = action.payload;
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+      localStorage.setItem('token', action.payload);
     },
     setRefreshToken: (state, action: PayloadAction<string>) => {
       state.refreshToken = action.payload;
@@ -46,16 +47,21 @@ export const userSlice = createSlice({
     },
     resetUserOnLogout: (state) => {
       Object.assign(state, initialState);
+      localStorage.removeItem('token');
+    },
+    getUserToken: (state) => {
+      state.token = localStorage.getItem('token') || null;
     },
   },
 });
 
 export const {
   setUser,
-  setAccessToken,
+  setToken,
   setRefreshToken,
   setIsAuth,
   resetUserOnLogout,
+  getUserToken,
 } = userSlice.actions;
 
 export default userSlice.reducer;

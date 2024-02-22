@@ -64,7 +64,7 @@ export default function Businesses() {
   ];
 
   return (
-    <div className='mt-5 flex flex-col gap-10 md:flex-row'>
+    <div className='my-5 flex flex-col gap-10 md:flex-row'>
       <div className='w-full md:w-4/12'>
         <FiltersCard
           filtersDisplayChildren={

@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 
 import Sidebar from '@/app/components/adminDashboard/sidebar/Sidebar';
+import AdminRouteGuard from '@/app/providers/AdminRouteGuard';
 
 function Layout({ children }: { children: ReactNode }) {
   return (
@@ -13,4 +14,4 @@ function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-export default Layout;
+export default AdminRouteGuard(Layout);

@@ -2,21 +2,20 @@
 
 import { useEffect } from 'react';
 
+import { jwtDecode } from 'jwt-decode';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import AuthForm from '@/app/components/auth/components/AuthForm';
-import {
-  setAccessToken,
-  setRefreshToken,
-  setUser,
-} from '@/app/redux/features/slices/userSlice';
+import { setToken, setUser } from '@/app/redux/features/slices/userSlice';
 import { useLoginUserMutation } from '@/app/redux/features/userApi/userApi';
 import { useAppDispatch } from '@/app/redux/store';
 import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
 import { LoginType } from '@/app/types/auth/AuthType';
 import { LoginFieldType } from '@/app/types/auth/FormFieldsType';
+import { UserJwtClaimsEnum } from '@/app/types/enums/UserJwtClaimsEnum';
+import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
 import { loginFormSchema } from '@/app/utils/formValidations/authFormSchema';
 
 export default function LoginPage() {
@@ -47,11 +46,26 @@ export default function LoginPage() {
   const onSubmit = async (data: AuthFormSchemaState) => {
     try {
       const response = await login(data).unwrap();
-      const { user, accessToken, refreshToken, role } = response;
+      const { token } = response;
+      const decoded: any = jwtDecode(token);
 
-      dispatch(setUser({ user, isAuth: true, role }));
-      dispatch(setAccessToken(accessToken));
-      dispatch(setRefreshToken(refreshToken));
+      const userEmail = decoded[UserJwtClaimsEnum.Email];
+      const userRole = decoded[UserJwtClaimsEnum.Role];
+      const userName = decoded[UserJwtClaimsEnum.UserName];
+
+      dispatch(
+        setUser({
+          user: {
+            firstName: 'Alexandr',
+            lastName: 'Garstea',
+            email: userEmail || '',
+            userName: userName || '',
+          },
+          isAuth: true,
+          role: userRole || UserRoleEnum.USER,
+        })
+      );
+      dispatch(setToken(token));
     } catch (error) {}
   };
 

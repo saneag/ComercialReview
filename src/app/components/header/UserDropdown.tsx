@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { UserRound } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import Dropdown from '@/app/components/dropdown';
 import {
@@ -17,7 +16,6 @@ import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
 
 export default function UserDropdown() {
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   const isAuth = useAppSelector((state) => state.user.isAuth);
   const user = useAppSelector((state) => state.user.user);

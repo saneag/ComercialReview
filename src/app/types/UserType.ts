@@ -8,8 +8,5 @@ export interface UserType {
 }
 
 export interface UserLoginType {
-  accessToken: string;
-  refreshToken: string;
-  user: UserType;
-  role: UserRoleEnum;
+  token: string;
 }
