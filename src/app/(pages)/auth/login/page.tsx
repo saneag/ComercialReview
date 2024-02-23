@@ -71,7 +71,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      router.replace('/businesses');
+      router.replace('/');
     }
   }, [isSuccess, router]);
 

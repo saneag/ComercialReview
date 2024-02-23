@@ -24,13 +24,15 @@ export const businessApi = createApi({
         method: 'GET',
       }),
     }),
-    createBusiness: builder.mutation<void, Partial<BusinessCreateType>>({
-      query: (body) => ({
-        url: '/businesses',
-        method: 'POST',
-        data: body,
-      }),
-    }),
+    createBusiness: builder.mutation<BusinessType, Partial<BusinessCreateType>>(
+      {
+        query: (body) => ({
+          url: '/businesses',
+          method: 'POST',
+          data: body,
+        }),
+      }
+    ),
     updateBusiness: builder.mutation<
       BusinessType,
       { body: Partial<BusinessUpdateType>; businessId: number }

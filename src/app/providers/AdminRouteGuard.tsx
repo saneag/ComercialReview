@@ -1,7 +1,6 @@
 'use client';
 
-import { notFound } from 'next/navigation';
-
+import NotAuthComponent from '@/app/components/auth/components/NotAuthComponent';
 import { useAppSelector } from '@/app/redux/store';
 import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
 
@@ -14,7 +13,7 @@ export default function AdminRouteGuard(Component: any) {
       !isAuth ||
       (role !== UserRoleEnum.ADMIN && role !== UserRoleEnum.SUPER_ADMIN)
     ) {
-      return notFound();
+      return <NotAuthComponent />;
     }
 
     return <Component {...props} />;

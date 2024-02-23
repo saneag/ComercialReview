@@ -7,18 +7,7 @@ import {
 
 import { LinkType } from '@/app/types/LinkType';
 
-export const publicLinks: LinkType[] = [
-  {
-    label: 'Businesses',
-    path: '/businesses',
-    icon: <Building size={16} />,
-  },
-  {
-    label: 'Reviews',
-    path: '/reviews',
-    icon: <MessageCircle size={16} />,
-  },
-];
+export const publicLinks: LinkType[] = [];
 export const privateLinks: LinkType[] = [];
 export const adminLinks: LinkType[] = [
   {
