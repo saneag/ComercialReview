@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className='flex min-h-screen'>
       <div className='flex-1 bg-gray-100'>
         <Header />
-        <div className='container mt-10'>{children}</div>
+        <div className='container my-10'>{children}</div>
         <div className='sm:hidden'>
           <UserNavigation />
         </div>

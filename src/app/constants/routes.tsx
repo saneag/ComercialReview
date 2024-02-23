@@ -28,11 +28,6 @@ export const adminLinksDashboard: LinkType[] = [
     icon: <Building size={20} />,
   },
   {
-    label: 'Reviews',
-    path: '/dashboard/reviews',
-    icon: <MessageCircle size={20} />,
-  },
-  {
     label: 'Settings',
     path: '/dashboard/settings',
     icon: <Settings size={20} />,

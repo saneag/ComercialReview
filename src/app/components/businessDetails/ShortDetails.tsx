@@ -7,7 +7,7 @@ import RatingStars from '@/app/components/RatingStars';
 import { Badge } from '@/app/components/ui/badge';
 import { useGetBusinessQuery } from '@/app/redux/features/businessApi/businessApi';
 
-export default function Description() {
+export default function ShortDetails() {
   const { businessId } = useParams();
   const { data: business, isLoading } = useGetBusinessQuery(Number(businessId));
 
