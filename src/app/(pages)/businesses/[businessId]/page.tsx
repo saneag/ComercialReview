@@ -1,3 +1,5 @@
-export default function BusinessDetails() {
-  return <div>Business details</div>;
+import BusinessDetails from '@/app/components/businessDetails';
+
+export default function BusinessDetailsPage() {
+  return <BusinessDetails />;
 }

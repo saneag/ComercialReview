@@ -53,11 +53,14 @@ export default function CreateBusiness() {
   const onSubmit = async (data: BusinessFormSchemaState) => {
     try {
       // TODO: change ownerId to the current user id
-      await createBusiness({
+      const response = await createBusiness({
         ...data,
-        ownerId: 4,
-      });
-      router.push('/dashboard/businesses');
+        ownerId: 52,
+      }).unwrap();
+
+      if (response && response.id) {
+        router.push('/dashboard/businesses');
+      }
     } catch (error) {}
   };
 
