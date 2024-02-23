@@ -22,19 +22,22 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
     if (token) {
       const decoded: any = jwtDecode(token);
 
-      const userEmail = decoded[UserJwtClaimsEnum.Email];
-      const userName = decoded[UserJwtClaimsEnum.UserName];
+      const userId = decoded[UserJwtClaimsEnum.UserId];
+      const email = decoded[UserJwtClaimsEnum.Email];
+      const firstName = decoded[UserJwtClaimsEnum.FirstName];
+      const lastName = decoded[UserJwtClaimsEnum.LastName];
+      const role = decoded[UserJwtClaimsEnum.Role];
 
       dispatch(
         setUser({
           user: {
-            firstName: 'Alexandr',
-            lastName: 'Garstea',
-            email: userEmail || '',
-            userName: userName || '',
+            userId,
+            firstName,
+            lastName,
+            email,
           },
           isAuth: true,
-          role: UserRoleEnum.SUPER_ADMIN,
+          role: Number(role) as UserRoleEnum,
         })
       );
     }

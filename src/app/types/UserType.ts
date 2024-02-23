@@ -1,6 +1,5 @@
-import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
-
 export interface UserType {
+  userId: number;
   firstName: string;
   lastName: string;
   email: string;
