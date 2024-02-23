@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import Header from '@/app/components/header/Header';
-import UserNavigation from '@/app/components/userNavigation';
+import UserNavigation from '@/app/components/UserNavigation';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

@@ -3,8 +3,9 @@
 import { useParams } from 'next/navigation';
 
 import FullDetails from '@/app/components/businessDetails/FullDetails';
+import ReviewsSection from '@/app/components/businessDetails/reviewsSection/ReviewsSection';
 import Description from '@/app/components/businessDetails/ShortDetails';
-import ImageCarousel from '@/app/components/imageCarousel/ImageCarousel';
+import ImageCarousel from '@/app/components/ImageCarousel';
 import { useGetBusinessQuery } from '@/app/redux/features/businessApi/businessApi';
 
 export default function BusinessDetails() {
@@ -35,6 +36,9 @@ export default function BusinessDetails() {
             <FullDetails />
           </div>
           <Description />
+        </div>
+        <div>
+          <ReviewsSection />
         </div>
       </div>
     )

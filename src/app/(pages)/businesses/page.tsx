@@ -1,6 +1,6 @@
 'use client';
 
-import BusinessesList from '@/app/components/businessesList';
+import BusinessesList from '@/app/components/businessesList/BusinessesList';
 import FiltersCard from '@/app/components/filters';
 import CategoryAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/CategoryAccordionItems';
 import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/RatingAccordionItems';

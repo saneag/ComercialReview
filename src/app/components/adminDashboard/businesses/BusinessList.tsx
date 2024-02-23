@@ -3,7 +3,7 @@
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 
-import BusinessesList from '@/app/components/businessesList';
+import BusinessesList from '@/app/components/businessesList/BusinessesList';
 import { Button } from '@/app/components/ui/button';
 
 export default function BusinessList() {

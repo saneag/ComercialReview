@@ -4,6 +4,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { businessApi } from '@/app/redux/features/businessApi/businessApi';
+import { reviewApi } from '@/app/redux/features/reviewApi/reviewApi';
 import businessFilterSlice from '@/app/redux/features/slices/businessFilterSlice';
 import reviewsFilterSlice from '@/app/redux/features/slices/reviewsFilterSlice';
 import userSlice from '@/app/redux/features/slices/userSlice';
@@ -13,6 +14,7 @@ import { rtkQueryErrorLogger } from '@/app/redux/rtkQueryErrorLogger';
 const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [businessApi.reducerPath]: businessApi.reducer,
+  [reviewApi.reducerPath]: reviewApi.reducer,
   user: userSlice,
   reviewsFilter: reviewsFilterSlice,
   businessFilter: businessFilterSlice,
@@ -26,6 +28,7 @@ export const store = configureStore({
     })
       .concat(userApi.middleware)
       .concat(businessApi.middleware)
+      .concat(reviewApi.middleware)
       .concat(rtkQueryErrorLogger),
   devTools: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production',
 });
