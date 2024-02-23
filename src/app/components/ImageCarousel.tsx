@@ -68,7 +68,7 @@ export default function ImageCarousel({
           {images.map((image, index) => (
             <CarouselItem
               key={index}
-              className='basis-1/4 pl-0'
+              className='basis-1/3 pl-0 sm:basis-1/4 lg:basis-1/3 xl:basis-1/4'
               onClick={() => handleImageClick(index)}
             >
               <Image

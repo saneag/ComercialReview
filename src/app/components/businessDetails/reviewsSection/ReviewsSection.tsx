@@ -12,7 +12,7 @@ export default function ReviewsSection() {
 
   return (
     <div className='space-y-3'>
-      <div className='flex w-8/12'>
+      <div className='flex w-full lg:w-8/12'>
         <ReviewsList reviewsLimit={3} />
       </div>
     </div>

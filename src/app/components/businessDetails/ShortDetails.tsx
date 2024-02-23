@@ -18,7 +18,7 @@ export default function ShortDetails() {
 
   return (
     business && (
-      <div className='flex h-fit flex-1 flex-col gap-3 bg-gray-200 pb-5'>
+      <div className='flex h-fit flex-col gap-3 bg-gray-200 pb-5'>
         <div className='flex-x-center max-h-[300px] min-h-[100px]'>
           {convertedImage ? (
             <Image
@@ -37,7 +37,7 @@ export default function ShortDetails() {
         </div>
         <div className='space-y-3 px-5'>
           <p>{business.shortDescription}</p>
-          <div className='flex justify-between'>
+          <div className='flex flex-wrap justify-between gap-2'>
             <div>
               <p className='text-sm text-gray-500'>Category</p>
               <Badge className='bg-pink-400 hover:bg-pink-500'>
@@ -50,7 +50,7 @@ export default function ShortDetails() {
                 <Badge className='flex w-fit bg-white hover:bg-white/70'>
                   <RatingStars starsCount={business.rating} starSize={16} />
                 </Badge>
-                <p className='text-sm text-gray-500'>
+                <p className='text-nowrap text-sm text-gray-500'>
                   ( {business.rating} / {business.reviewsCount} reviews)
                 </p>
               </div>

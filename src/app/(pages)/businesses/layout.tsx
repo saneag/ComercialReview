@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div className='flex-1 bg-gray-100'>
         <Header />
         <div className='container my-10'>{children}</div>
-        <div className='sm:hidden'>
+        <div className='hidden'>
           <UserNavigation />
         </div>
       </div>

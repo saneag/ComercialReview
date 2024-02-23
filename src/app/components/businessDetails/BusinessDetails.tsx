@@ -28,14 +28,16 @@ export default function BusinessDetails() {
         <div>
           <p className='text-2xl font-semibold'>{business.title}</p>
         </div>
-        <div className='flex w-full gap-4'>
-          <div className='w-8/12 space-y-10'>
+        <div className='flex w-full flex-wrap-reverse justify-center gap-4 lg:justify-normal'>
+          <div className='w-full space-y-10 lg:w-7/12 xl:w-8/12'>
             {images.length !== 0 && (
               <ImageCarousel images={images} includeBigImage />
             )}
             <FullDetails />
           </div>
-          <Description />
+          <div className='w-full sm:w-8/12 lg:w-6/12 lg:flex-1 xl:w-full'>
+            <Description />
+          </div>
         </div>
         <div>
           <ReviewsSection />
