@@ -1,13 +1,17 @@
 import { ReactNode } from 'react';
 
 import Header from '@/app/components/header/Header';
+import UserNavigation from '@/app/components/UserNavigation';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className='flex min-h-screen'>
       <div className='flex-1 bg-gray-100'>
         <Header />
-        <div className='container'>{children}</div>
+        <div className='container my-10'>{children}</div>
+        <div className='hidden'>
+          <UserNavigation />
+        </div>
       </div>
     </div>
   );

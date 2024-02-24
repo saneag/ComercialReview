@@ -1,5 +1,4 @@
 import { LogOut, User } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 import { Button } from '@/app/components/ui/button';
 import { resetUserOnLogout } from '@/app/redux/features/slices/userSlice';
@@ -7,14 +6,12 @@ import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 
 export default function SidebarUser() {
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   const user = useAppSelector((state) => state.user.user);
 
   const handleUserLogout = () => {
     dispatch(resetUserOnLogout());
     localStorage.removeItem('user');
-    router.replace('/businesses');
   };
 
   return (

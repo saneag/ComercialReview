@@ -11,7 +11,7 @@ export default function NotAuthComponent() {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      router.replace('/auth/login');
+      router.replace('/');
     }, 1000);
 
     return () => {

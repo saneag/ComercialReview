@@ -7,11 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import AuthForm from '@/app/components/auth/components/AuthForm';
-import {
-  setAccessToken,
-  setRefreshToken,
-  setUser,
-} from '@/app/redux/features/slices/userSlice';
+import { setToken } from '@/app/redux/features/slices/userSlice';
 import { useLoginUserMutation } from '@/app/redux/features/userApi/userApi';
 import { useAppDispatch } from '@/app/redux/store';
 import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
@@ -23,7 +19,7 @@ export default function LoginPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const [login, { isLoading, isError, isSuccess }] = useLoginUserMutation();
+  const [login, { isLoading, isSuccess }] = useLoginUserMutation();
 
   const defaultValues: LoginType = {
     email: '',
@@ -47,17 +43,13 @@ export default function LoginPage() {
   const onSubmit = async (data: AuthFormSchemaState) => {
     try {
       const response = await login(data).unwrap();
-      const { user, accessToken, refreshToken, role } = response;
-
-      dispatch(setUser({ user, isAuth: true, role }));
-      dispatch(setAccessToken(accessToken));
-      dispatch(setRefreshToken(refreshToken));
+      dispatch(setToken(response.token));
     } catch (error) {}
   };
 
   useEffect(() => {
     if (isSuccess) {
-      router.replace('/businesses');
+      router.replace('/');
     }
   }, [isSuccess, router]);
 

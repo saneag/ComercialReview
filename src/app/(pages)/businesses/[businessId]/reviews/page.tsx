@@ -3,7 +3,7 @@
 import FiltersCard from '@/app/components/filters';
 import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/RatingAccordionItems';
 import FiltersDisplay from '@/app/components/filters/FiltersDisplay';
-import ReviewsList from '@/app/components/reviewsList';
+import ReviewsList from '@/app/components/reviewsList/ReviewsList';
 import {
   removeReviewRatingFilter,
   resetReviewFilters,

@@ -1,6 +1,6 @@
 'use client';
 
-import BusinessesList from '@/app/components/businessesList';
+import BusinessesList from '@/app/components/businessesList/BusinessesList';
 import FiltersCard from '@/app/components/filters';
 import CategoryAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/CategoryAccordionItems';
 import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/RatingAccordionItems';
@@ -64,7 +64,7 @@ export default function Businesses() {
   ];
 
   return (
-    <div className='mt-5 flex flex-col gap-10 md:flex-row'>
+    <div className='my-5 flex flex-col gap-10 md:flex-row'>
       <div className='w-full md:w-4/12'>
         <FiltersCard
           filtersDisplayChildren={

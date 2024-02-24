@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import BusinessesForm from '@/app/components/adminDashboard/businesses/businessesForm/BusinessesForm';
 import { useCreateBusinessMutation } from '@/app/redux/features/businessApi/businessApi';
+import { useAppSelector } from '@/app/redux/store';
 import { BusinessFormSchemaState } from '@/app/types/business/BusinessSchemaType';
 import { BusinessCreateType } from '@/app/types/business/BusinessType';
 import { BusinessCreateFieldType } from '@/app/types/business/FormFieldsType';
@@ -13,6 +14,7 @@ import { businessCreateFormSchema } from '@/app/utils/formValidations/businessFo
 export default function CreateBusiness() {
   const router = useRouter();
   const [createBusiness, { isLoading }] = useCreateBusinessMutation();
+  const userId = useAppSelector((state) => state.user.user?.userId);
 
   const defaultValues: BusinessCreateType = {
     ownerId: null,
@@ -53,11 +55,14 @@ export default function CreateBusiness() {
   const onSubmit = async (data: BusinessFormSchemaState) => {
     try {
       // TODO: change ownerId to the current user id
-      await createBusiness({
+      const response = await createBusiness({
         ...data,
-        ownerId: 4,
-      });
-      router.push('/dashboard/businesses');
+        ownerId: userId,
+      }).unwrap();
+
+      if (response && response.id) {
+        router.push('/dashboard/businesses');
+      }
     } catch (error) {}
   };
 
