@@ -4,18 +4,18 @@ import HomeLogoLink from '@/app/components/HomeLogoLink';
 
 interface UnderConstructionProps {
   className?: string;
+  showLogo?: boolean;
 }
 
 export default function UnderConstruction({
   className,
+  showLogo = true,
 }: UnderConstructionProps) {
   return (
     <div
       className={`flex-center w-full select-none flex-col gap-5 ${className ?? ''}`}
     >
-      <div>
-        <HomeLogoLink className='animate-spin-10 w-20' />
-      </div>
+      {showLogo && <HomeLogoLink className='animate-spin-10 w-20' />}
       <div className='flex-y-center gap-2 text-7xl'>
         <UnderConstructionImage />
         <p className='text-center'>Coming Soon</p>
