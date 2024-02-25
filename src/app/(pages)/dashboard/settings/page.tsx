@@ -1,7 +1,9 @@
+import UnderConstruction from '@/app/components/UnderConstruction';
+
 export default function DashboardSettings() {
   return (
     <div>
-      <h1>Dashboard Settings</h1>
+      <UnderConstruction />
     </div>
   );
 }

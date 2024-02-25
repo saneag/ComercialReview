@@ -15,11 +15,7 @@ export default function HomeLogoLink({
   replace = true,
 }: HomeLogoLinkProps) {
   return (
-    <Link
-      href='/businesses'
-      replace={replace}
-      className='flex items-center gap-3'
-    >
+    <Link href='/businesses' className='flex items-center gap-3'>
       <Image
         src='/assets/images/intercon-logo-no-text.png'
         alt=''

@@ -83,6 +83,9 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'spin-3': 'spin 3s linear infinite',
+        'spin-5': 'spin 5s linear infinite',
+        'spin-10': 'spin 10s linear infinite',
       },
     },
   },
