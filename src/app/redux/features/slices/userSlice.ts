@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
-import { UserType } from '@/app/types/UserType';
+import { UserType } from '@/app/types/user/UserType';
 
 interface UserState {
   user: UserType | null;

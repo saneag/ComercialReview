@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { axiosBaseQuery } from '@/app/redux/features/axiosBaseQuery';
 import { LoginType, RegisterType } from '@/app/types/auth/AuthType';
-import { UserLoginType, UserType } from '@/app/types/UserType';
+import { UserLoginType, UserType } from '@/app/types/user/UserType';
 
 export const userApi = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: '' }),
@@ -56,7 +56,7 @@ export const userApi = createApi({
       }),
     }),
     updateUser: builder.mutation<
-      UserType,
+      void,
       { body: Partial<UserType>; userId: number }
     >({
       query: ({ body, userId }) => ({
