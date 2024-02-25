@@ -22,34 +22,38 @@ export default function BusinessCardHeader({
       : null;
 
   return (
-    <CardHeader className='flex flex-col gap-x-3 xs:flex-row'>
-      {convertedImage && (
-        <Avatar className='h-14 w-auto'>
-          <AvatarImage
-            className='object-contain'
-            src={convertedImage}
-            alt={title}
-          />
-        </Avatar>
-      )}
-      <div className='flex flex-1 flex-col'>
-        <Link
-          href={`/businesses/${id}`}
-          className='whitespace-break-spaces text-3xl'
-        >
-          {title}
-        </Link>
-        <span className='line-clamp-3 whitespace-break-spaces'>
-          {shortDescription}
-        </span>
+    <CardHeader className='flex flex-row flex-wrap gap-3'>
+      <div className='max-sm:flex-x-center max-sm:w-full'>
+        {convertedImage && (
+          <Avatar className='h-14 w-auto'>
+            <AvatarImage
+              className='object-contain'
+              src={convertedImage}
+              alt={title}
+            />
+          </Avatar>
+        )}
       </div>
-      <div className='w-fit text-sm xs:px-2'>
-        <div className='mt-2 flex items-center justify-evenly gap-1 text-gray-500'>
-          <span>{rating}</span>
-          <div className='flex space-x-1'>
-            <RatingStars starsCount={rating} starSize={12} />
+      <div className='flex flex-1 flex-wrap max-sm:justify-between'>
+        <div className='flex flex-1 flex-col'>
+          <Link
+            href={`/businesses/${id}`}
+            className='whitespace-break-spaces text-3xl'
+          >
+            {title}
+          </Link>
+          <span className='line-clamp-3 whitespace-break-spaces'>
+            {shortDescription}
+          </span>
+        </div>
+        <div className='w-fit text-sm xs:px-2'>
+          <div className='mt-2 flex items-center justify-evenly gap-1 text-gray-500'>
+            <span>{rating}</span>
+            <div className='flex space-x-1'>
+              <RatingStars starsCount={rating} starSize={12} />
+            </div>
+            <span className='text-gray-500'>({reviewsCount})</span>
           </div>
-          <span className='text-gray-500'>({reviewsCount})</span>
         </div>
       </div>
     </CardHeader>

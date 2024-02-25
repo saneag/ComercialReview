@@ -2,9 +2,17 @@ import Image from 'next/image';
 
 import HomeLogoLink from '@/app/components/HomeLogoLink';
 
-export default function UnderConstruction() {
+interface UnderConstructionProps {
+  className?: string;
+}
+
+export default function UnderConstruction({
+  className,
+}: UnderConstructionProps) {
   return (
-    <div className='flex-center container h-screen w-full select-none flex-col gap-5'>
+    <div
+      className={`flex-center w-full select-none flex-col gap-5 ${className ?? ''}`}
+    >
       <div>
         <HomeLogoLink className='animate-spin-10 w-20' />
       </div>

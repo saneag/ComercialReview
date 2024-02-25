@@ -17,14 +17,16 @@ export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
 
   return (
     <div className='w-full space-y-4'>
-      <div className='flex justify-end'>
-        <Link
-          href={`/businesses/${businessId}/reviews`}
-          className='text-blue-500 underline underline-offset-4'
-        >
-          Show All {reviews?.length || 0} reviews
-        </Link>
-      </div>
+      {reviewsLimit && (
+        <div className='flex justify-end'>
+          <Link
+            href={`/businesses/${businessId}/reviews`}
+            className='text-blue-500 underline underline-offset-4'
+          >
+            Show All {reviews?.length || 0} reviews
+          </Link>
+        </div>
+      )}
       {/* TODO: remove slice after pagination is implemented */}
       {isSuccess &&
         reviews
