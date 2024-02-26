@@ -17,12 +17,14 @@ export const businessApi = createApi({
         url: '/businesses',
         method: 'GET',
       }),
+      providesTags: ['Business'],
     }),
     getBusiness: builder.query<BusinessType, number>({
       query: (id) => ({
         url: `/businesses/${id}`,
         method: 'GET',
       }),
+      providesTags: ['Business'],
     }),
     createBusiness: builder.mutation<BusinessType, Partial<BusinessCreateType>>(
       {
@@ -31,6 +33,7 @@ export const businessApi = createApi({
           method: 'POST',
           data: body,
         }),
+        invalidatesTags: ['Business'],
       }
     ),
     updateBusiness: builder.mutation<
@@ -42,6 +45,7 @@ export const businessApi = createApi({
         method: 'PUT',
         data: body,
       }),
+      invalidatesTags: ['Business'],
     }),
   }),
 });
