@@ -28,9 +28,9 @@ export const userApi = createApi({
         data: body,
       }),
     }),
-    createUser: builder.mutation<void, Partial<RegisterType>>({
+    registerUser: builder.mutation<void, Partial<RegisterType>>({
       query: (body) => ({
-        url: '/users/create',
+        url: '/users/register',
         method: 'POST',
         data: {
           firstName: body.firstName,
@@ -86,7 +86,7 @@ export const {
   useLazyGetUserQuery,
   useLazyGetUsersQuery,
   useLoginUserMutation,
-  useCreateUserMutation,
+  useRegisterUserMutation,
   useResetPasswordMutation,
   useResetPasswordConfirmMutation,
   useUpdateUserMutation,
