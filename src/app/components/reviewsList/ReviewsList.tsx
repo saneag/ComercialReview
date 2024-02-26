@@ -15,9 +15,12 @@ export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
     Number(businessId)
   );
 
+  const showAllReviewsButton =
+    reviewsLimit && reviews && reviewsLimit < reviews?.length;
+
   return (
     <div className='w-full space-y-4'>
-      {reviewsLimit && (
+      {showAllReviewsButton && (
         <div className='flex justify-end'>
           <Link
             href={`/businesses/${businessId}/reviews`}
