@@ -4,7 +4,7 @@ import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import AuthForm from '@/app/components/auth/components/AuthForm';
-import { useCreateUserMutation } from '@/app/redux/features/userApi/userApi';
+import { useRegisterUserMutation } from '@/app/redux/features/userApi/userApi';
 import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
 import { RegisterType } from '@/app/types/auth/AuthType';
 import { RegisterFieldType } from '@/app/types/auth/FormFieldsType';
@@ -12,7 +12,7 @@ import { registerFormSchema } from '@/app/utils/formValidations/authFormSchema';
 
 export default function SignUpPage() {
   const router = useRouter();
-  const [createUser, { isLoading, isError }] = useCreateUserMutation();
+  const [registerUser, { isLoading, isError }] = useRegisterUserMutation();
 
   const defaultValues: RegisterType = {
     firstName: '',
@@ -60,7 +60,7 @@ export default function SignUpPage() {
 
   const onSubmit = async (data: AuthFormSchemaState) => {
     try {
-      const response = await createUser(data).unwrap();
+      const response = await registerUser(data).unwrap();
       router.replace('/auth/login');
     } catch (error) {}
   };
