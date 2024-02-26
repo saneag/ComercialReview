@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
-import { UserType } from '@/app/types/UserType';
+import { UserType } from '@/app/types/user/UserType';
 
 interface UserState {
   user: UserType | null;
@@ -35,6 +35,18 @@ export const userSlice = createSlice({
       state.isAuth = action.payload.isAuth;
       state.role = action.payload.role;
     },
+    setUserAfterUpdate: (
+      state,
+      action: PayloadAction<{ user: Omit<UserType, 'userId'> }>
+    ) => {
+      if (state.user) {
+        const user = action.payload.user;
+        state.user.firstName = user.firstName;
+        state.user.lastName = user.lastName;
+        state.user.email = user.email;
+        state.user.avatar = user.avatar;
+      }
+    },
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
       localStorage.setItem('token', action.payload);
@@ -57,6 +69,7 @@ export const userSlice = createSlice({
 
 export const {
   setUser,
+  setUserAfterUpdate,
   setToken,
   setRefreshToken,
   setIsAuth,

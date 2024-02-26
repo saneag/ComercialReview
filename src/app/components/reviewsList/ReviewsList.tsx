@@ -15,16 +15,21 @@ export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
     Number(businessId)
   );
 
+  const showAllReviewsButton =
+    reviewsLimit && reviews && reviewsLimit < reviews?.length;
+
   return (
     <div className='w-full space-y-4'>
-      <div className='flex justify-end'>
-        <Link
-          href={`/businesses/${businessId}/reviews`}
-          className='text-blue-500 underline underline-offset-4'
-        >
-          Show All {reviews?.length || 0} reviews
-        </Link>
-      </div>
+      {showAllReviewsButton && (
+        <div className='flex justify-end'>
+          <Link
+            href={`/businesses/${businessId}/reviews`}
+            className='text-blue-500 underline underline-offset-4'
+          >
+            Show All {reviews?.length || 0} reviews
+          </Link>
+        </div>
+      )}
       {/* TODO: remove slice after pagination is implemented */}
       {isSuccess &&
         reviews

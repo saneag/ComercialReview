@@ -26,6 +26,9 @@ interface ImageInputFormFieldProps extends BaseFieldType {
 }
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
+  if (!event.target.files || !event.target.files.length)
+    return { files: null, displayUrl: '' };
+
   const dataTransfer = new DataTransfer();
 
   Array.from(event.target.files!).forEach((image) =>
@@ -33,6 +36,7 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
   );
 
   const files = dataTransfer.files;
+
   const displayUrl = URL.createObjectURL(event.target.files![0]);
 
   return { files, displayUrl };
@@ -44,12 +48,15 @@ export default function ImageInputFormField({
   isRequired,
   placeholder,
   className,
+  isDisabled,
 }: ImageInputFormFieldProps) {
   const [showBigImage, setShowBigImage] = useState(false);
   const [preview, setPreview] = useState('');
   const form = useFormContext();
 
-  const handleImageSave = (files: FileList, onChange: any) => {
+  const handleImageSave = (files: FileList | null, onChange: any) => {
+    if (!files || !files.length) return;
+
     const reader = new FileReader();
     reader.onload = (event) => {
       const base64 = event.target?.result;
@@ -66,6 +73,17 @@ export default function ImageInputFormField({
     }
   };
 
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    onChange: any
+  ) => {
+    const { files, displayUrl } = getImageData(event);
+    if (displayUrl) {
+      setPreview(displayUrl);
+    }
+    handleImageSave(files, onChange);
+  };
+
   return (
     <div className={className}>
       <Avatar
@@ -73,7 +91,7 @@ export default function ImageInputFormField({
         onClick={handleImageClick}
       >
         <AvatarImage src={preview} className='object-contain' />
-        <AvatarFallback>
+        <AvatarFallback className='bg-gray-200'>
           <ImagePlaceholder />
         </AvatarFallback>
       </Avatar>
@@ -91,30 +109,29 @@ export default function ImageInputFormField({
           />
         </div>
       )}
-      <FormField
-        control={form.control}
-        name={label}
-        render={({ field: { onChange, value, ...rest } }) => (
-          <FormItem>
-            <FormLabel className='text-lg text-gray-500'>
-              {displayLabel} {isRequired && <RequiredFieldStar />}
-            </FormLabel>
-            <FormControl>
-              <Input
-                {...rest}
-                type='file'
-                onChange={(event) => {
-                  const { files, displayUrl } = getImageData(event);
-                  setPreview(displayUrl);
-                  handleImageSave(files, onChange);
-                }}
-                className='max-w-[220px]'
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      {!isDisabled && (
+        <FormField
+          control={form.control}
+          name={label}
+          disabled={isDisabled}
+          render={({ field: { onChange, value, ...rest } }) => (
+            <FormItem>
+              <FormLabel className='text-lg text-gray-500'>
+                {displayLabel} {isRequired && <RequiredFieldStar />}
+              </FormLabel>
+              <FormControl>
+                <Input
+                  {...rest}
+                  type='file'
+                  onChange={(event) => handleInputChange(event, onChange)}
+                  className='max-w-[220px]'
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
     </div>
   );
 }

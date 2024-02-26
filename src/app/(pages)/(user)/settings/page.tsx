@@ -1,9 +1,9 @@
 import UnderConstruction from '@/app/components/UnderConstruction';
 
-export default function DashboardSettings() {
+export default function UserSettingsPage() {
   return (
     <div>
-      <UnderConstruction className='h-screen' />
+      <UnderConstruction className='mt-64' />
     </div>
   );
 }

@@ -11,7 +11,7 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: '1rem',
       screens: {
         '2xl': '1400px',
       },
@@ -83,6 +83,9 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'spin-3': 'spin 3s linear infinite',
+        'spin-5': 'spin 5s linear infinite',
+        'spin-10': 'spin 10s linear infinite',
       },
     },
   },

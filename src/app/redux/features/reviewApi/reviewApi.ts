@@ -17,6 +17,7 @@ export const reviewApi = createApi({
         url: `/businesses/${businessId}/reviews`,
         method: 'GET',
       }),
+      providesTags: ['Review'],
     }),
     getReviewByUserAndBusinessId: builder.query<
       ReviewType,
@@ -26,16 +27,18 @@ export const reviewApi = createApi({
         url: `/businesses/${businessId}/reviews/${userId}`,
         method: 'GET',
       }),
+      providesTags: ['Review'],
     }),
     createReview: builder.mutation<
       ReviewType,
       { businessId: number; review: Partial<ReviewCreateType> }
     >({
       query: ({ businessId, review }) => ({
-        url: '/businesses/${businessId}/reviews',
+        url: `/businesses/${businessId}/reviews`,
         method: 'POST',
         data: review,
       }),
+      invalidatesTags: ['Review'],
     }),
     updateReview: builder.mutation<
       ReviewType,
@@ -46,6 +49,7 @@ export const reviewApi = createApi({
         method: 'PUT',
         data: review,
       }),
+      invalidatesTags: ['Review'],
     }),
     deleteReview: builder.mutation<
       void,
@@ -55,6 +59,7 @@ export const reviewApi = createApi({
         url: `/businesses/${businessId}/reviews/${userId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Review'],
     }),
   }),
 });

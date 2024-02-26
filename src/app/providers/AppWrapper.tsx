@@ -31,7 +31,7 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
       dispatch(
         setUser({
           user: {
-            userId,
+            userId: Number(userId),
             firstName,
             lastName,
             email,

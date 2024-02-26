@@ -1,5 +1,9 @@
-function AdminDashboardPage() {
-  return <div>Admin dashboard page</div>;
-}
+import UnderConstruction from '@/app/components/UnderConstruction';
 
-export default AdminDashboardPage;
+export default function AdminDashboardPage() {
+  return (
+    <div>
+      <UnderConstruction className='h-screen' />
+    </div>
+  );
+}

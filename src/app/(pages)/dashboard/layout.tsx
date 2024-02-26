@@ -7,9 +7,9 @@ import AdminRouteGuard from '@/app/providers/AdminRouteGuard';
 
 function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className='flex'>
+    <div className='flex bg-gray-100'>
       <Sidebar />
-      <div className='flex-1 bg-gray-100'>{children}</div>
+      <div className='container flex-1'>{children}</div>
     </div>
   );
 }

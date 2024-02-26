@@ -56,7 +56,8 @@ export default function BusinessesForm({
   };
 
   return (
-    <div className='mx-5 w-full max-w-[600px] rounded-xl px-10 py-5 nm-flat-white'>
+    <div className='w-full max-w-[600px] rounded-xl px-5 py-5 nm-flat-white md:mx-5 md:px-10'>
+      <p className='flex-x-center mb-2 text-xl text-gray-500'>{buttonLabel}</p>
       <FormProvider {...form}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>

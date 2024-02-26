@@ -5,7 +5,7 @@ export default function BusinessesList() {
   const { data: businesses, isSuccess } = useGetBusinessesQuery();
 
   return (
-    <div className='space-y-4'>
+    <div className='my-10 space-y-4'>
       {isSuccess &&
         businesses.map((business) => (
           <BusinessCard key={business.id} business={business} />
