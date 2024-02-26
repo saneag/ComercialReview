@@ -23,6 +23,7 @@ export default function InputFormField({
   placeholder,
   type,
   isRequired,
+  isDisabled = false,
 }: InputFormFieldProps) {
   const form = useFormContext();
 
@@ -40,6 +41,7 @@ export default function InputFormField({
     <FormField
       control={form.control}
       name={label}
+      disabled={isDisabled}
       render={({ field }) => (
         <FormItem>
           {displayLabel && (
@@ -57,7 +59,7 @@ export default function InputFormField({
                 className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
                 autoComplete='new-password'
               />
-              {form.watch(label) !== '' && (
+              {form.watch(label) !== '' && !isDisabled && (
                 <Button
                   variant='link'
                   size='icon'

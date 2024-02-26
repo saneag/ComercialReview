@@ -1,9 +1,12 @@
+'use client';
+
 import { ReactNode } from 'react';
 
 import Header from '@/app/components/header/Header';
 import UserNavigation from '@/app/components/UserNavigation';
+import AdminRouteGuard from '@/app/providers/AdminRouteGuard';
 
-export default function Layout({ children }: { children: ReactNode }) {
+function Layout({ children }: { children: ReactNode }) {
   return (
     <div className='flex min-h-screen'>
       <div className='flex-1 bg-gray-100'>
@@ -16,3 +19,5 @@ export default function Layout({ children }: { children: ReactNode }) {
     </div>
   );
 }
+
+export default AdminRouteGuard(Layout);

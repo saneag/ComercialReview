@@ -11,7 +11,7 @@ export interface UserAvatarType {
 }
 
 export interface UserType extends BaseUserType {
-  userId: string;
+  userId: number;
 }
 
 export interface UserUpdateType extends BaseUserType {}

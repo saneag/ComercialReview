@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import LoadingScreen from '@/app/components/LoadingScreen';
-
 export default function NotAuthComponent() {
   const router = useRouter();
 
@@ -19,9 +17,11 @@ export default function NotAuthComponent() {
     };
   }, [router]);
 
-  return (
-    <div className='fixed bottom-0 left-0 right-0 top-0 z-50'>
-      <LoadingScreen />
-    </div>
-  );
+  return null;
+
+  // return (
+  //   <div className='fixed bottom-0 left-0 right-0 top-0 z-50'>
+  //     <LoadingScreen />
+  //   </div>
+  // );
 }
