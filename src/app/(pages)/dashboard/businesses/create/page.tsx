@@ -17,7 +17,6 @@ export default function CreateBusiness() {
   const userId = useAppSelector((state) => state.user.user?.userId);
 
   const defaultValues: BusinessCreateType = {
-    ownerId: null,
     title: '',
     shortDescription: '',
     fullDescription: '',
@@ -56,7 +55,6 @@ export default function CreateBusiness() {
     try {
       const response = await createBusiness({
         ...data,
-        ownerId: userId,
       }).unwrap();
 
       if (response && response.id) {
