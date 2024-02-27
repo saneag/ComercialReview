@@ -22,8 +22,9 @@ export interface BusinessType extends BaseBusinessType {
   reviewsCount: number;
 }
 
-export interface BusinessCreateType extends BaseBusinessType {
+export interface BusinessCreateType extends Omit<BaseBusinessType, 'category'>{
   ownerId: number | null;
+  category: CategoryFilterEnum | null;
 }
 
 export interface BusinessUpdateType extends BaseBusinessType {

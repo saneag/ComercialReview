@@ -48,6 +48,8 @@ export default function BusinessesForm({
     resolver: zodResolver(resolver),
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [businessAddressInputType, setBusinessAddressInputType] =
     useState<BusinessAddressInputEnum>(BusinessAddressInputEnum.AUTO);
 
@@ -85,6 +87,7 @@ export default function BusinessesForm({
               <BusinessAddressFormField
                 businessAddressInputType={businessAddressInputType}
                 handleInputTypeChange={handleInputTypeChange}
+                setIsLoading={setIsLoading}
               />
             ) : (
               <BusinessAddressInputManual
@@ -99,7 +102,11 @@ export default function BusinessesForm({
               className='flex flex-wrap justify-center gap-3 max-sm:text-center'
             />
             <div className='flex justify-center'>
-              <Button type='submit' className={buttonClassName}>
+              <Button
+                type='submit'
+                disabled={isLoading}
+                className={buttonClassName}
+              >
                 {buttonLabel}
               </Button>
             </div>

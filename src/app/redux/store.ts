@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
+import { apiSlice } from '@/app/redux/features/baseQuery';
 import { businessApi } from '@/app/redux/features/businessApi/businessApi';
 import { reviewApi } from '@/app/redux/features/reviewApi/reviewApi';
 import businessFilterSlice from '@/app/redux/features/slices/businessFilterSlice';
@@ -12,6 +13,7 @@ import { userApi } from '@/app/redux/features/userApi/userApi';
 import { rtkQueryErrorLogger } from '@/app/redux/rtkQueryErrorLogger';
 
 const rootReducer = combineReducers({
+  [apiSlice.reducerPath]: apiSlice.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [businessApi.reducerPath]: businessApi.reducer,
   [reviewApi.reducerPath]: reviewApi.reducer,
@@ -26,6 +28,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     })
+      .concat(apiSlice.middleware)
       .concat(userApi.middleware)
       .concat(businessApi.middleware)
       .concat(reviewApi.middleware)

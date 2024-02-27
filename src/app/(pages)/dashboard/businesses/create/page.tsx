@@ -8,8 +8,8 @@ import { useAppSelector } from '@/app/redux/store';
 import { BusinessFormSchemaState } from '@/app/types/business/BusinessSchemaType';
 import { BusinessCreateType } from '@/app/types/business/BusinessType';
 import { BusinessCreateFieldType } from '@/app/types/business/FormFieldsType';
-import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { businessCreateFormSchema } from '@/app/utils/formValidations/businessFormSchema';
+import { showToastSuccess } from '@/app/utils/showToastMessage';
 
 export default function CreateBusiness() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function CreateBusiness() {
       latitude: '',
       longitude: '',
     },
-    category: CategoryFilterEnum.ALL,
+    category: null,
   };
 
   const formFields: BusinessCreateFieldType[] = [
@@ -54,20 +54,20 @@ export default function CreateBusiness() {
 
   const onSubmit = async (data: BusinessFormSchemaState) => {
     try {
-      // TODO: change ownerId to the current user id
       const response = await createBusiness({
         ...data,
         ownerId: userId,
       }).unwrap();
 
       if (response && response.id) {
+        showToastSuccess('Business created successfully');
         router.push('/dashboard/businesses');
       }
     } catch (error) {}
   };
 
   return (
-    <div className='mt-10 flex justify-center'>
+    <div className='my-10 flex justify-center'>
       <BusinessesForm
         defaultValues={defaultValues}
         resolver={businessCreateFormSchema}

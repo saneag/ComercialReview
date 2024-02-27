@@ -7,7 +7,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import AuthForm from '@/app/components/auth/components/AuthForm';
-import { setToken } from '@/app/redux/features/slices/userSlice';
+import {
+  setAccessToken,
+  setRefreshToken,
+} from '@/app/redux/features/slices/userSlice';
 import { useLoginUserMutation } from '@/app/redux/features/userApi/userApi';
 import { useAppDispatch } from '@/app/redux/store';
 import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
@@ -43,7 +46,8 @@ export default function LoginPage() {
   const onSubmit = async (data: AuthFormSchemaState) => {
     try {
       const response = await login(data).unwrap();
-      dispatch(setToken(response.token));
+      dispatch(setAccessToken(response.accessToken));
+      dispatch(setRefreshToken(response.refreshToken));
     } catch (error) {}
   };
 

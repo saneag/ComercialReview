@@ -17,5 +17,6 @@ export interface UserType extends BaseUserType {
 export interface UserUpdateType extends BaseUserType {}
 
 export interface UserLoginType {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
 }

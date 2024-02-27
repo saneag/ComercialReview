@@ -5,7 +5,7 @@ import { UserType } from '@/app/types/user/UserType';
 
 interface UserState {
   user: UserType | null;
-  token: string | null;
+  accessToken: string | null;
   refreshToken: string | null;
   isAuth: boolean;
   role: UserRoleEnum;
@@ -13,7 +13,7 @@ interface UserState {
 
 const initialState: UserState = {
   user: null,
-  token: null,
+  accessToken: null,
   refreshToken: null,
   isAuth: false,
   role: UserRoleEnum.GUEST,
@@ -47,22 +47,27 @@ export const userSlice = createSlice({
         state.user.avatar = user.avatar;
       }
     },
-    setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
-      localStorage.setItem('token', action.payload);
+    setAccessToken: (state, action: PayloadAction<string>) => {
+      state.accessToken = action.payload;
+      localStorage.setItem('accessToken', action.payload);
     },
     setRefreshToken: (state, action: PayloadAction<string>) => {
       state.refreshToken = action.payload;
+      localStorage.setItem('refreshToken', action.payload);
     },
     setIsAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
     },
     resetUserOnLogout: (state) => {
       Object.assign(state, initialState);
-      localStorage.removeItem('token');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
     },
-    getUserToken: (state) => {
-      state.token = localStorage.getItem('token') || null;
+    getUserAccessToken: (state) => {
+      state.accessToken = localStorage.getItem('accessToken') || null;
+    },
+    getUserRefreshToken: (state) => {
+      state.refreshToken = localStorage.getItem('refreshToken') || null;
     },
   },
 });
@@ -70,11 +75,11 @@ export const userSlice = createSlice({
 export const {
   setUser,
   setUserAfterUpdate,
-  setToken,
+  setAccessToken,
   setRefreshToken,
   setIsAuth,
   resetUserOnLogout,
-  getUserToken,
+  getUserAccessToken,
 } = userSlice.actions;
 
 export default userSlice.reducer;
