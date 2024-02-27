@@ -13,9 +13,11 @@ export const businessApi = businessApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getBusinesses: builder.query<BusinessType[], void>({
       query: () => '/businesses',
+      providesTags: ['Business'],
     }),
     getBusiness: builder.query<BusinessType, number>({
       query: (id) => `/businesses/${id}`,
+      providesTags: ['Business'],
     }),
     createBusiness: builder.mutation<BusinessType, Partial<BusinessCreateType>>(
       {
@@ -24,6 +26,7 @@ export const businessApi = businessApiWithTag.injectEndpoints({
           method: 'POST',
           body,
         }),
+        invalidatesTags: ['Business'],
       }
     ),
     updateBusiness: builder.mutation<
@@ -35,6 +38,7 @@ export const businessApi = businessApiWithTag.injectEndpoints({
         method: 'PUT',
         body,
       }),
+      invalidatesTags: ['Business'],
     }),
   }),
 });

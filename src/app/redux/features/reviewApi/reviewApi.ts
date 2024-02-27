@@ -13,6 +13,7 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getReviewsByBusinessId: builder.query<ReviewType[], number>({
       query: (businessId) => `/businesses/${businessId}/reviews`,
+      providesTags: ['Review'],
     }),
     getReviewByUserAndBusinessId: builder.query<
       ReviewType,
@@ -20,6 +21,7 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
     >({
       query: ({ businessId, userId }) =>
         `/businesses/${businessId}/reviews/${userId}`,
+      providesTags: ['Review'],
     }),
     createReview: builder.mutation<
       ReviewType,
@@ -30,6 +32,7 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         method: 'POST',
         body: review,
       }),
+      invalidatesTags: ['Review'],
     }),
     updateReview: builder.mutation<
       ReviewType,
@@ -40,6 +43,7 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         method: 'PUT',
         body: review,
       }),
+      invalidatesTags: ['Review'],
     }),
     deleteReview: builder.mutation<
       void,
@@ -47,6 +51,7 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
     >({
       query: ({ businessId, userId }) =>
         `/businesses/${businessId}/reviews/${userId}`,
+      invalidatesTags: ['Review'],
     }),
   }),
 });

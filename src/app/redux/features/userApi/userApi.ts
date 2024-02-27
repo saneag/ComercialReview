@@ -22,6 +22,7 @@ export const userApi = userApiWithTag.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['User'],
     }),
     registerUser: builder.mutation<void, Partial<RegisterType>>({
       query: (body) => ({
@@ -29,6 +30,7 @@ export const userApi = userApiWithTag.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['User'],
     }),
     resetPassword: builder.mutation({
       query: (body) => ({
@@ -36,6 +38,7 @@ export const userApi = userApiWithTag.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['User'],
     }),
     resetPasswordConfirm: builder.mutation({
       query: (body) => ({
@@ -43,6 +46,7 @@ export const userApi = userApiWithTag.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['User'],
     }),
     updateUser: builder.mutation<
       void,
@@ -53,12 +57,14 @@ export const userApi = userApiWithTag.injectEndpoints({
         method: 'PUT',
         body,
       }),
+      invalidatesTags: ['User'],
     }),
     deleteUser: builder.mutation<void, number>({
       query: (userId) => ({
         url: `/users/${userId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['User'],
     }),
     checkUserName: builder.query<void, string>({
       query: (userName) => `/users/checkUserName?nameToCheck=${userName}`,
