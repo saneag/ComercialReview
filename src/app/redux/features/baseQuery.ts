@@ -40,8 +40,6 @@ const baseQueryWithReAuth = async (args: any, api: any, extraOptions: any) => {
       extraOptions
     );
 
-    console.log('refreshResult', refreshResult);
-
     if (refreshResult.data) {
       api.dispatch(setAccessToken(refreshResult.data.accessToken));
       api.dispatch(setRefreshToken(refreshResult.data.refreshToken));

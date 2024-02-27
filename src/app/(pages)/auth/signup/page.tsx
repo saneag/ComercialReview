@@ -9,6 +9,7 @@ import { AuthFormSchemaState } from '@/app/types/auth/AuthSchemaType';
 import { RegisterType } from '@/app/types/auth/AuthType';
 import { RegisterFieldType } from '@/app/types/auth/FormFieldsType';
 import { registerFormSchema } from '@/app/utils/formValidations/authFormSchema';
+import { showToastSuccess } from '@/app/utils/showToastMessage';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -60,7 +61,11 @@ export default function SignUpPage() {
 
   const onSubmit = async (data: AuthFormSchemaState) => {
     try {
-      const response = await registerUser(data).unwrap();
+      const response: any = await registerUser(data);
+      if (response.error) {
+        return;
+      }
+      showToastSuccess('User registered successfully');
       router.replace('/auth/login');
     } catch (error) {}
   };

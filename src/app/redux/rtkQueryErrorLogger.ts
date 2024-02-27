@@ -12,11 +12,13 @@ export const rtkQueryErrorLogger: Middleware =
       if (typeof action.payload.data === 'string') {
         showToastError(action.payload.data);
       } else if (typeof action.payload.data === 'object') {
-        showToastError(action.payload.data.errors);
+        if (action.payload.status === 500) {
+          showToastError('Something went wrong');
+        } else {
+          showToastError(action.payload.data.errors);
+        }
       } else if (action.payload.status === 401) {
         showToastError('Unauthorized');
-      } else if (action.payload.status === 500) {
-        showToastError('Internal Server Error');
       }
     }
 
