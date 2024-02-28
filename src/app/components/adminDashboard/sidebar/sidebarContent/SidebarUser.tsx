@@ -11,7 +11,6 @@ export default function SidebarUser() {
 
   const handleUserLogout = () => {
     dispatch(resetUserOnLogout());
-    localStorage.removeItem('user');
   };
 
   return (

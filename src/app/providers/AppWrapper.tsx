@@ -5,22 +5,25 @@ import { ReactNode, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
 import { Toaster } from '@/app/components/ui/toaster';
-import { getUserToken, setUser } from '@/app/redux/features/slices/userSlice';
+import {
+  getUserAccessToken,
+  setUser,
+} from '@/app/redux/features/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { UserJwtClaimsEnum } from '@/app/types/enums/UserJwtClaimsEnum';
 import { UserRoleEnum } from '@/app/types/enums/UserRoleEnum';
 
 export default function AppWrapper({ children }: { children: ReactNode }) {
   const dispatch = useAppDispatch();
-  const token = useAppSelector((state) => state.user.token);
+  const accessToken = useAppSelector((state) => state.user.accessToken);
 
   useEffect(() => {
-    dispatch(getUserToken());
+    dispatch(getUserAccessToken());
   }, [dispatch]);
 
   useEffect(() => {
-    if (token) {
-      const decoded: any = jwtDecode(token);
+    if (accessToken) {
+      const decoded: any = jwtDecode(accessToken);
 
       const userId = decoded[UserJwtClaimsEnum.UserId];
       const email = decoded[UserJwtClaimsEnum.Email];
@@ -41,7 +44,7 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
         })
       );
     }
-  }, [token, dispatch]);
+  }, [accessToken, dispatch]);
 
   return (
     <>

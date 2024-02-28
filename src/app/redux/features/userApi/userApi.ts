@@ -1,59 +1,52 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-
-import { axiosBaseQuery } from '@/app/redux/features/axiosBaseQuery';
+import { apiSlice } from '@/app/redux/features/baseQuery';
 import { LoginType, RegisterType } from '@/app/types/auth/AuthType';
 import { UserLoginType, UserType } from '@/app/types/user/UserType';
 
-export const userApi = createApi({
-  baseQuery: axiosBaseQuery({ baseUrl: '' }),
-  tagTypes: ['User'],
-  reducerPath: 'userApi',
+const userApiWithTag = apiSlice.enhanceEndpoints({
+  addTagTypes: ['User'],
+});
+
+export const userApi = userApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query<UserType[], void>({
-      query: () => ({
-        url: '/users',
-        method: 'GET',
-      }),
+      query: () => '/users',
+      providesTags: ['User'],
     }),
     getUser: builder.query<UserType, number>({
-      query: (userId) => ({
-        url: `/users/${userId}`,
-        method: 'GET',
-      }),
+      query: (userId) => `/users/${userId}`,
+      providesTags: ['User'],
     }),
     loginUser: builder.mutation<UserLoginType, Partial<LoginType>>({
       query: (body) => ({
         url: '/users/login',
         method: 'POST',
-        data: body,
+        body,
       }),
+      invalidatesTags: ['User'],
     }),
     registerUser: builder.mutation<void, Partial<RegisterType>>({
       query: (body) => ({
         url: '/users/register',
         method: 'POST',
-        data: {
-          firstName: body.firstName,
-          lastName: body.lastName,
-          email: body.email,
-          password: body.password,
-          userName: body.userName || null,
-        },
+        body,
       }),
+      invalidatesTags: ['User'],
     }),
     resetPassword: builder.mutation({
       query: (body) => ({
         url: '/users/reset-password',
         method: 'POST',
-        data: body,
+        body,
       }),
+      invalidatesTags: ['User'],
     }),
     resetPasswordConfirm: builder.mutation({
       query: (body) => ({
         url: '/users/reset-password-confirm',
         method: 'POST',
-        data: body,
+        body,
       }),
+      invalidatesTags: ['User'],
     }),
     updateUser: builder.mutation<
       void,
@@ -62,20 +55,19 @@ export const userApi = createApi({
       query: ({ body, userId }) => ({
         url: `/users/${userId}`,
         method: 'PUT',
-        data: body,
+        body,
       }),
+      invalidatesTags: ['User'],
     }),
     deleteUser: builder.mutation<void, number>({
       query: (userId) => ({
         url: `/users/${userId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['User'],
     }),
     checkUserName: builder.query<void, string>({
-      query: (userName) => ({
-        url: `/users/checkUserName?nameToCheck=${userName}`,
-        method: 'GET',
-      }),
+      query: (userName) => `/users/checkUserName?nameToCheck=${userName}`,
     }),
   }),
 });

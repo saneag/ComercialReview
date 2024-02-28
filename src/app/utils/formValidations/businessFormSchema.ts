@@ -48,5 +48,13 @@ export const businessCreateFormSchema = z.object({
       })
       .min(1, { message: 'Longitude is required' }),
   }),
-  category: z.nativeEnum(CategoryFilterEnum),
+  category: z
+    .nativeEnum(CategoryFilterEnum, {
+      invalid_type_error: 'Category is required',
+      required_error: 'Category is required',
+    })
+    .nullish()
+    .refine((val) => val !== null, {
+      message: 'Category is required',
+    }),
 });

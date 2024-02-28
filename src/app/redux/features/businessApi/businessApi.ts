@@ -1,29 +1,22 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-
-import { axiosBaseQuery } from '@/app/redux/features/axiosBaseQuery';
+import { apiSlice } from '@/app/redux/features/baseQuery';
 import {
   BusinessCreateType,
   BusinessType,
   BusinessUpdateType,
 } from '@/app/types/business/BusinessType';
 
-export const businessApi = createApi({
-  baseQuery: axiosBaseQuery({ baseUrl: '' }),
-  tagTypes: ['Business'],
-  reducerPath: 'businessApi',
+const businessApiWithTag = apiSlice.enhanceEndpoints({
+  addTagTypes: ['Business'],
+});
+
+export const businessApi = businessApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getBusinesses: builder.query<BusinessType[], void>({
-      query: () => ({
-        url: '/businesses',
-        method: 'GET',
-      }),
+      query: () => '/businesses',
       providesTags: ['Business'],
     }),
     getBusiness: builder.query<BusinessType, number>({
-      query: (id) => ({
-        url: `/businesses/${id}`,
-        method: 'GET',
-      }),
+      query: (id) => `/businesses/${id}`,
       providesTags: ['Business'],
     }),
     createBusiness: builder.mutation<BusinessType, Partial<BusinessCreateType>>(
@@ -31,7 +24,7 @@ export const businessApi = createApi({
         query: (body) => ({
           url: '/businesses',
           method: 'POST',
-          data: body,
+          body,
         }),
         invalidatesTags: ['Business'],
       }
@@ -43,7 +36,7 @@ export const businessApi = createApi({
       query: ({ body, businessId }) => ({
         url: `/businesses/${businessId}`,
         method: 'PUT',
-        data: body,
+        body,
       }),
       invalidatesTags: ['Business'],
     }),

@@ -26,17 +26,22 @@ setRegion('md');
 interface BusinessAddressFormFieldProps {
   businessAddressInputType: BusinessAddressInputEnum;
   handleInputTypeChange: (type: BusinessAddressInputEnum) => void;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
 export default function BusinessAddressFormField({
   handleInputTypeChange,
   businessAddressInputType,
+  setIsLoading,
 }: BusinessAddressFormFieldProps) {
   const form = useFormContext();
 
   const handleAddressSearch = (address: string, onChange: any) => {
+    setIsLoading(true);
     onChange(address);
-    debounceSearch(address);
+    if (address.length) {
+      debounceSearch(address);
+    }
   };
 
   const searchAddress = async (address: string) => {
@@ -50,6 +55,7 @@ export default function BusinessAddressFormField({
     } catch (error) {
       showToastError('Address not found');
     }
+    setIsLoading(false);
   };
 
   const debounceSearch = useMemo(

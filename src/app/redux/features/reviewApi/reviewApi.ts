@@ -1,32 +1,26 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-
-import { axiosBaseQuery } from '@/app/redux/features/axiosBaseQuery';
+import { apiSlice } from '@/app/redux/features/baseQuery';
 import {
   ReviewCreateType,
   ReviewType,
   ReviewUpdateType,
 } from '@/app/types/review/ReviewType';
 
-export const reviewApi = createApi({
-  baseQuery: axiosBaseQuery({ baseUrl: '' }),
-  tagTypes: ['Review'],
-  reducerPath: 'reviewApi',
+const reviewApiWithTag = apiSlice.enhanceEndpoints({
+  addTagTypes: ['Review'],
+});
+
+export const reviewApi = reviewApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getReviewsByBusinessId: builder.query<ReviewType[], number>({
-      query: (businessId) => ({
-        url: `/businesses/${businessId}/reviews`,
-        method: 'GET',
-      }),
+      query: (businessId) => `/businesses/${businessId}/reviews`,
       providesTags: ['Review'],
     }),
     getReviewByUserAndBusinessId: builder.query<
       ReviewType,
       { businessId: number; userId: number }
     >({
-      query: ({ businessId, userId }) => ({
-        url: `/businesses/${businessId}/reviews/${userId}`,
-        method: 'GET',
-      }),
+      query: ({ businessId, userId }) =>
+        `/businesses/${businessId}/reviews/${userId}`,
       providesTags: ['Review'],
     }),
     createReview: builder.mutation<
@@ -36,7 +30,7 @@ export const reviewApi = createApi({
       query: ({ businessId, review }) => ({
         url: `/businesses/${businessId}/reviews`,
         method: 'POST',
-        data: review,
+        body: review,
       }),
       invalidatesTags: ['Review'],
     }),
@@ -47,7 +41,7 @@ export const reviewApi = createApi({
       query: ({ businessId, review }) => ({
         url: `/businesses/${businessId}/reviews`,
         method: 'PUT',
-        data: review,
+        body: review,
       }),
       invalidatesTags: ['Review'],
     }),
@@ -55,10 +49,8 @@ export const reviewApi = createApi({
       void,
       { businessId: number; userId: number }
     >({
-      query: ({ businessId, userId }) => ({
-        url: `/businesses/${businessId}/reviews/${userId}`,
-        method: 'DELETE',
-      }),
+      query: ({ businessId, userId }) =>
+        `/businesses/${businessId}/reviews/${userId}`,
       invalidatesTags: ['Review'],
     }),
   }),
