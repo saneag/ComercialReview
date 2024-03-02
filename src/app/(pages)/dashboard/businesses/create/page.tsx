@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 
 import BusinessesForm from '@/app/components/adminDashboard/businesses/businessesForm/BusinessesForm';
 import { useCreateBusinessMutation } from '@/app/redux/features/businessApi/businessApi';
-import { useAppSelector } from '@/app/redux/store';
 import { BusinessFormSchemaState } from '@/app/types/business/BusinessSchemaType';
 import { BusinessCreateType } from '@/app/types/business/BusinessType';
 import { BusinessCreateFieldType } from '@/app/types/business/FormFieldsType';
@@ -14,7 +13,6 @@ import { showToastSuccess } from '@/app/utils/showToastMessage';
 export default function CreateBusiness() {
   const router = useRouter();
   const [createBusiness, { isLoading }] = useCreateBusinessMutation();
-  const userId = useAppSelector((state) => state.user.user?.userId);
 
   const defaultValues: BusinessCreateType = {
     title: '',
