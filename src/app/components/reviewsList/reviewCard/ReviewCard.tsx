@@ -9,7 +9,7 @@ interface ReviewCardProps {
 
 export default function ReviewCard({ review }: ReviewCardProps) {
   return (
-    <Card>
+    <Card className='h-fit'>
       <ReviewCardHeader review={review} />
       <ReviewCardBody review={review} />
     </Card>
