@@ -4,6 +4,12 @@ import { useFormContext } from 'react-hook-form';
 import { Star } from 'lucide-react';
 
 import RequiredFieldStar from '@/app/components/RequiredFieldStar';
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/app/components/ui/form';
 
 interface BusinessGradeSelectProps {
   isDisabled: boolean;
@@ -18,7 +24,10 @@ export default function BusinessGradeSelect({
 
   const handleStarClick = (grade: number) => {
     if (!isDisabled) {
-      form.setValue('grade', grade);
+      form.setValue('grade', grade, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
     }
   };
 
@@ -44,22 +53,29 @@ export default function BusinessGradeSelect({
   };
 
   return (
-    <div className='flex items-center gap-3'>
-      <span>
-        Rating <RequiredFieldStar />
-      </span>
-      <div className='flex' onMouseLeave={handleMouseLeave}>
-        {Array.from({ length: 5 }, (_, index) => (
-          <Star
-            key={index}
-            onMouseEnter={() => handleMouseOver(index + 1)}
-            className='cursor-pointer text-yellow-500'
-            fill={shouldFillStar(index) ? 'currentColor' : 'none'}
-            onClick={() => handleStarClick(index + 1)}
-            size={30}
-          />
-        ))}
-      </div>
-    </div>
+    <FormField
+      name='grade'
+      control={form.control}
+      render={({ field }) => (
+        <FormItem className='flex items-center gap-3'>
+          <FormLabel className='mt-1 text-center'>
+            Rating <RequiredFieldStar />
+            <FormMessage />
+          </FormLabel>
+          <div className='flex' onMouseLeave={handleMouseLeave}>
+            {Array.from({ length: 5 }, (_, index) => (
+              <Star
+                key={index}
+                onMouseEnter={() => handleMouseOver(index + 1)}
+                className='cursor-pointer text-yellow-500'
+                fill={shouldFillStar(index) ? 'currentColor' : 'none'}
+                onClick={() => handleStarClick(index + 1)}
+                size={30}
+              />
+            ))}
+          </div>
+        </FormItem>
+      )}
+    />
   );
 }

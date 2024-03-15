@@ -1,17 +1,25 @@
+import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ThumbsDown, ThumbsUp } from 'lucide-react';
+import { useParams } from 'next/navigation';
 import z from 'zod';
 
 import TextareaFormField from '@/app/components/formFields/TextareaFormField';
 import BusinessGradeSelect from '@/app/components/reviewsList/reviewCreateCard/BusinessGradeSelect';
-import { Button } from '@/app/components/ui/button';
+import ReviewCreateCardActionButtons from '@/app/components/reviewsList/reviewCreateCard/ReviewCreateCardActionButtons';
 import { CardContent } from '@/app/components/ui/card';
 import { Form } from '@/app/components/ui/form';
+import { useCreateReviewMutation } from '@/app/redux/features/reviewApi/reviewApi';
+import { useAppSelector } from '@/app/redux/store';
 import { reviewCreateFormSchema } from '@/app/utils/formValidations/reviewCreateFormSchema';
+import { showToastSuccess } from '@/app/utils/showToastMessage';
 
 export default function ReviewCreateCardContent() {
+  const { businessId } = useParams();
+  const [createReview, { isLoading, isSuccess }] = useCreateReviewMutation();
+  const user = useAppSelector((state) => state.user.user);
+
   const form = useForm({
     defaultValues: {
       grade: 0,
@@ -22,8 +30,23 @@ export default function ReviewCreateCardContent() {
   });
 
   const onSubmit = async (data: z.infer<typeof reviewCreateFormSchema>) => {
-    console.log(data);
+    try {
+      await createReview({
+        businessId: Number(businessId),
+        review: {
+          ...data,
+          authorId: user?.userId,
+        },
+      });
+    } catch (error) {}
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      showToastSuccess('Review created successfully');
+      form.reset();
+    }
+  }, [isSuccess, form]);
 
   return (
     <CardContent>
@@ -31,34 +54,19 @@ export default function ReviewCreateCardContent() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='flex flex-col'
+            className='flex flex-col gap-2'
           >
             <div className='flex justify-end'>
-              <BusinessGradeSelect isDisabled={false} />
+              <BusinessGradeSelect isDisabled={isLoading} />
             </div>
             <TextareaFormField
               label='reviewText'
               displayLabel='Write a review'
-              isDisabled={false}
+              isDisabled={isLoading}
               isRequired
               textAreaClassName='nm-flat-white-sm'
             />
-            <div className='mt-3 flex flex-col gap-2'>
-              <span>Do you recommend this business?</span>
-              <div className='flex justify-between'>
-                <div className='flex gap-2'>
-                  <Button className='nm-flat-green-500-sm hover:nm-flat-green-600-sm'>
-                    <ThumbsUp />
-                  </Button>
-                  <Button className='nm-flat-red-500-sm hover:nm-flat-red-600-sm'>
-                    <ThumbsDown />
-                  </Button>
-                </div>
-                <Button className='bg-gradient-to-tr from-purple-500/70 to-blue-500/70 text-white brightness-125'>
-                  Post review
-                </Button>
-              </div>
-            </div>
+            <ReviewCreateCardActionButtons isDisabled={isLoading} />
           </form>
         </Form>
       </FormProvider>

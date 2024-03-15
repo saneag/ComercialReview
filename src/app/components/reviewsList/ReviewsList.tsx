@@ -30,7 +30,7 @@ export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
   }
 
   return (
-    <div className='space-y-4'>
+    <div className='w-full space-y-4'>
       <div className='mb-14 mt-10'>
         <ReviewCreateCard />
       </div>
