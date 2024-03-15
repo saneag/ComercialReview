@@ -81,6 +81,7 @@ export default function BusinessesForm({
                   key={field.label}
                   placeholder={field.placeholder}
                   type={field.type}
+                  textAreaClassName='nm-flat-white-sm'
                 />
               ))}
             {businessAddressInputType === BusinessAddressInputEnum.AUTO ? (

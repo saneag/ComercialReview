@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
 import { jwtDecode } from 'jwt-decode';
 
 import {
@@ -75,6 +75,6 @@ const baseQueryWithReAuth = async (args: any, api: any, extraOptions: any) => {
 };
 
 export const apiSlice = createApi({
-  baseQuery: baseQueryWithReAuth,
+  baseQuery: retry(baseQueryWithReAuth, { maxRetries: 3 }),
   endpoints: (builder) => ({}),
 });
