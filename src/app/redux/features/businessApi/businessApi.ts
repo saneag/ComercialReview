@@ -26,7 +26,10 @@ export const businessApi = businessApiWithTag.injectEndpoints({
           method: 'POST',
           body,
         }),
-        invalidatesTags: ['Business'],
+        invalidatesTags: (result, error) => (error ? [] : ['Business']),
+        extraOptions: {
+          maxRetries: 0,
+        },
       }
     ),
     updateBusiness: builder.mutation<
@@ -38,7 +41,10 @@ export const businessApi = businessApiWithTag.injectEndpoints({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: ['Business'],
+      invalidatesTags: (result, error) => (error ? [] : ['Business']),
+      extraOptions: {
+        maxRetries: 0,
+      },
     }),
   }),
 });

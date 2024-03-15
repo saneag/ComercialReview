@@ -32,7 +32,10 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         method: 'POST',
         body: review,
       }),
-      invalidatesTags: ['Review'],
+      invalidatesTags: (result, error) => (error ? [] : ['Review']),
+      extraOptions: {
+        maxRetries: 0,
+      },
     }),
     updateReview: builder.mutation<
       ReviewType,
@@ -43,7 +46,10 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         method: 'PUT',
         body: review,
       }),
-      invalidatesTags: ['Review'],
+      invalidatesTags: (result, error) => (error ? [] : ['Review']),
+      extraOptions: {
+        maxRetries: 0,
+      },
     }),
     deleteReview: builder.mutation<
       void,
@@ -51,7 +57,10 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
     >({
       query: ({ businessId, userId }) =>
         `/businesses/${businessId}/reviews/${userId}`,
-      invalidatesTags: ['Review'],
+      invalidatesTags: (result, error) => (error ? [] : ['Review']),
+      extraOptions: {
+        maxRetries: 0,
+      },
     }),
   }),
 });
