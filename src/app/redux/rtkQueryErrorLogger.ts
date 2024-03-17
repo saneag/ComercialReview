@@ -15,7 +15,9 @@ export const rtkQueryErrorLogger: Middleware =
         if (action.payload.status === 500) {
           showToastError('Something went wrong');
         } else {
-          showToastError(action.payload.data.errors);
+          if (action.payload.status !== 404) {
+            showToastError(action.payload.data.errors);
+          }
         }
       } else if (action.payload.status === 401) {
         showToastError('Unauthorized');

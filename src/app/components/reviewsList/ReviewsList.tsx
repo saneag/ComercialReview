@@ -31,13 +31,14 @@ export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
 
   return (
     <div className='w-full space-y-4'>
-      <div className='mb-14 mt-10'>
-        <ReviewCreateCard />
-      </div>
+      <ReviewCreateCard />
       {!reviewsLimit && (
         <ListTypeChangeButtons listType={listType} setListType={setListType} />
       )}
-      <ShowAllReviewsLink reviewsLimit={reviewsLimit} />
+      <div className='mb-2 flex justify-between px-2 pt-6'>
+        <p className='text-2xl'>Reviews</p>
+        <ShowAllReviewsLink reviewsLimit={reviewsLimit} />
+      </div>
       <div
         className={`gap-4 ${listType === ListType.List ? 'flex w-full flex-col' : 'grid grid-cols-2 max-md:grid-cols-1'}`}
       >

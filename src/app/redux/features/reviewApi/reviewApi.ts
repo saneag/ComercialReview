@@ -22,6 +22,9 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
       query: ({ businessId, userId }) =>
         `/businesses/${businessId}/reviews/${userId}`,
       providesTags: ['Review'],
+      extraOptions: {
+        maxRetries: 0,
+      },
     }),
     createReview: builder.mutation<
       ReviewType,
@@ -68,6 +71,7 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
 export const {
   useGetReviewsByBusinessIdQuery,
   useGetReviewByUserAndBusinessIdQuery,
+  useLazyGetReviewByUserAndBusinessIdQuery,
   useCreateReviewMutation,
   useUpdateReviewMutation,
   useDeleteReviewMutation,

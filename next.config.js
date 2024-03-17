@@ -13,7 +13,7 @@ const nextConfig = {
       {
         source: '/',
         destination: '/businesses',
-        permanent: true,
+        permanent: false,
       },
     ];
   },

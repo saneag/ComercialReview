@@ -33,7 +33,7 @@ export default function BusinessDetails() {
   return (
     !isLoading &&
     business && (
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-4'>
         <div>
           <p className='text-2xl font-semibold'>{business.title}</p>
         </div>
