@@ -6,6 +6,7 @@ import RatingStars from '@/app/components/RatingStars';
 import { Avatar } from '@/app/components/ui/avatar';
 import { CardHeader } from '@/app/components/ui/card';
 import { BusinessType } from '@/app/types/business/BusinessType';
+import { roundTo } from '@/app/utils/roundTo';
 
 interface BusinessCardHeaderProps {
   business: BusinessType;
@@ -48,7 +49,7 @@ export default function BusinessCardHeader({
         </div>
         <div className='w-fit text-sm xs:px-2'>
           <div className='mt-2 flex items-center justify-evenly gap-1 text-gray-500'>
-            <span>{rating}</span>
+            <span>{roundTo(rating, 1)}</span>
             <div className='flex space-x-1'>
               <RatingStars starsCount={rating} starSize={12} />
             </div>
