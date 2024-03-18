@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 
 import { useParams } from 'next/navigation';
 
+import PersonalReviewCardContent from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCardContent';
+import PersonalReviewCardHeader from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCardHeader';
 import ReviewCard from '@/app/components/reviewsList/reviewCard/ReviewCard';
-import ReviewCreateCardContent from '@/app/components/reviewsList/reviewCreateCard/ReviewCreateCardContent';
-import ReviewCreateCardHeader from '@/app/components/reviewsList/reviewCreateCard/ReviewCreateCardHeader';
 import { Card } from '@/app/components/ui/card';
 import { useLazyGetReviewByUserAndBusinessIdQuery } from '@/app/redux/features/reviewApi/reviewApi';
 import { useAppSelector } from '@/app/redux/store';
 
-export default function ReviewCreateCard() {
+export default function PersonalReviewCard() {
   const { businessId } = useParams();
 
   const user = useAppSelector((state) => state.user.user);
@@ -38,8 +38,8 @@ export default function ReviewCreateCard() {
         )
       ) : (
         <Card>
-          <ReviewCreateCardHeader />
-          <ReviewCreateCardContent />
+          <PersonalReviewCardHeader />
+          <PersonalReviewCardContent />
         </Card>
       )}
     </>

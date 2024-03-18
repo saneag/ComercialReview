@@ -6,8 +6,8 @@ import { useParams } from 'next/navigation';
 import z from 'zod';
 
 import TextareaFormField from '@/app/components/formFields/TextareaFormField';
-import BusinessGradeSelect from '@/app/components/reviewsList/reviewCreateCard/BusinessGradeSelect';
-import ReviewCreateCardActionButtons from '@/app/components/reviewsList/reviewCreateCard/ReviewCreateCardActionButtons';
+import BusinessGradeSelect from '@/app/components/reviewsList/personalReviewCard/BusinessGradeSelect';
+import PersonalReviewCardActionButtons from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCardActionButtons';
 import { CardContent } from '@/app/components/ui/card';
 import { Form } from '@/app/components/ui/form';
 import { useCreateReviewMutation } from '@/app/redux/features/reviewApi/reviewApi';
@@ -15,7 +15,7 @@ import { useAppSelector } from '@/app/redux/store';
 import { reviewCreateFormSchema } from '@/app/utils/formValidations/reviewCreateFormSchema';
 import { showToastSuccess } from '@/app/utils/showToastMessage';
 
-export default function ReviewCreateCardContent() {
+export default function PersonalReviewCardContent() {
   const { businessId } = useParams();
   const [createReview, { isLoading, isSuccess }] = useCreateReviewMutation();
   const user = useAppSelector((state) => state.user.user);
@@ -66,7 +66,7 @@ export default function ReviewCreateCardContent() {
               isRequired
               textAreaClassName='nm-flat-white-sm'
             />
-            <ReviewCreateCardActionButtons isDisabled={isLoading} />
+            <PersonalReviewCardActionButtons isDisabled={isLoading} />
           </form>
         </Form>
       </FormProvider>

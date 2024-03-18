@@ -2,13 +2,13 @@ import { ThumbsDown, ThumbsUp } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/button';
 
-interface ReviewCreateCardActionButtonsProps {
+interface PersonalReviewCardActionButtonsProps {
   isDisabled: boolean;
 }
 
-export default function ReviewCreateCardActionButtons({
+export default function PersonalReviewCardActionButtons({
   isDisabled,
-}: ReviewCreateCardActionButtonsProps) {
+}: PersonalReviewCardActionButtonsProps) {
   return (
     <div className='mt-3 flex flex-col gap-2'>
       <span>Do you recommend this business?</span>

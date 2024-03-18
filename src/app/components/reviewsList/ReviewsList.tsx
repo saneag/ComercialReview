@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useParams } from 'next/navigation';
 
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
+import PersonalReviewCard from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCard';
 import ReviewCard from '@/app/components/reviewsList/reviewCard/ReviewCard';
-import ReviewCreateCard from '@/app/components/reviewsList/reviewCreateCard/ReviewCreateCard';
 import ShowAllReviewsLink from '@/app/components/reviewsList/ShowAllReviewsLink';
 import { useGetReviewsByBusinessIdQuery } from '@/app/redux/features/reviewApi/reviewApi';
 import { ListType } from '@/app/types/ListType';
@@ -31,7 +31,7 @@ export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
 
   return (
     <div className='w-full space-y-4'>
-      <ReviewCreateCard />
+      <PersonalReviewCard />
       {!reviewsLimit && (
         <ListTypeChangeButtons listType={listType} setListType={setListType} />
       )}
