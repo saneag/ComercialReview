@@ -6,14 +6,14 @@ import {
 } from '@/app/types/business/BusinessType';
 
 const businessApiWithTag = apiSlice.enhanceEndpoints({
-  addTagTypes: ['Business'],
+  addTagTypes: ['Business', 'Businesses'],
 });
 
 export const businessApi = businessApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getBusinesses: builder.query<BusinessType[], void>({
       query: () => '/businesses',
-      providesTags: ['Business'],
+      providesTags: ['Businesses'],
     }),
     getBusiness: builder.query<BusinessType, number>({
       query: (id) => `/businesses/${id}`,
@@ -26,7 +26,10 @@ export const businessApi = businessApiWithTag.injectEndpoints({
           method: 'POST',
           body,
         }),
-        invalidatesTags: ['Business'],
+        invalidatesTags: (result, error) => (error ? [] : ['Businesses']),
+        extraOptions: {
+          maxRetries: 0,
+        },
       }
     ),
     updateBusiness: builder.mutation<
@@ -38,7 +41,10 @@ export const businessApi = businessApiWithTag.injectEndpoints({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: ['Business'],
+      invalidatesTags: (result, error) => (error ? [] : ['Businesses']),
+      extraOptions: {
+        maxRetries: 0,
+      },
     }),
   }),
 });

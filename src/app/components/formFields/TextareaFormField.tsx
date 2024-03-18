@@ -12,7 +12,9 @@ import {
 import { Textarea } from '@/app/components/ui/textarea';
 import { BaseFieldType } from '@/app/types/BaseFormFieldType';
 
-interface TextareaFormFieldProps extends BaseFieldType {}
+interface TextareaFormFieldProps extends BaseFieldType {
+  textAreaClassName?: string;
+}
 
 export default function TextareaFormField({
   label,
@@ -20,6 +22,7 @@ export default function TextareaFormField({
   isRequired,
   placeholder,
   type,
+  textAreaClassName,
 }: TextareaFormFieldProps) {
   const form = useFormContext();
 
@@ -56,7 +59,7 @@ export default function TextareaFormField({
                 id={label}
                 {...field}
                 placeholder={placeholder}
-                className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
+                className={`w-full focus-visible:ring-1 focus-visible:ring-blue-500 ${textAreaClassName ?? ''}`}
               />
             </div>
           </FormControl>

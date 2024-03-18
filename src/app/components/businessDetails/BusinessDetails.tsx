@@ -7,11 +7,20 @@ import ReviewsSection from '@/app/components/businessDetails/reviewsSection/Revi
 import Description from '@/app/components/businessDetails/ShortDetails';
 import ImageCarousel from '@/app/components/ImageCarousel';
 import { useGetBusinessQuery } from '@/app/redux/features/businessApi/businessApi';
+import { showToastError } from '@/app/utils/showToastMessage';
 
 export default function BusinessDetails() {
   const { businessId } = useParams();
 
-  const { data: business, isLoading } = useGetBusinessQuery(Number(businessId));
+  const {
+    data: business,
+    isLoading,
+    isError,
+  } = useGetBusinessQuery(Number(businessId));
+
+  if (isError) {
+    showToastError('Error fetching business');
+  }
 
   const images: string[] = [
     '/assets/images/linella1.jpg',
@@ -24,7 +33,7 @@ export default function BusinessDetails() {
   return (
     !isLoading &&
     business && (
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-4'>
         <div>
           <p className='text-2xl font-semibold'>{business.title}</p>
         </div>

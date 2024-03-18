@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
+import PersonalReviewCard from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCard';
 import ReviewCard from '@/app/components/reviewsList/reviewCard/ReviewCard';
+import ShowAllReviewsLink from '@/app/components/reviewsList/ShowAllReviewsLink';
 import { useGetReviewsByBusinessIdQuery } from '@/app/redux/features/reviewApi/reviewApi';
 import { ListType } from '@/app/types/ListType';
+import { showToastError } from '@/app/utils/showToastMessage';
 
 interface ReviewsListProps {
   reviewsLimit?: number;
@@ -17,26 +19,26 @@ export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
 
   const { businessId } = useParams();
 
-  const { data: reviews, isSuccess } = useGetReviewsByBusinessIdQuery(
-    Number(businessId)
-  );
+  const {
+    data: reviews,
+    isSuccess,
+    isError,
+  } = useGetReviewsByBusinessIdQuery(Number(businessId));
 
-  const showAllReviewsButton =
-    reviewsLimit && reviews && reviewsLimit < reviews?.length;
+  if (isError) {
+    showToastError('Error fetching reviews');
+  }
 
   return (
-    <div className='space-y-4'>
-      {!reviewsLimit && <ListTypeChangeButtons setListType={setListType} />}
-      {showAllReviewsButton && (
-        <div className='flex justify-end'>
-          <Link
-            href={`/businesses/${businessId}/reviews`}
-            className='text-blue-500 underline underline-offset-4'
-          >
-            Show All {reviews?.length || 0} reviews
-          </Link>
-        </div>
+    <div className='w-full space-y-4'>
+      <PersonalReviewCard />
+      {!reviewsLimit && (
+        <ListTypeChangeButtons listType={listType} setListType={setListType} />
       )}
+      <div className='mb-2 flex justify-between px-2 pt-6'>
+        <p className='text-2xl'>Reviews</p>
+        <ShowAllReviewsLink reviewsLimit={reviewsLimit} />
+      </div>
       <div
         className={`gap-4 ${listType === ListType.List ? 'flex w-full flex-col' : 'grid grid-cols-2 max-md:grid-cols-1'}`}
       >
