@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import RatingStars from '@/app/components/RatingStars';
 import { Badge } from '@/app/components/ui/badge';
 import { useGetBusinessQuery } from '@/app/redux/features/businessApi/businessApi';
+import { roundTo } from '@/app/utils/roundTo';
 
 export default function ShortDetails() {
   const { businessId } = useParams();
@@ -51,7 +52,8 @@ export default function ShortDetails() {
                   <RatingStars starsCount={business.rating} starSize={16} />
                 </Badge>
                 <p className='text-nowrap text-sm text-gray-500'>
-                  ( {business.rating} / {business.reviewsCount} reviews)
+                  ( {roundTo(business.rating, 1)} / {business.reviewsCount}{' '}
+                  reviews)
                 </p>
               </div>
             </div>
