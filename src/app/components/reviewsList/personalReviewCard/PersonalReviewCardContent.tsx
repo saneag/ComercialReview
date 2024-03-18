@@ -10,15 +10,38 @@ import BusinessGradeSelect from '@/app/components/reviewsList/personalReviewCard
 import PersonalReviewCardActionButtons from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCardActionButtons';
 import { CardContent } from '@/app/components/ui/card';
 import { Form } from '@/app/components/ui/form';
-import { useCreateReviewMutation } from '@/app/redux/features/reviewApi/reviewApi';
+import {
+  useCreateReviewMutation,
+  useUpdateReviewMutation,
+} from '@/app/redux/features/reviewApi/reviewApi';
 import { useAppSelector } from '@/app/redux/store';
+import { ReviewType } from '@/app/types/review/ReviewType';
 import { reviewCreateFormSchema } from '@/app/utils/formValidations/reviewCreateFormSchema';
 import { showToastSuccess } from '@/app/utils/showToastMessage';
 
-export default function PersonalReviewCardContent() {
+interface PersonalReviewCardContentProps {
+  isEdit?: boolean;
+  handleEdit?: () => void;
+  review?: ReviewType;
+}
+
+export default function PersonalReviewCardContent({
+  isEdit,
+  handleEdit,
+  review,
+}: PersonalReviewCardContentProps) {
   const { businessId } = useParams();
-  const [createReview, { isLoading, isSuccess }] = useCreateReviewMutation();
   const user = useAppSelector((state) => state.user.user);
+
+  const [
+    createReview,
+    { isLoading: isCreateLoading, isSuccess: isCreateSuccess },
+  ] = useCreateReviewMutation();
+
+  const [
+    updateReview,
+    { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess },
+  ] = useUpdateReviewMutation();
 
   const form = useForm({
     defaultValues: {
@@ -31,22 +54,44 @@ export default function PersonalReviewCardContent() {
 
   const onSubmit = async (data: z.infer<typeof reviewCreateFormSchema>) => {
     try {
-      await createReview({
-        businessId: Number(businessId),
-        review: {
-          ...data,
-          authorId: user?.userId,
-        },
-      });
+      if (isEdit) {
+        await updateReview({
+          businessId: Number(businessId),
+          review: {
+            ...data,
+            authorId: user?.userId,
+          },
+        });
+      } else {
+        await createReview({
+          businessId: Number(businessId),
+          review: {
+            ...data,
+            authorId: user?.userId,
+          },
+        });
+      }
     } catch (error) {}
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      showToastSuccess('Review created successfully');
+    if (isCreateSuccess || isUpdateSuccess) {
+      showToastSuccess('Review saved successfully');
       form.reset();
+      if (handleEdit) {
+        handleEdit();
+      }
     }
-  }, [isSuccess, form]);
+  }, [isCreateSuccess, form, isUpdateSuccess, handleEdit, user, businessId]);
+
+  useEffect(() => {
+    if (review) {
+      form.reset({
+        grade: review.grade,
+        reviewText: review.reviewText,
+      });
+    }
+  }, [form, review]);
 
   return (
     <CardContent>
@@ -57,16 +102,22 @@ export default function PersonalReviewCardContent() {
             className='flex flex-col gap-2'
           >
             <div className='flex justify-end'>
-              <BusinessGradeSelect isDisabled={isLoading} />
+              <BusinessGradeSelect
+                isDisabled={isCreateLoading || isUpdateLoading}
+              />
             </div>
             <TextareaFormField
               label='reviewText'
               displayLabel='Write a review'
-              isDisabled={isLoading}
+              isDisabled={isCreateLoading || isUpdateLoading}
               isRequired
               textAreaClassName='nm-flat-white-sm'
             />
-            <PersonalReviewCardActionButtons isDisabled={isLoading} />
+            <PersonalReviewCardActionButtons
+              isDisabled={isCreateLoading || isUpdateLoading}
+              isEdit={isEdit}
+              handleEdit={handleEdit}
+            />
           </form>
         </Form>
       </FormProvider>

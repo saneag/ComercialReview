@@ -1,4 +1,5 @@
 import { apiSlice } from '@/app/redux/features/baseQuery';
+import { businessApi } from '@/app/redux/features/businessApi/businessApi';
 import {
   ReviewCreateType,
   ReviewType,
@@ -6,14 +7,14 @@ import {
 } from '@/app/types/review/ReviewType';
 
 const reviewApiWithTag = apiSlice.enhanceEndpoints({
-  addTagTypes: ['Review'],
+  addTagTypes: ['Review', 'Reviews'],
 });
 
 export const reviewApi = reviewApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getReviewsByBusinessId: builder.query<ReviewType[], number>({
       query: (businessId) => `/businesses/${businessId}/reviews`,
-      providesTags: ['Review'],
+      providesTags: ['Reviews'],
     }),
     getReviewByUserAndBusinessId: builder.query<
       ReviewType,
@@ -35,7 +36,11 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         method: 'POST',
         body: review,
       }),
-      invalidatesTags: (result, error) => (error ? [] : ['Review']),
+      invalidatesTags: (result, error) => (error ? [] : ['Review', 'Reviews']),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(businessApi.util.invalidateTags(['Business']));
+      },
       extraOptions: {
         maxRetries: 0,
       },
@@ -49,7 +54,11 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         method: 'PUT',
         body: review,
       }),
-      invalidatesTags: (result, error) => (error ? [] : ['Review']),
+      invalidatesTags: (result, error) => (error ? [] : ['Review', 'Reviews']),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(businessApi.util.invalidateTags(['Business']));
+      },
       extraOptions: {
         maxRetries: 0,
       },
@@ -58,9 +67,15 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
       void,
       { businessId: number; userId: number }
     >({
-      query: ({ businessId, userId }) =>
-        `/businesses/${businessId}/reviews/${userId}`,
-      invalidatesTags: (result, error) => (error ? [] : ['Review']),
+      query: ({ businessId, userId }) => ({
+        url: `/businesses/${businessId}/reviews/${userId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error) => (error ? [] : ['Review', 'Reviews']),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(businessApi.util.invalidateTags(['Business']));
+      },
       extraOptions: {
         maxRetries: 0,
       },

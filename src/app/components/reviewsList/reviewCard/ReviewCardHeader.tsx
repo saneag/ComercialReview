@@ -1,13 +1,22 @@
 import { Star } from 'lucide-react';
 
+import EntityEditDropdown from '@/app/components/EntityEditDropdown';
 import { CardHeader } from '@/app/components/ui/card';
 import { ReviewType } from '@/app/types/review/ReviewType';
 
 interface ReviewCardHeaderProps {
   review: ReviewType;
+  isEditable?: boolean;
+  handleEdit?: () => void;
+  handleDelete?: () => void;
 }
 
-export default function ReviewCardHeader({ review }: ReviewCardHeaderProps) {
+export default function ReviewCardHeader({
+  review,
+  isEditable,
+  handleEdit,
+  handleDelete,
+}: ReviewCardHeaderProps) {
   const getStarColor = (grade: number) => {
     if (grade <= 2) {
       return '#FD909B';
@@ -35,6 +44,12 @@ export default function ReviewCardHeader({ review }: ReviewCardHeaderProps) {
             fill={getStarColor(review.grade)}
             className='drop-shadow'
           />
+          {isEditable && (
+            <EntityEditDropdown
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
+          )}
         </div>
       </div>
     </CardHeader>
