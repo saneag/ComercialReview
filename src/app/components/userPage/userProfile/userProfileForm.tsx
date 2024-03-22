@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,7 +10,11 @@ import InputFormField from '@/app/components/formFields/InputFormField';
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
 import { setUserAfterUpdate } from '@/app/redux/features/slices/userSlice';
-import { useUpdateUserMutation } from '@/app/redux/features/userApi/userApi';
+import {
+  useGetUserQuery,
+  useLazyGetUserQuery,
+  useUpdateUserMutation,
+} from '@/app/redux/features/userApi/userApi';
 import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { UserFormSchemaState } from '@/app/types/user/UserSchemaType';
 import { userFormSchema } from '@/app/utils/formValidations/userFormSchema';
@@ -19,20 +23,41 @@ export default function UserProfileForm() {
   const dispatch = useAppDispatch();
   const [updateUser, { isLoading }] = useUpdateUserMutation();
   const user = useAppSelector((state) => state.user.user);
+  const [trigger, { data: userData }] = useLazyGetUserQuery();
 
   const [isEdit, setIsEdit] = useState(false);
 
   const form = useForm<UserFormSchemaState>({
     defaultValues: {
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      email: user?.email,
-      userName: user?.userName,
-      avatar: user?.avatar,
+      firstName: '',
+      lastName: '',
+      email: '',
+      userName: '',
+      avatar: {
+        data: '',
+      },
     },
     mode: 'onChange',
     resolver: zodResolver(userFormSchema),
   });
+
+  useEffect(() => {
+    if (user && user.userId) {
+      trigger(user.userId);
+    }
+  }, [trigger, user]);
+
+  useEffect(() => {
+    if (userData) {
+      form.reset({
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        userName: userData.userName,
+        avatar: userData.avatar,
+      });
+    }
+  }, [userData, form]);
 
   const onSubmit = async (data: UserFormSchemaState) => {
     try {
@@ -72,7 +97,7 @@ export default function UserProfileForm() {
                 isDisabled={!isEdit}
               />
             </div>
-            <div className='w-full max-w-[300px]'>
+            <div className='w-full max-w-[300px] space-y-4'>
               <InputFormField
                 label='firstName'
                 displayLabel='First Name'
@@ -112,7 +137,10 @@ export default function UserProfileForm() {
                   type='button'
                   variant='destructive'
                   key='cancel'
-                  onClick={() => setIsEdit(false)}
+                  onClick={() => {
+                    setIsEdit(false);
+                    form.reset();
+                  }}
                 >
                   Cancel
                 </Button>
