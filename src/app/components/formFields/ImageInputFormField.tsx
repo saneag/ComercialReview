@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { Base64 } from 'js-base64';
@@ -83,6 +83,13 @@ export default function ImageInputFormField({
     }
     handleImageSave(files, onChange);
   };
+
+  useEffect(() => {
+    if (form.watch(label)?.data !== '') {
+      const base64Data = Base64.decode(form.watch(label).data);
+      setPreview(`data:image/png;base64,${base64Data}`);
+    }
+  }, [form, label]);
 
   return (
     <div className={className}>

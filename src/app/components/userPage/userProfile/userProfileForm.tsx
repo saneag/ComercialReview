@@ -11,7 +11,6 @@ import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
 import { setUserAfterUpdate } from '@/app/redux/features/slices/userSlice';
 import {
-  useGetUserQuery,
   useLazyGetUserQuery,
   useUpdateUserMutation,
 } from '@/app/redux/features/userApi/userApi';
