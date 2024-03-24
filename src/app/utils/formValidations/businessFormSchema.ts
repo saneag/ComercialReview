@@ -53,8 +53,7 @@ export const businessCreateFormSchema = z.object({
       invalid_type_error: 'Category is required',
       required_error: 'Category is required',
     })
-    .nullish()
-    .refine((val) => val !== null, {
+    .refine((value) => value !== CategoryFilterEnum.ALL, {
       message: 'Category is required',
     }),
 });
