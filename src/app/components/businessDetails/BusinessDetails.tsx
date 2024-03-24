@@ -35,7 +35,7 @@ export default function BusinessDetails() {
     business && (
       <div className='flex flex-col gap-4'>
         <div>
-          <p className='text-2xl font-semibold'>{business.title}</p>
+          <p className='text-2xl text-4xl font-semibold'>{business.title}</p>
         </div>
         <div className='flex w-full flex-wrap-reverse justify-center gap-4 lg:justify-normal'>
           <div className='w-full space-y-10 lg:w-7/12 xl:w-8/12'>

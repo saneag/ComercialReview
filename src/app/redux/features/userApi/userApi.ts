@@ -23,6 +23,9 @@ export const userApi = userApiWithTag.injectEndpoints({
         body,
       }),
       invalidatesTags: ['User'],
+      extraOptions: {
+        maxRetries: 1,
+      },
     }),
     registerUser: builder.mutation<void, Partial<RegisterType>>({
       query: (body) => ({
@@ -31,6 +34,9 @@ export const userApi = userApiWithTag.injectEndpoints({
         body,
       }),
       invalidatesTags: ['User'],
+      extraOptions: {
+        maxRetries: 1,
+      },
     }),
     resetPassword: builder.mutation({
       query: (body) => ({
@@ -39,6 +45,9 @@ export const userApi = userApiWithTag.injectEndpoints({
         body,
       }),
       invalidatesTags: ['User'],
+      extraOptions: {
+        maxRetries: 1,
+      },
     }),
     resetPasswordConfirm: builder.mutation({
       query: (body) => ({
@@ -47,6 +56,9 @@ export const userApi = userApiWithTag.injectEndpoints({
         body,
       }),
       invalidatesTags: ['User'],
+      extraOptions: {
+        maxRetries: 1,
+      },
     }),
     updateUser: builder.mutation<
       void,
@@ -58,6 +70,9 @@ export const userApi = userApiWithTag.injectEndpoints({
         body,
       }),
       invalidatesTags: ['User'],
+      extraOptions: {
+        maxRetries: 1,
+      },
     }),
     deleteUser: builder.mutation<void, number>({
       query: (userId) => ({
@@ -65,6 +80,9 @@ export const userApi = userApiWithTag.injectEndpoints({
         method: 'DELETE',
       }),
       invalidatesTags: ['User'],
+      extraOptions: {
+        maxRetries: 1,
+      },
     }),
     checkUserName: builder.query<void, string>({
       query: (userName) => `/users/checkUserName?nameToCheck=${userName}`,

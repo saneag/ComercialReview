@@ -33,7 +33,10 @@ export default function InputFormField({
     if (type === 'password') {
       setShowPassword(!showPassword);
     } else {
-      form.setValue(label, '');
+      form.setValue(label, '', {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
     }
   };
 
