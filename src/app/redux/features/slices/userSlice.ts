@@ -28,12 +28,13 @@ export const userSlice = createSlice({
       action: PayloadAction<{
         user: UserType;
         isAuth: boolean;
-        role: UserRoleEnum;
       }>
     ) => {
       state.user = action.payload.user;
       state.isAuth = action.payload.isAuth;
-      state.role = action.payload.role;
+    },
+    setUserRole: (state, action: PayloadAction<UserRoleEnum>) => {
+      state.role = action.payload;
     },
     setUserAfterUpdate: (
       state,
@@ -66,14 +67,12 @@ export const userSlice = createSlice({
     getUserAccessToken: (state) => {
       state.accessToken = localStorage.getItem('accessToken') || null;
     },
-    getUserRefreshToken: (state) => {
-      state.refreshToken = localStorage.getItem('refreshToken') || null;
-    },
   },
 });
 
 export const {
   setUser,
+  setUserRole,
   setUserAfterUpdate,
   setAccessToken,
   setRefreshToken,

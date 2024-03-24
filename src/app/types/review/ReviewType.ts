@@ -1,5 +1,4 @@
 export interface BaseReviewType {
-  authorId: number;
   grade: number;
   reviewText: string;
 }

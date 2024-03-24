@@ -18,10 +18,9 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
     }),
     getReviewByUserAndBusinessId: builder.query<
       ReviewType,
-      { businessId: number; userId: number }
+      { businessId: number; id: number }
     >({
-      query: ({ businessId, userId }) =>
-        `/businesses/${businessId}/reviews/${userId}`,
+      query: ({ businessId, id }) => `/businesses/${businessId}/reviews/${id}`,
       providesTags: ['Review'],
       extraOptions: {
         maxRetries: 0,
@@ -63,12 +62,9 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         maxRetries: 0,
       },
     }),
-    deleteReview: builder.mutation<
-      void,
-      { businessId: number; userId: number }
-    >({
-      query: ({ businessId, userId }) => ({
-        url: `/businesses/${businessId}/reviews/${userId}`,
+    deleteReview: builder.mutation<void, { businessId: number }>({
+      query: ({ businessId }) => ({
+        url: `/businesses/${businessId}/reviews`,
         method: 'DELETE',
       }),
       invalidatesTags: (result, error) => (error ? [] : ['Review', 'Reviews']),

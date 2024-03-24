@@ -25,7 +25,7 @@ export default function PersonalReviewCard() {
 
   useEffect(() => {
     if (user) {
-      trigger({ businessId: Number(businessId), userId: user.userId });
+      trigger({ businessId: Number(businessId), id: user.id });
     }
   }, [businessId, user, trigger]);
 
@@ -40,7 +40,6 @@ export default function PersonalReviewCard() {
   const handleDelete = () => {
     deleteReview({
       businessId: Number(businessId),
-      userId: user.userId,
     });
   };
 
