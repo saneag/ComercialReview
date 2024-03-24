@@ -19,7 +19,7 @@ export default function CreateBusiness() {
     shortDescription: '',
     fullDescription: '',
     logo: {
-      data: '',
+      data: undefined,
     },
     address: {
       street: '',
@@ -51,9 +51,18 @@ export default function CreateBusiness() {
 
   const onSubmit = async (data: BusinessFormSchemaState) => {
     try {
-      const response = await createBusiness({
-        ...data,
-      }).unwrap();
+      const formData = new FormData();
+      formData.append('Title', data.title);
+      formData.append('ShortDescription', data.shortDescription);
+      formData.append('FullDescription', data.fullDescription);
+      console.log('data.logo.data', data.logo.data);
+      formData.append('Logo', data.logo.data);
+      formData.append('Address.Street', data.address.street);
+      formData.append('Address.Latitude', data.address.latitude);
+      formData.append('Address.Longitude', data.address.longitude);
+      formData.append('Category', data.category);
+
+      const response = await createBusiness(formData).unwrap();
 
       if (response && response.id) {
         showToastSuccess('Business created successfully');

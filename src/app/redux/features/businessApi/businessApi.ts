@@ -19,19 +19,17 @@ export const businessApi = businessApiWithTag.injectEndpoints({
       query: (id) => `/businesses/${id}`,
       providesTags: ['Business'],
     }),
-    createBusiness: builder.mutation<BusinessType, Partial<BusinessCreateType>>(
-      {
-        query: (body) => ({
-          url: '/businesses',
-          method: 'POST',
-          body,
-        }),
-        invalidatesTags: (result, error) => (error ? [] : ['Businesses']),
-        extraOptions: {
-          maxRetries: 0,
-        },
-      }
-    ),
+    createBusiness: builder.mutation<BusinessType, Partial<FormData>>({
+      query: (body) => ({
+        url: '/businesses',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: (result, error) => (error ? [] : ['Businesses']),
+      extraOptions: {
+        maxRetries: 0,
+      },
+    }),
     updateBusiness: builder.mutation<
       BusinessType,
       { body: Partial<BusinessUpdateType>; businessId: number }

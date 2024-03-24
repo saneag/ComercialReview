@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { Base64 } from 'js-base64';
 import { Image as ImagePlaceholder } from 'lucide-react';
 import Image from 'next/image';
 
@@ -56,15 +55,7 @@ export default function ImageInputFormField({
 
   const handleImageSave = (files: FileList | null, onChange: any) => {
     if (!files || !files.length) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64 = event.target?.result;
-      const base64String = base64?.toString().split(',')[1];
-      const base64Data = Base64.encode(base64String as string);
-      onChange({ data: base64Data });
-    };
-    reader.readAsDataURL(files[0]);
+    onChange({ data: files[0] });
   };
 
   const handleImageClick = () => {
@@ -86,8 +77,9 @@ export default function ImageInputFormField({
 
   useEffect(() => {
     if (form.watch(label)?.data !== '') {
-      const base64Data = Base64.decode(form.watch(label).data);
-      setPreview(`data:image/png;base64,${base64Data}`);
+      // const base64Data = Base64.decode(form.watch(label).data);
+      // setPreview(`data:image/png;base64,${base64Data}`);
+      // setPreview();
     }
   }, [form, label]);
 

@@ -24,7 +24,7 @@ export const businessCreateFormSchema = z.object({
   fullDescription: z.string().optional(),
   logo: z
     .object({
-      data: z.string().optional(),
+      data: z.any().optional(),
     })
     .nullish()
     .optional(),

@@ -1,3 +1,3 @@
 export interface LogoType {
-  data?: string;
+  data?: File;
 }
