@@ -38,7 +38,6 @@ export default function UserDropdown() {
 
   const handleUserLogout = useCallback(() => {
     dispatch(resetUserOnLogout());
-    localStorage.removeItem('user');
   }, [dispatch]);
 
   useEffect(() => {
