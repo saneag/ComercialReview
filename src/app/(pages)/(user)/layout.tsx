@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 import Header from '@/app/components/header/Header';
 import UserNavigation from '@/app/components/UserNavigation';
-import AdminRouteGuard from '@/app/providers/AdminRouteGuard';
+import NotAuthPageGuard from '@/app/providers/NotAuthPageGuard';
 
 function Layout({ children }: { children: ReactNode }) {
   return (
@@ -20,4 +20,4 @@ function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-export default AdminRouteGuard(Layout);
+export default NotAuthPageGuard(Layout);

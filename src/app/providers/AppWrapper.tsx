@@ -10,13 +10,13 @@ import {
   setUser,
   setUserRole,
 } from '@/app/redux/features/slices/userSlice';
-import { useLazyGetUserIdentityQuery } from '@/app/redux/features/userApi/userApi';
+import { useLazyGetUserQuery } from '@/app/redux/features/userApi/userApi';
 import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { UserJwtClaimsEnum } from '@/app/types/enums/UserJwtClaimsEnum';
 
 export default function AppWrapper({ children }: { children: ReactNode }) {
   const dispatch = useAppDispatch();
-  const [getUserIdentity, { data: user }] = useLazyGetUserIdentityQuery();
+  const [getUser, { data: user }] = useLazyGetUserQuery();
   const accessToken = useAppSelector((state) => state.user.accessToken);
 
   useEffect(() => {
@@ -26,11 +26,12 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (accessToken) {
       const decoded: any = jwtDecode(accessToken);
+      const userId = decoded[UserJwtClaimsEnum.UserId];
       const role = decoded[UserJwtClaimsEnum.Role];
-      dispatch(setUserRole(role));
-      getUserIdentity();
+      dispatch(setUserRole(Number(role)));
+      getUser(userId);
     }
-  }, [accessToken, dispatch, getUserIdentity]);
+  }, [accessToken, dispatch, getUser]);
 
   useEffect(() => {
     if (user) {
