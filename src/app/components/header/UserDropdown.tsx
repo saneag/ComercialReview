@@ -75,7 +75,7 @@ export default function UserDropdown() {
         triggerText={
           <div className='cursor-pointer rounded-full p-0.5 nm-flat-gray-400-sm'>
             <Avatar>
-              <AvatarImage></AvatarImage>
+              <AvatarImage src={user?.avatarPath ?? ''}></AvatarImage>
               <AvatarFallback className='nm-convex-gray-200'>
                 {user && userRole !== UserRoleEnum.GUEST ? (
                   <span className='text-capitalize'>

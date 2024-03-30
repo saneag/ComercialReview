@@ -26,7 +26,7 @@ export const userSlice = createSlice({
     setUser: (
       state,
       action: PayloadAction<{
-        user: UserType;
+        user: UserType | null;
         isAuth: boolean;
       }>
     ) => {
@@ -45,7 +45,7 @@ export const userSlice = createSlice({
         state.user.firstName = user.firstName;
         state.user.lastName = user.lastName;
         state.user.email = user.email;
-        state.user.avatar = user.avatar;
+        state.user.avatarPath = user.avatarPath;
       }
     },
     setAccessToken: (state, action: PayloadAction<string>) => {

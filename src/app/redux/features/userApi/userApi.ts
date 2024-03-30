@@ -64,19 +64,17 @@ export const userApi = userApiWithTag.injectEndpoints({
         maxRetries: 1,
       },
     }),
-    updateUser: builder.mutation<void, { body: Partial<UserType>; id: number }>(
-      {
-        query: ({ body, id }) => ({
-          url: `/users/${id}`,
-          method: 'PUT',
-          body,
-        }),
-        invalidatesTags: ['User'],
-        extraOptions: {
-          maxRetries: 1,
-        },
-      }
-    ),
+    updateUser: builder.mutation<void, { body: Partial<FormData> }>({
+      query: ({ body }) => ({
+        url: `/users/edit`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['User'],
+      extraOptions: {
+        maxRetries: 1,
+      },
+    }),
     deleteUser: builder.mutation<void, number>({
       query: (id) => ({
         url: `/users/${id}`,

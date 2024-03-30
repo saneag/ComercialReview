@@ -55,7 +55,7 @@ export default function ImageInputFormField({
 
   const handleImageSave = (files: FileList | null, onChange: any) => {
     if (!files || !files.length) return;
-    onChange({ data: files[0] });
+    onChange(files[0]);
   };
 
   const handleImageClick = () => {
@@ -76,10 +76,8 @@ export default function ImageInputFormField({
   };
 
   useEffect(() => {
-    if (form.watch(label)?.data !== '') {
-      // const base64Data = Base64.decode(form.watch(label).data);
-      // setPreview(`data:image/png;base64,${base64Data}`);
-      // setPreview();
+    if (form.watch(label) && typeof form.watch(label) === 'string') {
+      setPreview(form.watch(label));
     }
   }, [form, label]);
 
@@ -104,7 +102,8 @@ export default function ImageInputFormField({
             alt='Image'
             width={0}
             height={0}
-            className='h-96 w-auto rounded-xl'
+            sizes='100vw'
+            className='h-[80vh] w-auto rounded-xl'
           />
         </div>
       )}
