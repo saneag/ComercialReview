@@ -6,7 +6,6 @@ export interface BaseBusinessType {
   fullDescription: string;
   address: AddressType;
   category: CategoryFilterEnum;
-  logo: File | string | null;
 }
 
 export interface AddressType {
@@ -19,13 +18,14 @@ export interface BusinessType extends BaseBusinessType {
   id: number;
   rating: number;
   reviewsCount: number;
+  logoPath: string | null;
 }
 
-export interface BusinessCreateType extends Omit<BaseBusinessType, 'category'> {
-  category: CategoryFilterEnum;
+export interface BusinessCreateType extends BaseBusinessType {
+  logo: File | string | null;
 }
 
-export interface BusinessUpdateType extends BaseBusinessType {
+export interface BusinessUpdateType extends BusinessCreateType {
   id: number;
 }
 
