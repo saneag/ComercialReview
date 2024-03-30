@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { Base64 } from 'js-base64';
 import Image from 'next/image';
 
 import {
@@ -43,10 +42,6 @@ export default function ImageCarousel({
 
     setCurrent(index);
   };
-
-  const convertedImages = images.map(
-    (image) => `data:image/png;base64,${Base64.decode(image)}`
-  );
 
   return (
     <div>

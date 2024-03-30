@@ -13,10 +13,9 @@ export default function Links() {
     <div className='flex gap-2'>
       <LinkContainer links={publicLinks} />
       {isAuth && <LinkContainer links={privateLinks} />}
-      {role === UserRoleEnum.ADMIN ||
-        (role === UserRoleEnum.SUPER_ADMIN && (
-          <LinkContainer links={adminLinks} />
-        ))}
+      {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (
+        <LinkContainer links={adminLinks} />
+      )}
     </div>
   );
 }

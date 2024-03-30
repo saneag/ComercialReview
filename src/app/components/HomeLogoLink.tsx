@@ -1,21 +1,35 @@
+'use client';
+
 import { ReactNode } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { setPage } from '@/app/redux/features/slices/paginationSlice';
+import { useAppDispatch, useAppSelector } from '@/app/redux/store';
+
 interface HomeLogoLinkProps {
   className?: string;
   children?: ReactNode;
-  replace?: boolean;
 }
 
 export default function HomeLogoLink({
   className,
   children,
-  replace = true,
 }: HomeLogoLinkProps) {
+  const dispatch = useAppDispatch();
+  const page = useAppSelector((state) => state.pagination);
+
+  const handleClick = () => {
+    dispatch(setPage({ pageIndex: 1, pageSize: page.pageSize }));
+  };
+
   return (
-    <Link href='/businesses' className='flex items-center gap-3'>
+    <Link
+      href='/businesses'
+      onClick={handleClick}
+      className='flex items-center gap-3'
+    >
       <Image
         src='/assets/images/intercon-logo-no-text.png'
         alt=''

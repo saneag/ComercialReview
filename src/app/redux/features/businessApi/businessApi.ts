@@ -4,6 +4,8 @@ import {
   BusinessType,
   BusinessUpdateType,
 } from '@/app/types/business/BusinessType';
+import { QueryParams } from '@/app/types/QueryParams';
+import { ResponseType } from '@/app/types/ResponseType';
 
 const businessApiWithTag = apiSlice.enhanceEndpoints({
   addTagTypes: ['Business', 'Businesses'],
@@ -11,27 +13,28 @@ const businessApiWithTag = apiSlice.enhanceEndpoints({
 
 export const businessApi = businessApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
-    getBusinesses: builder.query<BusinessType[], void>({
-      query: () => '/businesses',
+    getBusinesses: builder.query<ResponseType<BusinessType>, QueryParams>({
+      query: (params) => ({
+        url: '/businesses',
+        params,
+      }),
       providesTags: ['Businesses'],
     }),
     getBusiness: builder.query<BusinessType, number>({
       query: (id) => `/businesses/${id}`,
       providesTags: ['Business'],
     }),
-    createBusiness: builder.mutation<BusinessType, Partial<BusinessCreateType>>(
-      {
-        query: (body) => ({
-          url: '/businesses',
-          method: 'POST',
-          body,
-        }),
-        invalidatesTags: (result, error) => (error ? [] : ['Businesses']),
-        extraOptions: {
-          maxRetries: 0,
-        },
-      }
-    ),
+    createBusiness: builder.mutation<BusinessType, Partial<FormData>>({
+      query: (body) => ({
+        url: '/businesses',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: (result, error) => (error ? [] : ['Businesses']),
+      extraOptions: {
+        maxRetries: 0,
+      },
+    }),
     updateBusiness: builder.mutation<
       BusinessType,
       { body: Partial<BusinessUpdateType>; businessId: number }

@@ -7,6 +7,7 @@ import { useCreateBusinessMutation } from '@/app/redux/features/businessApi/busi
 import { BusinessFormSchemaState } from '@/app/types/business/BusinessSchemaType';
 import { BusinessCreateType } from '@/app/types/business/BusinessType';
 import { BusinessCreateFieldType } from '@/app/types/business/FormFieldsType';
+import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { businessCreateFormSchema } from '@/app/utils/formValidations/businessFormSchema';
 import { showToastSuccess } from '@/app/utils/showToastMessage';
 
@@ -18,15 +19,13 @@ export default function CreateBusiness() {
     title: '',
     shortDescription: '',
     fullDescription: '',
-    logo: {
-      data: '',
-    },
+    logo: null,
     address: {
       street: '',
       latitude: '',
       longitude: '',
     },
-    category: null,
+    category: CategoryFilterEnum.ALL,
   };
 
   const formFields: BusinessCreateFieldType[] = [
@@ -51,9 +50,17 @@ export default function CreateBusiness() {
 
   const onSubmit = async (data: BusinessFormSchemaState) => {
     try {
-      const response = await createBusiness({
-        ...data,
-      }).unwrap();
+      const formData = new FormData();
+      formData.append('Title', data.title);
+      formData.append('ShortDescription', data.shortDescription);
+      formData.append('FullDescription', data.fullDescription ?? '');
+      formData.append('Logo', data.logo ?? '');
+      formData.append('Address.Street', data.address.street);
+      formData.append('Address.Latitude', data.address.latitude);
+      formData.append('Address.Longitude', data.address.longitude);
+      formData.append('Category', CategoryFilterEnum[data.category]);
+
+      const response = await createBusiness(formData).unwrap();
 
       if (response && response.id) {
         showToastSuccess('Business created successfully');

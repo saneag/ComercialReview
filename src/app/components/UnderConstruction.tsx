@@ -15,7 +15,7 @@ export default function UnderConstruction({
     <div
       className={`flex-center w-full select-none flex-col gap-5 ${className ?? ''}`}
     >
-      {showLogo && <HomeLogoLink className='animate-spin-10 w-20' />}
+      {showLogo && <HomeLogoLink className='w-20 animate-spin-10' />}
       <div className='flex-y-center gap-2 text-7xl'>
         <UnderConstructionImage />
         <p className='text-center'>Coming Soon</p>

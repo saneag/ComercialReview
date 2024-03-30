@@ -1,4 +1,3 @@
-import { Base64 } from 'js-base64';
 import { ImageOff } from 'lucide-react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
@@ -12,18 +11,13 @@ export default function ShortDetails() {
   const { businessId } = useParams();
   const { data: business, isLoading } = useGetBusinessQuery(Number(businessId));
 
-  const convertedImage =
-    business && business.logo && business.logo.data
-      ? `data:image/png;base64,${Base64.decode(business.logo.data)}`
-      : null;
-
   return (
     business && (
       <div className='flex h-fit flex-col gap-3 bg-gray-200 pb-5'>
         <div className='flex-x-center max-h-[300px] min-h-[100px]'>
-          {convertedImage ? (
+          {business.logoPath ? (
             <Image
-              src={convertedImage}
+              src={business.logoPath}
               alt='logo'
               width={0}
               height={0}

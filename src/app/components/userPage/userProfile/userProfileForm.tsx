@@ -9,20 +9,14 @@ import ImageInputFormField from '@/app/components/formFields/ImageInputFormField
 import InputFormField from '@/app/components/formFields/InputFormField';
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
-import { setUserAfterUpdate } from '@/app/redux/features/slices/userSlice';
-import {
-  useLazyGetUserQuery,
-  useUpdateUserMutation,
-} from '@/app/redux/features/userApi/userApi';
-import { useAppDispatch, useAppSelector } from '@/app/redux/store';
+import { useUpdateUserMutation } from '@/app/redux/features/userApi/userApi';
+import { useAppSelector } from '@/app/redux/store';
 import { UserFormSchemaState } from '@/app/types/user/UserSchemaType';
 import { userFormSchema } from '@/app/utils/formValidations/userFormSchema';
 
 export default function UserProfileForm() {
-  const dispatch = useAppDispatch();
   const [updateUser, { isLoading }] = useUpdateUserMutation();
   const user = useAppSelector((state) => state.user.user);
-  const [trigger, { data: userData }] = useLazyGetUserQuery();
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -32,49 +26,36 @@ export default function UserProfileForm() {
       lastName: '',
       email: '',
       userName: '',
-      avatar: {
-        data: '',
-      },
+      avatar: null,
     },
     mode: 'onChange',
     resolver: zodResolver(userFormSchema),
   });
 
   useEffect(() => {
-    if (user && user.userId) {
-      trigger(user.userId);
-    }
-  }, [trigger, user]);
-
-  useEffect(() => {
-    if (userData) {
+    if (user) {
       form.reset({
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        email: userData.email,
-        userName: userData.userName,
-        avatar: userData.avatar,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        userName: user.userName,
+        avatar: user.avatarPath,
       });
     }
-  }, [userData, form]);
+  }, [user, form]);
 
   const onSubmit = async (data: UserFormSchemaState) => {
     try {
-      await updateUser({
-        userId: Number(user?.userId),
-        body: data,
-      });
+      const formData = new FormData();
+      formData.append('firstName', data.firstName);
+      formData.append('lastName', data.lastName);
+      formData.append('email', data.email);
+      formData.append('userName', data.userName ?? '');
+      formData.append('avatar', data.avatar ?? '');
 
-      dispatch(
-        setUserAfterUpdate({
-          user: {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            avatar: data.avatar,
-          },
-        })
-      );
+      await updateUser({
+        body: formData,
+      });
 
       setIsEdit(false);
     } catch (error) {}
@@ -129,6 +110,7 @@ export default function UserProfileForm() {
                   className='bg-green-500 hover:bg-green-600'
                   type='submit'
                   key='submit'
+                  disabled={isLoading}
                 >
                   Save
                 </Button>

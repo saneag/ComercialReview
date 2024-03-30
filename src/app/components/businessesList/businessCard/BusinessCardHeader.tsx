@@ -1,5 +1,4 @@
 import { AvatarImage } from '@radix-ui/react-avatar';
-import { Base64 } from 'js-base64';
 import Link from 'next/link';
 
 import RatingStars from '@/app/components/RatingStars';
@@ -15,21 +14,17 @@ interface BusinessCardHeaderProps {
 export default function BusinessCardHeader({
   business,
 }: BusinessCardHeaderProps) {
-  const { title, shortDescription, logo, rating, reviewsCount, id } = business;
-
-  const convertedImage =
-    logo && logo.data
-      ? `data:image/png;base64,${Base64.decode(logo.data)}`
-      : null;
+  const { title, shortDescription, logoPath, rating, reviewsCount, id } =
+    business;
 
   return (
     <CardHeader className='flex flex-row flex-wrap gap-3'>
       <div className='max-sm:flex-x-center max-sm:w-full'>
-        {convertedImage && (
+        {logoPath && (
           <Avatar className='h-14 w-auto'>
             <AvatarImage
               className='object-contain'
-              src={convertedImage}
+              src={logoPath}
               alt={title}
             />
           </Avatar>

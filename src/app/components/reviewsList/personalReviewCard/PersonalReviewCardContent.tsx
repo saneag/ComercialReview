@@ -59,7 +59,6 @@ export default function PersonalReviewCardContent({
           businessId: Number(businessId),
           review: {
             ...data,
-            authorId: user?.userId,
           },
         });
       } else {
@@ -67,7 +66,6 @@ export default function PersonalReviewCardContent({
           businessId: Number(businessId),
           review: {
             ...data,
-            authorId: user?.userId,
           },
         });
       }

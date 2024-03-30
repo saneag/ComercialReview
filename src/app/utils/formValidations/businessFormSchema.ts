@@ -2,6 +2,14 @@ import z from 'zod';
 
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+];
+
 export const businessCreateFormSchema = z.object({
   title: z
     .string({
@@ -23,11 +31,14 @@ export const businessCreateFormSchema = z.object({
     }),
   fullDescription: z.string().optional(),
   logo: z
-    .object({
-      data: z.string().optional(),
+    .any()
+    .refine((file) => file?.size <= MAX_FILE_SIZE, {
+      message: 'File size should be less than 5MB',
     })
-    .nullish()
-    .optional(),
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      'Only jpeg, jpg, png, webp files are allowed'
+    ),
   address: z.object({
     street: z
       .string({
@@ -53,8 +64,7 @@ export const businessCreateFormSchema = z.object({
       invalid_type_error: 'Category is required',
       required_error: 'Category is required',
     })
-    .nullish()
-    .refine((val) => val !== null, {
+    .refine((value) => value !== CategoryFilterEnum.ALL, {
       message: 'Category is required',
     }),
 });

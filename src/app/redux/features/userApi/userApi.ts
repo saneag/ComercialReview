@@ -13,7 +13,11 @@ export const userApi = userApiWithTag.injectEndpoints({
       providesTags: ['User'],
     }),
     getUser: builder.query<UserType, number>({
-      query: (userId) => `/users/${userId}`,
+      query: (id) => `/users/${id}`,
+      providesTags: ['User'],
+    }),
+    getUserIdentity: builder.query<UserType, void>({
+      query: () => '/users/identity',
       providesTags: ['User'],
     }),
     loginUser: builder.mutation<UserLoginType, Partial<LoginType>>({
@@ -60,12 +64,9 @@ export const userApi = userApiWithTag.injectEndpoints({
         maxRetries: 1,
       },
     }),
-    updateUser: builder.mutation<
-      void,
-      { body: Partial<UserType>; userId: number }
-    >({
-      query: ({ body, userId }) => ({
-        url: `/users/${userId}`,
+    updateUser: builder.mutation<void, { body: Partial<FormData> }>({
+      query: ({ body }) => ({
+        url: `/users/edit`,
         method: 'PUT',
         body,
       }),
@@ -75,8 +76,8 @@ export const userApi = userApiWithTag.injectEndpoints({
       },
     }),
     deleteUser: builder.mutation<void, number>({
-      query: (userId) => ({
-        url: `/users/${userId}`,
+      query: (id) => ({
+        url: `/users/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['User'],
@@ -95,6 +96,8 @@ export const {
   useGetUsersQuery,
   useLazyGetUserQuery,
   useLazyGetUsersQuery,
+  useGetUserIdentityQuery,
+  useLazyGetUserIdentityQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
   useResetPasswordMutation,

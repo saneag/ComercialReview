@@ -3,18 +3,16 @@ export interface BaseUserType {
   lastName: string;
   email: string;
   userName?: string;
-  avatar?: UserAvatarType | null;
-}
-
-export interface UserAvatarType {
-  data?: string;
 }
 
 export interface UserType extends BaseUserType {
-  userId: number;
+  id: number;
+  avatarPath: string;
 }
 
-export interface UserUpdateType extends BaseUserType {}
+export interface UserUpdateType extends BaseUserType {
+  avatar: File | null;
+}
 
 export interface UserLoginType {
   accessToken: string;
