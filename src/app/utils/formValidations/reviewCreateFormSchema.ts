@@ -1,5 +1,7 @@
 import z from 'zod';
 
+import { LikeType } from '@/app/types/LikeType';
+
 export const reviewCreateFormSchema = z.object({
   grade: z
     .number()
@@ -18,4 +20,5 @@ export const reviewCreateFormSchema = z.object({
     .max(1000, {
       message: 'Review text must be less than 1000 characters',
     }),
+  like: z.nativeEnum(LikeType),
 });

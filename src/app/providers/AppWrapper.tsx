@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import { Toaster } from '@/app/components/ui/toaster';
 import {
   getUserAccessToken,
+  getUserRefreshToken,
   setUser,
   setUserRole,
 } from '@/app/redux/features/slices/userSlice';
@@ -21,6 +22,7 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     dispatch(getUserAccessToken());
+    dispatch(getUserRefreshToken());
   }, [dispatch]);
 
   useEffect(() => {

@@ -1,6 +1,9 @@
+import { LikeType } from '@/app/types/LikeType';
+
 export interface BaseReviewType {
   grade: number;
   reviewText: string;
+  like: LikeType;
 }
 
 export interface ReviewAuthorType {
