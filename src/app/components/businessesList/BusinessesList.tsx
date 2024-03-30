@@ -3,13 +3,15 @@ import { useState } from 'react';
 import BusinessCard from '@/app/components/businessesList/businessCard/BusinessCard';
 import ListPagination from '@/app/components/ListPagination';
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
+import { useQueryParams } from '@/app/hooks/useQueryParams';
 import { useGetBusinessesQuery } from '@/app/redux/features/businessApi/businessApi';
+import { useAppSelector } from '@/app/redux/store';
 import { ListType } from '@/app/types/ListType';
 import { showToastError } from '@/app/utils/showToastMessage';
 
 export default function BusinessesList() {
   const [listType, setListType] = useState<ListType>(ListType.List);
-  const [page, setPage] = useState({ pageIndex: 1, pageSize: 6 });
+  const page = useAppSelector((state) => state.pagination);
 
   const {
     data: businesses,
@@ -24,6 +26,10 @@ export default function BusinessesList() {
     showToastError('Error fetching businesses');
   }
 
+  useQueryParams({
+    page,
+  });
+
   return (
     <div className='space-y-4'>
       <ListTypeChangeButtons listType={listType} setListType={setListType} />
@@ -37,8 +43,6 @@ export default function BusinessesList() {
       </div>
       {businesses && (
         <ListPagination
-          page={page}
-          setPage={setPage}
           totalPages={businesses.totalPages}
           hasNextPage={businesses.hasNext}
           hasPreviousPage={businesses.hasPrevious}

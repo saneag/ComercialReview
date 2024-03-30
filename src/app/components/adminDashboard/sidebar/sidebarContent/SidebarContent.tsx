@@ -16,7 +16,7 @@ export default function SidebarContent({
       {!isSidebarOpen && (
         <div className='mt-2 flex w-full flex-col items-center gap-3 lg:hidden'>
           <div className='flex'>
-            <HomeLogoLink className='w-7' replace={false} />
+            <HomeLogoLink className='w-7' />
           </div>
           <SidebarLinks
             setIsSidebarOpen={setIsSidebarOpen}
@@ -32,7 +32,7 @@ export default function SidebarContent({
         }`}
       >
         <div className='space-y-5'>
-          <HomeLogoLink className='w-10' replace={false}>
+          <HomeLogoLink className='w-10'>
             <span className='text-xl'>Intercon</span>
           </HomeLogoLink>
           <SidebarUser />

@@ -5,6 +5,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { apiSlice } from '@/app/redux/features/baseQuery';
 import businessFilterSlice from '@/app/redux/features/slices/businessFilterSlice';
+import paginationSlice from '@/app/redux/features/slices/paginationSlice';
 import reviewsFilterSlice from '@/app/redux/features/slices/reviewsFilterSlice';
 import userSlice from '@/app/redux/features/slices/userSlice';
 import { rtkQueryErrorLogger } from '@/app/redux/rtkQueryErrorLogger';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   user: userSlice,
   reviewsFilter: reviewsFilterSlice,
   businessFilter: businessFilterSlice,
+  pagination: paginationSlice,
 });
 
 export const store = configureStore({

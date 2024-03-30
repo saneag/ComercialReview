@@ -6,31 +6,41 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/app/components/ui/pagination';
-import { PaginationType } from '@/app/types/PaginationType';
+import { setPage } from '@/app/redux/features/slices/paginationSlice';
+import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 
 interface ListPagination {
-  page: PaginationType;
-  setPage: React.Dispatch<React.SetStateAction<PaginationType>>;
   totalPages: number;
   hasPreviousPage?: boolean;
   hasNextPage?: boolean;
 }
 
 export default function ListPagination({
-  page,
-  setPage,
   totalPages,
   hasNextPage,
   hasPreviousPage,
 }: ListPagination) {
+  const dispatch = useAppDispatch();
+  const page = useAppSelector((state) => state.pagination);
+
   const handleNextPage = () => {
     if (totalPages === page.pageIndex || !hasNextPage) return;
-    setPage((prev) => ({ ...prev, pageIndex: prev.pageIndex + 1 }));
+    dispatch(
+      setPage({
+        pageIndex: page.pageIndex + 1,
+        pageSize: page.pageSize,
+      })
+    );
   };
 
   const handlePreviousPage = () => {
     if (page.pageIndex === 0 || !hasPreviousPage) return;
-    setPage((prev) => ({ ...prev, pageIndex: prev.pageIndex - 1 }));
+    dispatch(
+      setPage({
+        pageIndex: page.pageIndex - 1,
+        pageSize: page.pageSize,
+      })
+    );
   };
 
   return (
@@ -49,7 +59,12 @@ export default function ListPagination({
             <PaginationLink
               className='cursor-pointer select-none'
               onClick={() =>
-                setPage({ pageIndex: index + 1, pageSize: page.pageSize })
+                dispatch(
+                  setPage({
+                    pageIndex: index + 1,
+                    pageSize: page.pageSize,
+                  })
+                )
               }
               isActive={index + 1 === page.pageIndex}
             >
