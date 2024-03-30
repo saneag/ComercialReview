@@ -19,9 +19,7 @@ export default function CreateBusiness() {
     title: '',
     shortDescription: '',
     fullDescription: '',
-    logo: {
-      data: undefined,
-    },
+    logo: null,
     address: {
       street: '',
       latitude: '',
@@ -56,7 +54,7 @@ export default function CreateBusiness() {
       formData.append('Title', data.title);
       formData.append('ShortDescription', data.shortDescription);
       formData.append('FullDescription', data.fullDescription ?? '');
-      formData.append('Logo', data.logo?.data);
+      formData.append('Logo', data.logo ?? '');
       formData.append('Address.Street', data.address.street);
       formData.append('Address.Latitude', data.address.latitude);
       formData.append('Address.Longitude', data.address.longitude);
