@@ -1,5 +1,7 @@
 import { apiSlice } from '@/app/redux/features/baseQuery';
 import { businessApi } from '@/app/redux/features/businessApi/businessApi';
+import { QueryParams } from '@/app/types/QueryParams';
+import { ResponseType } from '@/app/types/ResponseType';
 import {
   ReviewCreateType,
   ReviewType,
@@ -12,8 +14,14 @@ const reviewApiWithTag = apiSlice.enhanceEndpoints({
 
 export const reviewApi = reviewApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
-    getReviewsByBusinessId: builder.query<ReviewType[], number>({
-      query: (businessId) => `/businesses/${businessId}/reviews`,
+    getReviewsByBusinessId: builder.query<
+      ResponseType<ReviewType>,
+      { businessId: number; params: QueryParams }
+    >({
+      query: ({ businessId, params }) => ({
+        url: `/businesses/${businessId}/reviews`,
+        params,
+      }),
       providesTags: ['Reviews'],
     }),
     getReviewByUserAndBusinessId: builder.query<
@@ -81,6 +89,7 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
 
 export const {
   useGetReviewsByBusinessIdQuery,
+  useLazyGetReviewsByBusinessIdQuery,
   useGetReviewByUserAndBusinessIdQuery,
   useLazyGetReviewByUserAndBusinessIdQuery,
   useCreateReviewMutation,

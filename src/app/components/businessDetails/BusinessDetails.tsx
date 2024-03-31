@@ -3,9 +3,9 @@
 import { useParams } from 'next/navigation';
 
 import FullDetails from '@/app/components/businessDetails/FullDetails';
-import ReviewsSection from '@/app/components/businessDetails/reviewsSection/ReviewsSection';
 import Description from '@/app/components/businessDetails/ShortDetails';
 import ImageCarousel from '@/app/components/ImageCarousel';
+import ReviewsList from '@/app/components/reviewsList/ReviewsList';
 import { useGetBusinessQuery } from '@/app/redux/features/businessApi/businessApi';
 import { showToastError } from '@/app/utils/showToastMessage';
 
@@ -48,8 +48,10 @@ export default function BusinessDetails() {
             <Description />
           </div>
         </div>
-        <div>
-          <ReviewsSection />
+        <div className='space-y-3'>
+          <div className='flex w-full lg:w-8/12'>
+            <ReviewsList showAllReviewsLink />
+          </div>
         </div>
       </div>
     )

@@ -1,9 +1,5 @@
 import { apiSlice } from '@/app/redux/features/baseQuery';
-import {
-  BusinessCreateType,
-  BusinessType,
-  BusinessUpdateType,
-} from '@/app/types/business/BusinessType';
+import { BusinessType } from '@/app/types/business/BusinessType';
 import { QueryParams } from '@/app/types/QueryParams';
 import { ResponseType } from '@/app/types/ResponseType';
 
@@ -37,7 +33,7 @@ export const businessApi = businessApiWithTag.injectEndpoints({
     }),
     updateBusiness: builder.mutation<
       BusinessType,
-      { body: Partial<BusinessUpdateType>; businessId: number }
+      { body: Partial<FormData>; businessId: number }
     >({
       query: ({ body, businessId }) => ({
         url: `/businesses/${businessId}`,

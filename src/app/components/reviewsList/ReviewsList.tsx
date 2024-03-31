@@ -2,28 +2,42 @@ import { useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
+import ListPagination from '@/app/components/ListPagination';
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
 import PersonalReviewCard from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCard';
 import ReviewCard from '@/app/components/reviewsList/reviewCard/ReviewCard';
 import ShowAllReviewsLink from '@/app/components/reviewsList/ShowAllReviewsLink';
 import { useGetReviewsByBusinessIdQuery } from '@/app/redux/features/reviewApi/reviewApi';
+import { useAppSelector } from '@/app/redux/store';
 import { ListType } from '@/app/types/ListType';
 import { showToastError } from '@/app/utils/showToastMessage';
 
 interface ReviewsListProps {
-  reviewsLimit?: number;
+  showListTypeChangeButtons?: boolean;
+  showAllReviewsLink?: boolean;
 }
 
-export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
+export default function ReviewsList({
+  showListTypeChangeButtons = false,
+  showAllReviewsLink = false,
+}: ReviewsListProps) {
+  const { businessId } = useParams();
+
   const [listType, setListType] = useState<ListType>(ListType.List);
 
-  const { businessId } = useParams();
+  const page = useAppSelector((state) => state.pagination);
 
   const {
     data: reviews,
-    isSuccess,
     isError,
-  } = useGetReviewsByBusinessIdQuery(Number(businessId));
+    isSuccess,
+  } = useGetReviewsByBusinessIdQuery({
+    businessId: Number(businessId),
+    params: {
+      pageNumber: page.pageIndex,
+      pageSize: page.pageSize,
+    },
+  });
 
   if (isError) {
     showToastError('Error fetching reviews');
@@ -32,21 +46,35 @@ export default function ReviewsList({ reviewsLimit }: ReviewsListProps) {
   return (
     <div className='w-full space-y-4'>
       <PersonalReviewCard />
-      {!reviewsLimit && (
-        <ListTypeChangeButtons listType={listType} setListType={setListType} />
-      )}
-      <div className='mb-2 flex justify-between px-2 pt-6'>
+
+      <div
+        className={`mb-2 flex justify-between gap-2 px-2 pt-6 ${reviews && reviews.totalCount === 0 && 'flex-col'}`}
+      >
         <p className='text-2xl'>Reviews</p>
-        <ShowAllReviewsLink reviewsLimit={reviewsLimit} />
+        {reviews && reviews.totalCount === 0 && <p>No reviews yet</p>}
+        {showAllReviewsLink && <ShowAllReviewsLink />}
+        {showListTypeChangeButtons && (
+          <ListTypeChangeButtons
+            listType={listType}
+            setListType={setListType}
+          />
+        )}
       </div>
       <div
         className={`gap-4 ${listType === ListType.List ? 'flex w-full flex-col' : 'grid grid-cols-2 max-md:grid-cols-1'}`}
       >
         {isSuccess &&
-          reviews
-            .slice(0, reviewsLimit)
-            .map((review, index) => <ReviewCard key={index} review={review} />)}
+          reviews.items.map((review, index) => (
+            <ReviewCard key={index} review={review} />
+          ))}
       </div>
+      {reviews && page.pageSize > 3 && (
+        <ListPagination
+          totalPages={reviews.totalPages}
+          hasNextPage={reviews.hasNext}
+          hasPreviousPage={reviews.hasPrevious}
+        />
+      )}
     </div>
   );
 }

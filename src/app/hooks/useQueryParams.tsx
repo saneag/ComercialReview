@@ -17,6 +17,6 @@ export const useQueryParams = ({ page }: UseQueryParamsProps) => {
     const params = new URLSearchParams(Array.from(searchParams.entries()));
     params.set('pageIndex', page.pageIndex.toString());
     params.set('pageSize', page.pageSize.toString());
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    router.push(`${pathname}?${params.toString()}`);
   }, [page.pageIndex, page.pageSize, pathname, router, searchParams]);
 };
