@@ -15,7 +15,8 @@ import {
   useUpdateReviewMutation,
 } from '@/app/redux/features/reviewApi/reviewApi';
 import { useAppSelector } from '@/app/redux/store';
-import { ReviewType } from '@/app/types/review/ReviewType';
+import { LikeType } from '@/app/types/LikeType';
+import { ReviewCreateType, ReviewType } from '@/app/types/review/ReviewType';
 import { reviewCreateFormSchema } from '@/app/utils/formValidations/reviewCreateFormSchema';
 import { showToastSuccess } from '@/app/utils/showToastMessage';
 
@@ -43,10 +44,11 @@ export default function PersonalReviewCardContent({
     { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess },
   ] = useUpdateReviewMutation();
 
-  const form = useForm({
+  const form = useForm<ReviewCreateType>({
     defaultValues: {
       grade: 0,
       reviewText: '',
+      like: LikeType.NONE,
     },
     mode: 'onChange',
     resolver: zodResolver(reviewCreateFormSchema),
@@ -87,6 +89,7 @@ export default function PersonalReviewCardContent({
       form.reset({
         grade: review.grade,
         reviewText: review.reviewText,
+        like: review.like,
       });
     }
   }, [form, review]);

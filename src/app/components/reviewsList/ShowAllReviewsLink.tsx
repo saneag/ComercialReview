@@ -2,29 +2,28 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { useGetReviewsByBusinessIdQuery } from '@/app/redux/features/reviewApi/reviewApi';
+import { useAppSelector } from '@/app/redux/store';
 
-interface ShowAllReviewsLinkProps {
-  reviewsLimit?: number;
-}
-
-export default function ShowAllReviewsLink({
-  reviewsLimit,
-}: ShowAllReviewsLinkProps) {
+export default function ShowAllReviewsLink() {
   const { businessId } = useParams();
+  const page = useAppSelector((state) => state.pagination);
 
-  const { data: reviews } = useGetReviewsByBusinessIdQuery(Number(businessId));
-
-  const showAllReviewsButton =
-    reviewsLimit && reviews && reviewsLimit < reviews?.length;
+  const { data: reviews } = useGetReviewsByBusinessIdQuery({
+    businessId: Number(businessId),
+    params: {
+      pageNumber: page.pageIndex,
+      pageSize: page.pageSize,
+    },
+  });
 
   return (
-    showAllReviewsButton && (
+    reviews?.totalCount !== 0 && (
       <div className='flex justify-end'>
         <Link
           href={`/businesses/${businessId}/reviews`}
           className='text-blue-500 underline underline-offset-4'
         >
-          Show All {reviews?.length || 0} reviews
+          Show All {reviews?.totalCount} reviews
         </Link>
       </div>
     )

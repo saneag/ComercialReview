@@ -67,6 +67,9 @@ export const userSlice = createSlice({
     getUserAccessToken: (state) => {
       state.accessToken = localStorage.getItem('accessToken') || null;
     },
+    getUserRefreshToken: (state) => {
+      state.refreshToken = localStorage.getItem('refreshToken') || null;
+    },
   },
 });
 
@@ -79,6 +82,7 @@ export const {
   setIsAuth,
   resetUserOnLogout,
   getUserAccessToken,
+  getUserRefreshToken,
 } = userSlice.actions;
 
 export default userSlice.reducer;

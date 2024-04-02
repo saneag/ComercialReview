@@ -1,45 +1,54 @@
 'use client';
 
+import { useEffect } from 'react';
+
+import { useSearchParams } from 'next/navigation';
+
 import FiltersCard from '@/app/components/filters';
-import RatingAccordionItems from '@/app/components/filters/filtersAccordion/filterItems/RatingAccordionItems';
 import FiltersDisplay from '@/app/components/filters/FiltersDisplay';
 import ReviewsList from '@/app/components/reviewsList/ReviewsList';
+import useReviewFilterAccordionItemsList from '@/app/hooks/useReviewFilterAccordionItemsList';
+import useReviewFiltersDisplayList from '@/app/hooks/useReviewFiltersDisplayList';
 import {
-  removeReviewRatingFilter,
-  resetReviewFilters,
-  setReviewRatingFilter,
-} from '@/app/redux/features/slices/reviewsFilterSlice';
-import { useAppSelector } from '@/app/redux/store';
-import { ratingEnumToText } from '@/app/types/enums/RatingFilterEnum';
+  resetPagination,
+  setPage,
+} from '@/app/redux/features/slices/paginationSlice';
+import { resetReviewFilters } from '@/app/redux/features/slices/reviewsFilterSlice';
+import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { DisplayFilterType } from '@/app/types/filter/EntityFilterType';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
 export default function ReviewsPage() {
-  const filters = useAppSelector((state) => state.reviewsFilter);
+  const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
 
-  const filterAccordionItems: FilterAccordionItemType[] = [
-    {
-      filterValue: 'rating',
-      triggerLabel: 'Rating',
-      children: (
-        <RatingAccordionItems
-          ratingFilter={filters.rating}
-          setFilter={setReviewRatingFilter}
-        />
-      ),
-    },
-  ];
+  const page = useAppSelector((state) => state.pagination);
 
-  const reviewsFiltersDisplay: DisplayFilterType[] = [
-    {
-      filterByLabel: 'Rating',
-      filterValues: filters.rating.map((rating) => ({
-        label: ratingEnumToText(rating),
-        value: rating,
-      })),
-      removeOnClick: removeReviewRatingFilter,
-    },
-  ];
+  const pageIndex = searchParams.get('pageIndex') || 1;
+  const pageSize = searchParams.get('pageSize') || 6;
+
+  useEffect(() => {
+    dispatch(
+      setPage({
+        pageIndex: Number(pageIndex),
+        pageSize: Number(pageSize),
+      })
+    );
+
+    return () => {
+      dispatch(resetPagination());
+    };
+  }, [dispatch, pageIndex, pageSize]);
+
+  const filterAccordionItems: FilterAccordionItemType[] =
+    useReviewFilterAccordionItemsList();
+
+  const reviewsFiltersDisplay: DisplayFilterType[] =
+    useReviewFiltersDisplayList();
+
+  // useQueryParams({
+  //   page,
+  // });
 
   return (
     <div className='mt-5 flex flex-col gap-10 lg:flex-row'>
@@ -53,7 +62,7 @@ export default function ReviewsPage() {
         />
       </div>
       <div className='w-full flex-1'>
-        <ReviewsList />
+        <ReviewsList showListTypeChangeButtons />
       </div>
     </div>
   );
