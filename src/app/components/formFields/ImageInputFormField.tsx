@@ -87,7 +87,7 @@ export default function ImageInputFormField({
         className={`h-24 w-24 ${preview !== '' && 'cursor-pointer'}`}
         onClick={handleImageClick}
       >
-        <AvatarImage src={preview} className='object-contain' />
+        <AvatarImage src={preview} className='object-fill' />
         <AvatarFallback className='bg-gray-200'>
           <ImagePlaceholder />
         </AvatarFallback>
