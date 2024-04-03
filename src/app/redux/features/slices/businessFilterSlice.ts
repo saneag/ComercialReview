@@ -3,10 +3,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { RatingFilterEnum } from '@/app/types/enums/RatingFilterEnum';
 import { BusinessFilterType } from '@/app/types/filter/EntityFilterType';
+import { SortType } from '@/app/types/SortType';
 
 const initialState: BusinessFilterType = {
   rating: [RatingFilterEnum.ALL],
   category: [CategoryFilterEnum.ALL],
+  search: '',
+  sort: {
+    sortBy: '',
+    sortOrder: 'asc',
+  },
 };
 
 const businessFilterSlice = createSlice({
@@ -62,6 +68,12 @@ const businessFilterSlice = createSlice({
         }
       }
     },
+    setBusinessSearchFilter(state, action: PayloadAction<string>) {
+      state.search = action.payload;
+    },
+    setBusinessSortFilter(state, action: PayloadAction<SortType>) {
+      state.sort = action.payload;
+    },
     removeBusinessRatingFilter(state, action: PayloadAction<number>) {
       if (action.payload === RatingFilterEnum.ALL) {
         return;
@@ -90,9 +102,17 @@ const businessFilterSlice = createSlice({
         state.category = [CategoryFilterEnum.ALL];
       }
     },
+    removeBusinessSearchFilter(state) {
+      state.search = '';
+    },
+    removeBusinessSortFilter(state) {
+      state.sort = {
+        sortBy: '',
+        sortOrder: 'asc',
+      };
+    },
     resetBusinessFilters(state) {
-      state.rating = [RatingFilterEnum.ALL];
-      state.category = [CategoryFilterEnum.ALL];
+      Object.assign(state, initialState);
     },
   },
 });
@@ -100,6 +120,10 @@ const businessFilterSlice = createSlice({
 export const {
   setBusinessRatingFilter,
   setBusinessesCategoryFilter,
+  setBusinessSearchFilter,
+  setBusinessSortFilter,
+  removeBusinessSearchFilter,
+  removeBusinessSortFilter,
   removeBusinessRatingFilter,
   removeBusinessCategoryFilter,
   resetBusinessFilters,

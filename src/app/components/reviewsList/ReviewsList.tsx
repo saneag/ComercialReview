@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
@@ -8,7 +8,8 @@ import PersonalReviewCard from '@/app/components/reviewsList/personalReviewCard/
 import ReviewCard from '@/app/components/reviewsList/reviewCard/ReviewCard';
 import ShowAllReviewsLink from '@/app/components/reviewsList/ShowAllReviewsLink';
 import { useGetReviewsByBusinessIdQuery } from '@/app/redux/features/reviewApi/reviewApi';
-import { useAppSelector } from '@/app/redux/store';
+import { resetReviewFilters } from '@/app/redux/features/slices/reviewsFilterSlice';
+import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { ListType } from '@/app/types/ListType';
 import { showToastError } from '@/app/utils/showToastMessage';
 
@@ -21,23 +22,37 @@ export default function ReviewsList({
   showListTypeChangeButtons = false,
   showAllReviewsLink = false,
 }: ReviewsListProps) {
+  const dispatch = useAppDispatch();
   const { businessId } = useParams();
 
   const [listType, setListType] = useState<ListType>(ListType.List);
 
   const page = useAppSelector((state) => state.pagination);
 
+  const filter = useAppSelector((state) => state.reviewsFilter);
+
   const {
     data: reviews,
     isError,
     isSuccess,
-  } = useGetReviewsByBusinessIdQuery({
-    businessId: Number(businessId),
-    params: {
-      pageNumber: page.pageIndex,
-      pageSize: page.pageSize,
+  } = useGetReviewsByBusinessIdQuery(
+    {
+      businessId: Number(businessId),
+      params: {
+        pageNumber: page.pageIndex,
+        pageSize: page.pageSize,
+        rating: filter.rating,
+        search: filter.search,
+      },
     },
-  });
+    { refetchOnMountOrArgChange: true }
+  );
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetReviewFilters());
+    };
+  }, [dispatch]);
 
   if (isError) {
     showToastError('Error fetching reviews');

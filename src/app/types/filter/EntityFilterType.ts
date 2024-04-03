@@ -4,18 +4,22 @@ import {
   resetBusinessFilters,
   setBusinessesCategoryFilter,
   setBusinessRatingFilter,
+  setBusinessSearchFilter,
+  setBusinessSortFilter,
 } from '@/app/redux/features/slices/businessFilterSlice';
 import {
-  removeReviewCategoryFilter,
   removeReviewRatingFilter,
   resetReviewFilters,
-  setReviewCategoryFilter,
   setReviewRatingFilter,
+  setReviewSearchFilter,
+  setReviewSortFilter,
 } from '@/app/redux/features/slices/reviewsFilterSlice';
+import { SortType } from '@/app/types/SortType';
 
 export interface BaseFilterType {
   rating: RatingFilterType;
-  category: CategoryFilterType;
+  search: string;
+  sort: SortType;
 }
 
 export type RatingFilterType = number[];
@@ -23,15 +27,23 @@ export type CategoryFilterType = number[];
 
 export interface ReviewFilterType extends BaseFilterType {}
 
-export interface BusinessFilterType extends BaseFilterType {}
+export interface BusinessFilterType extends BaseFilterType {
+  category: CategoryFilterType;
+}
 
 export type SetRatingFilterType =
   | typeof setReviewRatingFilter
   | typeof setBusinessRatingFilter;
 
-export type SetCategoryFilterType =
-  | typeof setBusinessesCategoryFilter
-  | typeof setReviewCategoryFilter;
+export type SetCategoryFilterType = typeof setBusinessesCategoryFilter;
+
+export type SearchFilterType =
+  | typeof setBusinessSearchFilter
+  | typeof setReviewSearchFilter;
+
+export type SortFilterType =
+  | typeof setReviewSortFilter
+  | typeof setBusinessSortFilter;
 
 export type ResetFiltersType =
   | typeof resetBusinessFilters
@@ -44,8 +56,7 @@ export type RemoveRatingFilterOnClickType =
   | typeof removeReviewRatingFilter;
 
 export type RemoveCategoryFilterOnClickType =
-  | typeof removeBusinessCategoryFilter
-  | typeof removeReviewCategoryFilter;
+  typeof removeBusinessCategoryFilter;
 
 export type RemoveFilterOnClickType =
   | RemoveRatingFilterOnClickType

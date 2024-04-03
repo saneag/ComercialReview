@@ -5,7 +5,10 @@ import FiltersCard from '@/app/components/filters';
 import FiltersDisplay from '@/app/components/filters/FiltersDisplay';
 import useBusinessFilterAccordionItemsList from '@/app/hooks/useBusinessFilterAccordionItemsList';
 import useBusinessFiltersDisplayList from '@/app/hooks/useBusinessFiltersDisplayList';
-import { resetBusinessFilters } from '@/app/redux/features/slices/businessFilterSlice';
+import {
+  resetBusinessFilters,
+  setBusinessSearchFilter,
+} from '@/app/redux/features/slices/businessFilterSlice';
 import { DisplayFilterType } from '@/app/types/filter/EntityFilterType';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
@@ -25,6 +28,7 @@ export default function Businesses() {
           }
           resetFilters={resetBusinessFilters}
           filterAccordionItems={filterAccordionItems}
+          setSearchFilter={setBusinessSearchFilter}
         />
       </div>
       <div className='w-full flex-1'>

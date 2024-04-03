@@ -13,7 +13,10 @@ import {
   resetPagination,
   setPage,
 } from '@/app/redux/features/slices/paginationSlice';
-import { resetReviewFilters } from '@/app/redux/features/slices/reviewsFilterSlice';
+import {
+  resetReviewFilters,
+  setReviewSearchFilter,
+} from '@/app/redux/features/slices/reviewsFilterSlice';
 import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { DisplayFilterType } from '@/app/types/filter/EntityFilterType';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
@@ -59,6 +62,7 @@ export default function ReviewsPage() {
           }
           resetFilters={resetReviewFilters}
           filterAccordionItems={filterAccordionItems}
+          setSearchFilter={setReviewSearchFilter}
         />
       </div>
       <div className='w-full flex-1'>

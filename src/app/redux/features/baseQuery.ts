@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+import qs from 'qs';
 
 import {
   resetUserOnLogout,
@@ -8,6 +9,7 @@ import {
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
+  paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
   prepareHeaders: (headers, { getState }: any) => {
     const accessToken = localStorage.getItem('accessToken');
 

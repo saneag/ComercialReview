@@ -6,6 +6,7 @@ import BusinessCard from '@/app/components/businessesList/businessCard/BusinessC
 import ListPagination from '@/app/components/ListPagination';
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
 import { useGetBusinessesQuery } from '@/app/redux/features/businessApi/businessApi';
+import { resetBusinessFilters } from '@/app/redux/features/slices/businessFilterSlice';
 import {
   resetPagination,
   setPage,
@@ -21,6 +22,7 @@ export default function BusinessesList() {
   const [listType, setListType] = useState<ListType>(ListType.List);
 
   const page = useAppSelector((state) => state.pagination);
+  const filter = useAppSelector((state) => state.businessFilter);
 
   const pageIndex = searchParams.get('pageIndex') || 1;
   const pageSize = searchParams.get('pageSize') || 6;
@@ -35,6 +37,7 @@ export default function BusinessesList() {
 
     return () => {
       dispatch(resetPagination());
+      dispatch(resetBusinessFilters());
     };
   }, [dispatch, pageIndex, pageSize]);
 
@@ -42,10 +45,16 @@ export default function BusinessesList() {
     data: businesses,
     isSuccess,
     isError,
-  } = useGetBusinessesQuery({
-    pageNumber: page.pageIndex,
-    pageSize: page.pageSize,
-  });
+  } = useGetBusinessesQuery(
+    {
+      pageNumber: page.pageIndex,
+      pageSize: page.pageSize,
+      categories: filter.category,
+      rating: filter.rating,
+      search: filter.search,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   if (isError) {
     showToastError('Error fetching businesses');

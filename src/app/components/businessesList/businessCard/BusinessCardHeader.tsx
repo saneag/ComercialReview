@@ -19,7 +19,7 @@ export default function BusinessCardHeader({
 
   return (
     <CardHeader className='flex flex-row flex-wrap gap-3'>
-      <div className='max-sm:flex-x-center max-sm:w-full'>
+      <div className='max-sm:flex-x-center min-w-14 max-sm:w-full'>
         {logoPath && (
           <Avatar className='h-14 w-auto'>
             <AvatarImage

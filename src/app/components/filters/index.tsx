@@ -6,28 +6,33 @@ import FiltersAccordion from '@/app/components/filters/filtersAccordion';
 import SearchInput from '@/app/components/SearchInput';
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
+import { setBusinessSearchFilter } from '@/app/redux/features/slices/businessFilterSlice';
 import { useAppDispatch } from '@/app/redux/store';
-import { ResetFiltersType } from '@/app/types/filter/EntityFilterType';
+import {
+  ResetFiltersType,
+  SearchFilterType,
+} from '@/app/types/filter/EntityFilterType';
 import { FilterAccordionItemType } from '@/app/types/filter/FilterAccordionItemType';
 
 interface FiltersCardProps {
   filterAccordionItems: FilterAccordionItemType[];
   resetFilters: ResetFiltersType;
   filtersDisplayChildren: ReactNode;
+  setSearchFilter: SearchFilterType;
 }
 
 export default function FiltersCard({
   resetFilters,
   filterAccordionItems,
   filtersDisplayChildren,
+  setSearchFilter,
 }: FiltersCardProps) {
   const dispatch = useAppDispatch();
 
   const [search, setSearch] = useState('');
 
   const onSearch = (value: string) => {
-    // TODO: Implement search
-    console.log('searching...', value);
+    dispatch(setSearchFilter(value.trim()));
   };
 
   const handleResetButtonClick = () => {

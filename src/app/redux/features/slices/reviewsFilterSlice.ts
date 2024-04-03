@@ -2,10 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RatingFilterEnum } from '@/app/types/enums/RatingFilterEnum';
 import { ReviewFilterType } from '@/app/types/filter/EntityFilterType';
+import { SortType } from '@/app/types/SortType';
 
 const initialState: ReviewFilterType = {
   rating: [RatingFilterEnum.ALL],
-  category: [RatingFilterEnum.ALL],
+  search: '',
+  sort: {
+    sortBy: '',
+    sortOrder: 'asc',
+  },
 };
 
 const reviewsFilterSlice = createSlice({
@@ -37,29 +42,11 @@ const reviewsFilterSlice = createSlice({
         }
       }
     },
-    setReviewCategoryFilter(state, action: PayloadAction<number>) {
-      if (action.payload === RatingFilterEnum.ALL) {
-        state.category = [RatingFilterEnum.ALL];
-        return;
-      }
-
-      if (
-        state.category.length === 1 &&
-        state.category[0] === RatingFilterEnum.ALL
-      ) {
-        state.category = [];
-      }
-
-      const index = state.category.indexOf(action.payload);
-      if (index === -1) {
-        state.category.push(action.payload);
-      } else {
-        state.category.splice(index, 1);
-
-        if (state.category.length === 0) {
-          state.category.push(RatingFilterEnum.ALL);
-        }
-      }
+    setReviewSearchFilter(state, action: PayloadAction<string>) {
+      state.search = action.payload;
+    },
+    setReviewSortFilter(state, action: PayloadAction<SortType>) {
+      state.sort = action.payload;
     },
     removeReviewRatingFilter(state, action: PayloadAction<number>) {
       if (action.payload === RatingFilterEnum.ALL) {
@@ -75,32 +62,28 @@ const reviewsFilterSlice = createSlice({
         state.rating.push(RatingFilterEnum.ALL);
       }
     },
-    removeReviewCategoryFilter(state, action: PayloadAction<number>) {
-      if (action.payload === RatingFilterEnum.ALL) {
-        return;
-      }
-
-      const index = state.category.indexOf(action.payload);
-      if (index !== -1) {
-        state.category.splice(index, 1);
-      }
-
-      if (state.category.length === 0) {
-        state.category.push(RatingFilterEnum.ALL);
-      }
+    removeReviewSearchFilter(state) {
+      state.search = '';
+    },
+    removeReviewSortFilter(state) {
+      state.sort = {
+        sortBy: '',
+        sortOrder: 'asc',
+      };
     },
     resetReviewFilters(state) {
-      state.rating = [RatingFilterEnum.ALL];
-      state.category = [RatingFilterEnum.ALL];
+      Object.assign(state, initialState);
     },
   },
 });
 
 export const {
   setReviewRatingFilter,
-  setReviewCategoryFilter,
+  setReviewSearchFilter,
+  setReviewSortFilter,
+  removeReviewSearchFilter,
+  removeReviewSortFilter,
   removeReviewRatingFilter,
-  removeReviewCategoryFilter,
   resetReviewFilters,
 } = reviewsFilterSlice.actions;
 
