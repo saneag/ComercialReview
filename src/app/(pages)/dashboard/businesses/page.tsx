@@ -22,7 +22,7 @@ export default function DashboardBusinesses() {
   const pageIndex = searchParams.get('pageIndex') || 1;
   const pageSize = searchParams.get('pageSize') || 6;
 
-  const { data: business } = useGetMyBusinessQuery();
+  const { data: business, isLoading } = useGetMyBusinessQuery();
 
   useEffect(() => {
     dispatch(
@@ -36,6 +36,10 @@ export default function DashboardBusinesses() {
       dispatch(resetPagination());
     };
   }, [dispatch, pageIndex, pageSize]);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <div className='my-10 space-y-4'>

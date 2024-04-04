@@ -11,7 +11,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
   paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
   prepareHeaders: (headers, { getState }: any) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getState().user.accessToken;
 
     if (accessToken) {
       headers.set('authorization', `Bearer ${accessToken}`);
