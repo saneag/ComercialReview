@@ -23,7 +23,7 @@ export default function ShowAllReviewsLink() {
           href={`/businesses/${businessId}/reviews`}
           className='text-blue-500 underline underline-offset-4'
         >
-          Show All {reviews?.totalCount} reviews
+          Show all {reviews?.totalCount} reviews
         </Link>
       </div>
     )
