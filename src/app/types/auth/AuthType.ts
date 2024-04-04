@@ -16,6 +16,7 @@ export interface ResetPasswordType extends Omit<BaseAuthType, 'password'> {}
 
 export interface ResetPasswordConfirmType extends BaseAuthType {
   confirmPassword: string;
+  resetPasswordCode: string;
 }
 
 export type AuthType =

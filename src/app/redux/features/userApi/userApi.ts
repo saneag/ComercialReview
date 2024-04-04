@@ -1,5 +1,10 @@
 import { apiSlice } from '@/app/redux/features/baseQuery';
-import { LoginType, RegisterType } from '@/app/types/auth/AuthType';
+import {
+  LoginType,
+  RegisterType,
+  ResetPasswordConfirmType,
+  ResetPasswordType,
+} from '@/app/types/auth/AuthType';
 import { UserLoginType, UserType } from '@/app/types/user/UserType';
 
 const userApiWithTag = apiSlice.enhanceEndpoints({
@@ -42,9 +47,9 @@ export const userApi = userApiWithTag.injectEndpoints({
         maxRetries: 1,
       },
     }),
-    resetPassword: builder.mutation({
+    resetPassword: builder.mutation<void, ResetPasswordType>({
       query: (body) => ({
-        url: '/users/reset-password',
+        url: '/users/forgot-password',
         method: 'POST',
         body,
       }),
@@ -53,9 +58,12 @@ export const userApi = userApiWithTag.injectEndpoints({
         maxRetries: 1,
       },
     }),
-    resetPasswordConfirm: builder.mutation({
+    resetPasswordConfirm: builder.mutation<
+      void,
+      Partial<ResetPasswordConfirmType>
+    >({
       query: (body) => ({
-        url: '/users/reset-password-confirm',
+        url: '/users/reset-password',
         method: 'POST',
         body,
       }),

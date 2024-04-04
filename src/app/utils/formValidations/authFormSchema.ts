@@ -73,6 +73,13 @@ export const resetPasswordConfirmFormSchema = z
     email,
     password: advancedPassword,
     confirmPassword: z.string(),
+    resetPasswordCode: z
+      .string({
+        invalid_type_error: 'Code is required.',
+        required_error: 'Code is required.',
+      })
+      .min(6, { message: 'Code is required.' })
+      .max(6, { message: 'Code is required.' }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match.',

@@ -79,6 +79,10 @@ const config: Config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        'caret-blink': {
+          '0%,70%,100%': { opacity: '1' },
+          '20%,50%': { opacity: '0' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -86,6 +90,7 @@ const config: Config = {
         'spin-3': 'spin 3s linear infinite',
         'spin-5': 'spin 5s linear infinite',
         'spin-10': 'spin 10s linear infinite',
+        'caret-blink': 'caret-blink 1.25s ease-out infinite',
       },
     },
   },
