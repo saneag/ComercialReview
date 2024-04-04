@@ -20,6 +20,10 @@ export const businessApi = businessApiWithTag.injectEndpoints({
       query: (id) => `/businesses/${id}`,
       providesTags: ['Business'],
     }),
+    getMyBusiness: builder.query<BusinessType, void>({
+      query: () => '/businesses/my',
+      providesTags: ['Business'],
+    }),
     createBusiness: builder.mutation<BusinessType, Partial<FormData>>({
       query: (body) => ({
         url: '/businesses',
@@ -51,6 +55,7 @@ export const businessApi = businessApiWithTag.injectEndpoints({
 export const {
   useGetBusinessesQuery,
   useGetBusinessQuery,
+  useGetMyBusinessQuery,
   useCreateBusinessMutation,
   useUpdateBusinessMutation,
 } = businessApi;
