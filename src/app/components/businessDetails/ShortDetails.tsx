@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import RatingStars from '@/app/components/RatingStars';
 import { Badge } from '@/app/components/ui/badge';
 import { useGetBusinessQuery } from '@/app/redux/features/businessApi/businessApi';
+import { categoryEnumToText } from '@/app/types/enums/CategoryFilterEnum';
 import { roundTo } from '@/app/utils/roundTo';
 
 export default function ShortDetails() {
@@ -36,7 +37,7 @@ export default function ShortDetails() {
             <div>
               <p className='text-sm text-gray-500'>Category</p>
               <Badge className='bg-pink-400 hover:bg-pink-500'>
-                {business.category}
+                {categoryEnumToText(business.category)}
               </Badge>
             </div>
             <div>
