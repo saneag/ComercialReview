@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -56,6 +56,12 @@ export default function BusinessesForm({
   const handleInputTypeChange = (type: BusinessAddressInputEnum) => {
     setBusinessAddressInputType(type);
   };
+
+  useEffect(() => {
+    if (defaultValues) {
+      form.reset(defaultValues);
+    }
+  }, [defaultValues, form]);
 
   return (
     <div className='w-full max-w-[600px] rounded-xl px-5 py-5 nm-flat-white md:mx-5 md:px-10'>

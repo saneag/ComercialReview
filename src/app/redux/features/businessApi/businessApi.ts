@@ -40,11 +40,12 @@ export const businessApi = businessApiWithTag.injectEndpoints({
       { body: Partial<FormData>; businessId: number }
     >({
       query: ({ body, businessId }) => ({
-        url: `/businesses/${businessId}`,
+        url: `/businesses/${businessId}/edit`,
         method: 'PUT',
         body,
       }),
-      invalidatesTags: (result, error) => (error ? [] : ['Businesses']),
+      invalidatesTags: (result, error) =>
+        error ? [] : ['Businesses', 'Business'],
       extraOptions: {
         maxRetries: 0,
       },

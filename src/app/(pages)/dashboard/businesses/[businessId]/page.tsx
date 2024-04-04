@@ -1,34 +1,40 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import BusinessesForm from '@/app/components/adminDashboard/businesses/businessesForm/BusinessesForm';
-import { useCreateBusinessMutation } from '@/app/redux/features/businessApi/businessApi';
+import {
+  useGetMyBusinessQuery,
+  useUpdateBusinessMutation,
+} from '@/app/redux/features/businessApi/businessApi';
 import { BusinessFormSchemaState } from '@/app/types/business/BusinessSchemaType';
 import { BusinessCreateType } from '@/app/types/business/BusinessType';
-import { BusinessCreateFieldType } from '@/app/types/business/FormFieldsType';
+import { BusinessUpdateFieldType } from '@/app/types/business/FormFieldsType';
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { businessCreateFormSchema } from '@/app/utils/formValidations/businessFormSchema';
 import { showToastSuccess } from '@/app/utils/showToastMessage';
 
-export default function CreateBusiness() {
+export default function UpdateBusiness() {
+  const { businessId } = useParams();
+
   const router = useRouter();
-  const [createBusiness, { isLoading }] = useCreateBusinessMutation();
+  const { data: businessForUpdate } = useGetMyBusinessQuery();
+  const [updateBusiness] = useUpdateBusinessMutation();
 
   const defaultValues: BusinessCreateType = {
-    title: '',
-    shortDescription: '',
-    fullDescription: '',
-    logo: null,
-    address: {
+    title: businessForUpdate?.title || '',
+    shortDescription: businessForUpdate?.shortDescription || '',
+    fullDescription: businessForUpdate?.fullDescription || '',
+    logo: businessForUpdate?.logoPath || null,
+    address: businessForUpdate?.address || {
       street: '',
       latitude: '',
       longitude: '',
     },
-    category: CategoryFilterEnum.ALL,
+    category: businessForUpdate?.category || CategoryFilterEnum.ALL,
   };
 
-  const formFields: BusinessCreateFieldType[] = [
+  const formFields: BusinessUpdateFieldType[] = [
     {
       label: 'title',
       displayLabel: 'Title',
@@ -36,7 +42,7 @@ export default function CreateBusiness() {
     },
   ];
 
-  const textFormFields: BusinessCreateFieldType[] = [
+  const textFormFields: BusinessUpdateFieldType[] = [
     {
       label: 'shortDescription',
       displayLabel: 'Short Description',
@@ -60,7 +66,10 @@ export default function CreateBusiness() {
       formData.append('Address.Longitude', data.address.longitude);
       formData.append('Category', CategoryFilterEnum[data.category]);
 
-      const response = await createBusiness(formData).unwrap();
+      const response = await updateBusiness({
+        body: formData,
+        businessId: Number(businessId),
+      }).unwrap();
 
       if (response && response.id) {
         showToastSuccess('Business created successfully');
@@ -77,7 +86,7 @@ export default function CreateBusiness() {
         onSubmit={onSubmit}
         formFields={formFields}
         textFormFields={textFormFields}
-        buttonLabel='Create Business'
+        buttonLabel='Update Business'
         buttonClassName='bg-green-600 hover:bg-green-700'
       />
     </div>

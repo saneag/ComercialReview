@@ -19,6 +19,7 @@ export interface BusinessType extends BaseBusinessType {
   rating: number;
   reviewsCount: number;
   logoPath: string | null;
+  ownerId: number;
 }
 
 export interface BusinessCreateType extends BaseBusinessType {

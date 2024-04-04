@@ -36,12 +36,12 @@ export default function BusinessCategorySelect() {
             onValueChange={(value) => {
               field.onChange(Number(value));
             }}
-            defaultValue={field.value}
+            value={String(field.value)}
           >
             <FormControl>
               <>
                 <SelectTrigger className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'>
-                  <SelectValue placeholder='Select a business category from dropdown' />
+                  <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   {categoryFilterArray
