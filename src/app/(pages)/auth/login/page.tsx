@@ -15,7 +15,7 @@ import {
   setUserRole,
 } from '@/app/redux/features/slices/userSlice';
 import {
-  useLazyGetUserQuery,
+  useLazyGetUserIdentityQuery,
   useLoginUserMutation,
 } from '@/app/redux/features/userApi/userApi';
 import { useAppDispatch } from '@/app/redux/store';
@@ -29,7 +29,7 @@ export default function LoginPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const [getUser, { data: user }] = useLazyGetUserQuery();
+  const [getUser, { data: user }] = useLazyGetUserIdentityQuery();
   const [login, { isLoading, isSuccess }] = useLoginUserMutation();
 
   const defaultValues: LoginType = {
@@ -58,24 +58,20 @@ export default function LoginPage() {
       dispatch(setRefreshToken(response.refreshToken));
 
       const decoded: any = jwtDecode(response.accessToken);
-      const userId = decoded[UserJwtClaimsEnum.UserId];
       const role = decoded[UserJwtClaimsEnum.Role];
       dispatch(setUserRole(Number(role)));
-      getUser(userId);
+      await getUser();
     } catch (error) {}
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      router.replace('/');
-    }
-  }, [isSuccess, router]);
-
-  useEffect(() => {
     if (user) {
       dispatch(setUser({ user, isAuth: true }));
+      if (isSuccess) {
+        router.replace('/');
+      }
     }
-  }, [user, dispatch]);
+  }, [user, dispatch, isSuccess, router]);
 
   return (
     <div className='flex-center w-full max-md:pb-20'>

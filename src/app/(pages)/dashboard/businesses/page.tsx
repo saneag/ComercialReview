@@ -37,10 +37,6 @@ export default function DashboardBusinesses() {
     };
   }, [dispatch, pageIndex, pageSize]);
 
-  if (isLoading) {
-    return null;
-  }
-
   return (
     <div className='my-10 space-y-4'>
       <div className='space-y-10'>
@@ -51,12 +47,14 @@ export default function DashboardBusinesses() {
           </div>
         ) : (
           <div className='flex justify-end'>
-            <Link href='/dashboard/businesses/create'>
-              <Button className='space-x-1 nm-flat-green-500-sm hover:nm-flat-green-600-sm'>
-                <span>Add a business</span>
-                <Plus size={20} />
-              </Button>
-            </Link>
+            {!isLoading && (
+              <Link href='/dashboard/businesses/create'>
+                <Button className='space-x-1 nm-flat-green-500-sm hover:nm-flat-green-600-sm'>
+                  <span>Add a business</span>
+                  <Plus size={20} />
+                </Button>
+              </Link>
+            )}
           </div>
         )}
         <BusinessesList />

@@ -17,7 +17,8 @@ export default function ShowAllReviewsLink() {
   });
 
   return (
-    reviews?.totalCount !== 0 && (
+    reviews &&
+    reviews.totalCount > 3 && (
       <div className='flex justify-end'>
         <Link
           href={`/businesses/${businessId}/reviews`}
