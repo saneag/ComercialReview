@@ -7,8 +7,13 @@ import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
 import PersonalReviewCard from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCard';
 import ReviewCard from '@/app/components/reviewsList/reviewCard/ReviewCard';
 import ShowAllReviewsLink from '@/app/components/reviewsList/ShowAllReviewsLink';
+import SortDropdown from '@/app/components/SortDropdown';
+import { reviewSortOptions } from '@/app/constants/sortDropdownOptions';
 import { useGetReviewsByBusinessIdQuery } from '@/app/redux/features/reviewApi/reviewApi';
-import { resetReviewFilters } from '@/app/redux/features/slices/reviewsFilterSlice';
+import {
+  resetReviewFilters,
+  setReviewSortFilter,
+} from '@/app/redux/features/slices/reviewsFilterSlice';
 import { useAppDispatch, useAppSelector } from '@/app/redux/store';
 import { ListType } from '@/app/types/ListType';
 import { showToastError } from '@/app/utils/showToastMessage';
@@ -43,6 +48,8 @@ export default function ReviewsList({
         pageSize: page.pageSize,
         grades: filter.rating,
         search: filter.search,
+        sortBy: filter.sort.sortBy,
+        sortDirection: filter.sort.sortDirection,
       },
     },
     { refetchOnMountOrArgChange: true }
@@ -65,14 +72,22 @@ export default function ReviewsList({
       <div
         className={`mb-2 flex justify-between gap-2 px-2 pt-6 ${reviews && reviews.totalCount === 0 && 'flex-col'}`}
       >
-        <p className='text-2xl'>Reviews</p>
+        {showAllReviewsLink && <p className='text-2xl'>Reviews</p>}
         {reviews && reviews.totalCount === 0 && <p>No reviews yet</p>}
         {showAllReviewsLink && <ShowAllReviewsLink />}
         {showListTypeChangeButtons && (
-          <ListTypeChangeButtons
-            listType={listType}
-            setListType={setListType}
-          />
+          <>
+            <SortDropdown
+              sortBy={filter.sort.sortBy}
+              sortDirection={filter.sort.sortDirection}
+              sortOptions={reviewSortOptions}
+              setSortFilter={setReviewSortFilter}
+            />
+            <ListTypeChangeButtons
+              listType={listType}
+              setListType={setListType}
+            />
+          </>
         )}
       </div>
       <div

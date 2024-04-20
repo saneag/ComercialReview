@@ -2,7 +2,7 @@ import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { RatingFilterEnum } from '@/app/types/enums/RatingFilterEnum';
 import {
   BusinessSortByEnum,
-  ReviewSortType,
+  ReviewSortByEnum,
   SortType,
 } from '@/app/types/SortType';
 
@@ -21,6 +21,6 @@ export interface BusinessQueryParams
 
 export interface ReviewQueryParams
   extends QueryParams,
-    SortType<ReviewSortType> {
+    SortType<ReviewSortByEnum> {
   grades?: RatingFilterEnum[];
 }

@@ -1,4 +1,4 @@
-import { BusinessSortByEnum } from '@/app/types/SortType';
+import { BusinessSortByEnum, ReviewSortByEnum } from '@/app/types/SortType';
 
 export const businessSortOptions = [
   {
@@ -16,5 +16,20 @@ export const businessSortOptions = [
   {
     value: BusinessSortByEnum.Rating,
     label: 'Rating',
+  },
+];
+
+export const reviewSortOptions = [
+  {
+    value: ReviewSortByEnum.UpdatedDate,
+    label: 'Updated Date',
+  },
+  {
+    value: ReviewSortByEnum.Grade,
+    label: 'Grade',
+  },
+  {
+    value: ReviewSortByEnum.Like,
+    label: 'Like',
   },
 ];

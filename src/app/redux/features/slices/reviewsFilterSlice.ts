@@ -2,14 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RatingFilterEnum } from '@/app/types/enums/RatingFilterEnum';
 import { ReviewFilterType } from '@/app/types/filter/EntityFilterType';
-import { SortType } from '@/app/types/SortType';
+import {
+  ReviewSortByEnum,
+  ReviewSortType,
+  SortDirectionEnum,
+} from '@/app/types/SortType';
 
 const initialState: ReviewFilterType = {
   rating: [RatingFilterEnum.ALL],
   search: '',
   sort: {
-    sortBy: '',
-    sortOrder: 'asc',
+    sortBy: ReviewSortByEnum.UpdatedDate,
+    sortDirection: SortDirectionEnum.Descending,
   },
 };
 
@@ -45,7 +49,7 @@ const reviewsFilterSlice = createSlice({
     setReviewSearchFilter(state, action: PayloadAction<string>) {
       state.search = action.payload;
     },
-    setReviewSortFilter(state, action: PayloadAction<SortType>) {
+    setReviewSortFilter(state, action: PayloadAction<ReviewSortType>) {
       state.sort = action.payload;
     },
     removeReviewRatingFilter(state, action: PayloadAction<number>) {
@@ -67,8 +71,8 @@ const reviewsFilterSlice = createSlice({
     },
     removeReviewSortFilter(state) {
       state.sort = {
-        sortBy: '',
-        sortOrder: 'asc',
+        sortBy: ReviewSortByEnum.UpdatedDate,
+        sortDirection: SortDirectionEnum.Ascending,
       };
     },
     resetReviewFilters(state) {
