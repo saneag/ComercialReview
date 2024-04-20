@@ -10,6 +10,7 @@ export enum CategoryFilterEnum {
   CLOTHING = 8,
   ELECTRONICS = 9,
   FURNITURE = 10,
+  FAST_FOOD = 11,
 }
 
 export enum CategoryFilterEnumLabel {
@@ -24,6 +25,7 @@ export enum CategoryFilterEnumLabel {
   CLOTHING = 'Clothing',
   ELECTRONICS = 'Electronics',
   FURNITURE = 'Furniture',
+  FAST_FOOD = 'Fast Food',
 }
 
 export const categoryEnumToText = (category: CategoryFilterEnum): string => {
@@ -50,6 +52,8 @@ export const categoryEnumToText = (category: CategoryFilterEnum): string => {
       return CategoryFilterEnumLabel.ELECTRONICS;
     case CategoryFilterEnum.FURNITURE:
       return CategoryFilterEnumLabel.FURNITURE;
+    case CategoryFilterEnum.FAST_FOOD:
+      return CategoryFilterEnumLabel.FAST_FOOD;
     default:
       return '';
   }
@@ -99,5 +103,9 @@ export const categoryFilterArray = [
   {
     value: CategoryFilterEnum.FURNITURE,
     label: CategoryFilterEnumLabel.FURNITURE,
+  },
+  {
+    value: CategoryFilterEnum.FAST_FOOD,
+    label: CategoryFilterEnumLabel.FAST_FOOD,
   },
 ];

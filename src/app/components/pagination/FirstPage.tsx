@@ -1,5 +1,3 @@
-import { isMobile } from 'react-device-detect';
-
 import {
   PaginationEllipsis,
   PaginationItem,
@@ -12,10 +10,10 @@ export default function FirstPage() {
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.pagination);
 
-  const pagesToShow = isMobile ? 1 : 2;
-
   return (
-    <div className={`flex ${page.pageIndex <= pagesToShow ? 'hidden' : ''}`}>
+    <div
+      className={`flex max-md:hidden ${page.pageIndex <= 2 ? 'hidden' : ''}`}
+    >
       <PaginationItem>
         <PaginationLink
           onClick={() =>
@@ -31,7 +29,7 @@ export default function FirstPage() {
           1
         </PaginationLink>
       </PaginationItem>
-      <PaginationItem>
+      <PaginationItem className='max-md:hidden'>
         <PaginationEllipsis />
       </PaginationItem>
     </div>

@@ -15,9 +15,9 @@ export default function EndPage({ totalPages }: EndPage) {
   const page = useAppSelector((state) => state.pagination);
 
   return (
-    <>
+    <div className='flex max-md:hidden'>
       <PaginationItem
-        className={`${page.pageIndex >= totalPages - 1 ? 'hidden' : ''}`}
+        className={`max-md:hidden ${page.pageIndex >= totalPages - 1 ? 'hidden' : ''}`}
       >
         <PaginationEllipsis />
       </PaginationItem>
@@ -37,6 +37,6 @@ export default function EndPage({ totalPages }: EndPage) {
           {totalPages}
         </PaginationLink>
       </PaginationItem>
-    </>
+    </div>
   );
 }

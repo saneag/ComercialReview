@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
-import ListPagination from '@/app/components/pagination/ListPagination';
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
+import ListPagination from '@/app/components/pagination/ListPagination';
 import PersonalReviewCard from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCard';
 import ReviewCard from '@/app/components/reviewsList/reviewCard/ReviewCard';
 import ShowAllReviewsLink from '@/app/components/reviewsList/ShowAllReviewsLink';
@@ -76,7 +76,7 @@ export default function ReviewsList({
         {reviews && reviews.totalCount === 0 && <p>No reviews yet</p>}
         {showAllReviewsLink && <ShowAllReviewsLink />}
         {showListTypeChangeButtons && (
-          <>
+          <div className='flex w-full flex-wrap-reverse justify-between gap-3 max-sm:justify-center'>
             <SortDropdown
               sortBy={filter.sort.sortBy}
               sortDirection={filter.sort.sortDirection}
@@ -87,7 +87,7 @@ export default function ReviewsList({
               listType={listType}
               setListType={setListType}
             />
-          </>
+          </div>
         )}
       </div>
       <div

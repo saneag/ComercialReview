@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import BusinessCard from '@/app/components/businessesList/businessCard/BusinessCard';
-import ListPagination from '@/app/components/pagination/ListPagination';
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
+import ListPagination from '@/app/components/pagination/ListPagination';
 import SortDropdown from '@/app/components/SortDropdown';
 import { businessSortOptions } from '@/app/constants/sortDropdownOptions';
 import { useGetBusinessesQuery } from '@/app/redux/features/businessApi/businessApi';
@@ -73,7 +73,7 @@ export default function BusinessesList() {
 
   return (
     <div className='space-y-4'>
-      <div className='flex items-center justify-between gap-3 pr-3'>
+      <div className='flex flex-wrap-reverse items-center justify-between gap-3 pr-3 max-sm:justify-center'>
         <SortDropdown
           sortBy={filter.sort.sortBy}
           sortDirection={filter.sort.sortDirection}

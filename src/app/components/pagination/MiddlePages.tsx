@@ -1,5 +1,3 @@
-import { isMobile } from 'react-device-detect';
-
 import { PaginationItem, PaginationLink } from '@/app/components/ui/pagination';
 import { setPage } from '@/app/redux/features/slices/paginationSlice';
 import { useAppDispatch, useAppSelector } from '@/app/redux/store';
@@ -12,7 +10,7 @@ export default function MiddlePages({ totalPages }: MiddlePages) {
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.pagination);
 
-  const pagesToShow = isMobile ? 1 : 3;
+  const pagesToShow = 3;
   const halfPagesToShow = Math.floor(pagesToShow / 2);
 
   const startPage = Math.max(1, page.pageIndex - halfPagesToShow);
@@ -23,22 +21,35 @@ export default function MiddlePages({ totalPages }: MiddlePages) {
     (_, i) => i + startPage
   );
 
-  return pages.map((currentPage) => (
-    <PaginationItem key={currentPage}>
-      <PaginationLink
-        className='cursor-pointer select-none'
-        onClick={() =>
-          dispatch(
-            setPage({
-              pageIndex: currentPage,
-              pageSize: page.pageSize,
-            })
-          )
-        }
-        isActive={currentPage === page.pageIndex}
-      >
-        {currentPage}
-      </PaginationLink>
-    </PaginationItem>
-  ));
+  return (
+    <>
+      <div className='flex max-md:hidden'>
+        {pages.map((currentPage) => (
+          <PaginationItem key={currentPage}>
+            <PaginationLink
+              className='cursor-pointer select-none'
+              onClick={() =>
+                dispatch(
+                  setPage({
+                    pageIndex: currentPage,
+                    pageSize: page.pageSize,
+                  })
+                )
+              }
+              isActive={currentPage === page.pageIndex}
+            >
+              {currentPage}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+      </div>
+      <div className='md:hidden'>
+        <PaginationItem>
+          <PaginationLink>
+            {page.pageIndex} of {totalPages}
+          </PaginationLink>
+        </PaginationItem>
+      </div>
+    </>
+  );
 }

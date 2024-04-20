@@ -63,7 +63,12 @@ export default function SortDropdown<T>({
           ))}
         </SelectContent>
       </Select>
-      <Button size='icon' className='p-2' onClick={handleButtonClick}>
+      <Button
+        variant='outline'
+        size='icon'
+        className='p-2'
+        onClick={handleButtonClick}
+      >
         {sortDirection === SortDirectionEnum.Ascending ? (
           <ArrowUpNarrowWide />
         ) : (
