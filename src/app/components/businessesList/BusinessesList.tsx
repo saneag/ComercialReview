@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import BusinessCard from '@/app/components/businessesList/businessCard/BusinessCard';
-import ListPagination from '@/app/components/ListPagination';
+import ListPagination from '@/app/components/pagination/ListPagination';
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
 import SortDropdown from '@/app/components/SortDropdown';
 import { businessSortOptions } from '@/app/constants/sortDropdownOptions';

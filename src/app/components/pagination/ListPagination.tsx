@@ -1,8 +1,10 @@
+import EndPage from '@/app/components/pagination/EndPage';
+import FirstPage from '@/app/components/pagination/FirstPage';
+import MiddlePages from '@/app/components/pagination/MiddlePages';
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from '@/app/components/ui/pagination';
@@ -54,24 +56,9 @@ export default function ListPagination({
             onClick={handlePreviousPage}
           />
         </PaginationItem>
-        {Array.from({ length: totalPages || 1 }).map((_, index) => (
-          <PaginationItem key={index}>
-            <PaginationLink
-              className='cursor-pointer select-none'
-              onClick={() =>
-                dispatch(
-                  setPage({
-                    pageIndex: index + 1,
-                    pageSize: page.pageSize,
-                  })
-                )
-              }
-              isActive={index + 1 === page.pageIndex}
-            >
-              {index + 1}
-            </PaginationLink>
-          </PaginationItem>
-        ))}
+        <FirstPage />
+        <MiddlePages totalPages={totalPages} />
+        <EndPage totalPages={totalPages} />
         <PaginationItem
           className={`${!hasNextPage && 'pointer-events-none text-gray-400'}`}
         >

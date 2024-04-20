@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
-import ListPagination from '@/app/components/ListPagination';
+import ListPagination from '@/app/components/pagination/ListPagination';
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
 import PersonalReviewCard from '@/app/components/reviewsList/personalReviewCard/PersonalReviewCard';
 import ReviewCard from '@/app/components/reviewsList/reviewCard/ReviewCard';
