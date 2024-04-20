@@ -6,7 +6,6 @@ import FiltersAccordion from '@/app/components/filters/filtersAccordion';
 import SearchInput from '@/app/components/SearchInput';
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card';
-import { setBusinessSearchFilter } from '@/app/redux/features/slices/businessFilterSlice';
 import { useAppDispatch } from '@/app/redux/store';
 import {
   ResetFiltersType,
@@ -19,6 +18,7 @@ interface FiltersCardProps {
   resetFilters: ResetFiltersType;
   filtersDisplayChildren: ReactNode;
   setSearchFilter: SearchFilterType;
+  searchPlaceholder?: string;
 }
 
 export default function FiltersCard({
@@ -26,6 +26,7 @@ export default function FiltersCard({
   filterAccordionItems,
   filtersDisplayChildren,
   setSearchFilter,
+  searchPlaceholder,
 }: FiltersCardProps) {
   const dispatch = useAppDispatch();
 
@@ -61,7 +62,7 @@ export default function FiltersCard({
             setSearch={setSearch}
             onSearch={onSearch}
             className='shadow-md focus:ring-0 focus:ring-offset-0 focus-visible:bg-gray-100/50 focus-visible:ring-0 focus-visible:ring-offset-0'
-            placeholder='Search reviews...'
+            placeholder={searchPlaceholder || 'Search'}
           />
           <FiltersAccordion filterAccordionItems={filterAccordionItems} />
           {filtersDisplayChildren}

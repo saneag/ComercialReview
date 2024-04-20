@@ -65,6 +65,7 @@ export default function ReviewsPage() {
           resetFilters={resetReviewFilters}
           filterAccordionItems={filterAccordionItems}
           setSearchFilter={setReviewSearchFilter}
+          searchPlaceholder='Search reviews'
         />
       </div>
       <div className='w-full flex-1'>

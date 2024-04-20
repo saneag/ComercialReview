@@ -29,6 +29,7 @@ export default function Businesses() {
           resetFilters={resetBusinessFilters}
           filterAccordionItems={filterAccordionItems}
           setSearchFilter={setBusinessSearchFilter}
+          searchPlaceholder='Search businesses'
         />
       </div>
       <div className='w-full flex-1'>
