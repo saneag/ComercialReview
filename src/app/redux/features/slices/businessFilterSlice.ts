@@ -3,15 +3,19 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { RatingFilterEnum } from '@/app/types/enums/RatingFilterEnum';
 import { BusinessFilterType } from '@/app/types/filter/EntityFilterType';
-import { SortType } from '@/app/types/SortType';
+import {
+  BusinessSortByEnum,
+  BusinessSortType,
+  SortDirectionEnum,
+} from '@/app/types/SortType';
 
 const initialState: BusinessFilterType = {
   rating: RatingFilterEnum.ALL,
   category: [CategoryFilterEnum.ALL],
   search: '',
   sort: {
-    sortBy: '',
-    sortOrder: 'asc',
+    sortBy: BusinessSortByEnum.UpdatedDate,
+    sortDirection: SortDirectionEnum.Descending,
   },
 };
 
@@ -58,7 +62,7 @@ const businessFilterSlice = createSlice({
     setBusinessSearchFilter(state, action: PayloadAction<string>) {
       state.search = action.payload;
     },
-    setBusinessSortFilter(state, action: PayloadAction<SortType>) {
+    setBusinessSortFilter(state, action: PayloadAction<BusinessSortType>) {
       state.sort = action.payload;
     },
     removeBusinessRatingFilter(state, action: PayloadAction<number>) {
@@ -87,8 +91,8 @@ const businessFilterSlice = createSlice({
     },
     removeBusinessSortFilter(state) {
       state.sort = {
-        sortBy: '',
-        sortOrder: 'asc',
+        sortBy: BusinessSortByEnum.UpdatedDate,
+        sortDirection: SortDirectionEnum.Ascending,
       };
     },
     resetBusinessFilters(state) {

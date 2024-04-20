@@ -26,7 +26,7 @@ export default function ListTypeChangeButtons({
   ];
 
   return (
-    <div className='flex items-center justify-end gap-3 px-3'>
+    <div className='flex items-center gap-3'>
       <p>Display Type</p>
       {listTypeButtons.map((button, index) => (
         <Button

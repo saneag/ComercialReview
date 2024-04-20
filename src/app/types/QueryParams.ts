@@ -1,19 +1,26 @@
 import { CategoryFilterEnum } from '@/app/types/enums/CategoryFilterEnum';
 import { RatingFilterEnum } from '@/app/types/enums/RatingFilterEnum';
-import { SortType } from '@/app/types/SortType';
+import {
+  BusinessSortByEnum,
+  ReviewSortType,
+  SortType,
+} from '@/app/types/SortType';
 
 export interface QueryParams {
   pageNumber: number;
   pageSize: number;
   search?: string;
-  sort?: SortType;
   categories?: CategoryFilterEnum[];
 }
 
-export interface BusinessQueryParams extends QueryParams {
+export interface BusinessQueryParams
+  extends QueryParams,
+    SortType<BusinessSortByEnum> {
   minGrade?: RatingFilterEnum;
 }
 
-export interface ReviewQueryParams extends QueryParams {
+export interface ReviewQueryParams
+  extends QueryParams,
+    SortType<ReviewSortType> {
   grades?: RatingFilterEnum[];
 }

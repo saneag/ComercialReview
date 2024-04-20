@@ -5,8 +5,13 @@ import { useSearchParams } from 'next/navigation';
 import BusinessCard from '@/app/components/businessesList/businessCard/BusinessCard';
 import ListPagination from '@/app/components/ListPagination';
 import ListTypeChangeButtons from '@/app/components/ListTypeChangeButtons';
+import SortDropdown from '@/app/components/SortDropdown';
+import { businessSortOptions } from '@/app/constants/sortDropdownOptions';
 import { useGetBusinessesQuery } from '@/app/redux/features/businessApi/businessApi';
-import { resetBusinessFilters } from '@/app/redux/features/slices/businessFilterSlice';
+import {
+  resetBusinessFilters,
+  setBusinessSortFilter,
+} from '@/app/redux/features/slices/businessFilterSlice';
 import {
   resetPagination,
   setPage,
@@ -52,6 +57,8 @@ export default function BusinessesList() {
       categories: filter.category,
       minGrade: filter.rating,
       search: filter.search,
+      sortBy: filter.sort.sortBy,
+      sortDirection: filter.sort.sortDirection,
     },
     { refetchOnMountOrArgChange: true }
   );
@@ -66,7 +73,15 @@ export default function BusinessesList() {
 
   return (
     <div className='space-y-4'>
-      <ListTypeChangeButtons listType={listType} setListType={setListType} />
+      <div className='flex items-center justify-between gap-3 pr-3'>
+        <SortDropdown
+          sortBy={filter.sort.sortBy}
+          sortDirection={filter.sort.sortDirection}
+          sortOptions={businessSortOptions}
+          setSortFilter={setBusinessSortFilter}
+        />
+        <ListTypeChangeButtons listType={listType} setListType={setListType} />
+      </div>
       <div
         className={`gap-4 ${listType === ListType.List ? 'flex w-full flex-col' : 'grid grid-cols-2 max-md:grid-cols-1'}`}
       >

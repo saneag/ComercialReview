@@ -14,20 +14,21 @@ import {
   setReviewSearchFilter,
   setReviewSortFilter,
 } from '@/app/redux/features/slices/reviewsFilterSlice';
-import { SortType } from '@/app/types/SortType';
+import { BusinessSortType, ReviewSortType } from '@/app/types/SortType';
 
 export interface BaseFilterType {
   search: string;
-  sort: SortType;
 }
 
 export interface ReviewFilterType extends BaseFilterType {
   rating: number[];
+  sort: ReviewSortType;
 }
 
 export interface BusinessFilterType extends BaseFilterType {
   rating: number;
   category: number[];
+  sort: BusinessSortType;
 }
 
 export type SetRatingFilterType =
@@ -63,7 +64,7 @@ export type RemoveFilterOnClickType =
 
 export interface FilterValueType {
   label: string;
-  value: number;
+  value: number | string;
 }
 
 export type DisplayFilterType = {
@@ -71,3 +72,7 @@ export type DisplayFilterType = {
   filterValues: FilterValueType[];
   removeOnClick: RemoveFilterOnClickType;
 };
+
+export type SetSortFilterType =
+  | typeof setBusinessSortFilter
+  | typeof setReviewSortFilter;
