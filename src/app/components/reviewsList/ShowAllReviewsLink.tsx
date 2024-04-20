@@ -8,11 +8,15 @@ export default function ShowAllReviewsLink() {
   const { businessId } = useParams();
   const page = useAppSelector((state) => state.pagination);
 
+  const filter = useAppSelector((state) => state.reviewsFilter);
+
   const { data: reviews } = useGetReviewsByBusinessIdQuery({
     businessId: Number(businessId),
     params: {
       pageNumber: page.pageIndex,
       pageSize: page.pageSize,
+      sortBy: filter.sort.sortBy,
+      sortDirection: filter.sort.sortDirection,
     },
   });
 

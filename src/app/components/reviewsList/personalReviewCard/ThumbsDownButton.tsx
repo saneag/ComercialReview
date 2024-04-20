@@ -1,11 +1,11 @@
 import { Check, ThumbsDown } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/button';
-import { LikeType } from '@/app/types/LikeType';
+import { RecommendationType } from '@/app/types/RecommendationType';
 
 interface ThumbsDownButtonProps {
   isDisabled: boolean;
-  onChange: (value: LikeType) => void;
+  onChange: (value: RecommendationType) => void;
   isSelected: boolean;
 }
 
@@ -18,7 +18,7 @@ export default function ThumbsDownButton({
     <Button
       className='relative nm-flat-red-500-sm hover:nm-flat-red-600-sm'
       disabled={isDisabled || isSelected}
-      onClick={() => onChange(LikeType.DISLIKE)}
+      onClick={() => onChange(RecommendationType.NotRecommended)}
       type='button'
     >
       <ThumbsDown />

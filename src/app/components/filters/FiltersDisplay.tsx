@@ -26,7 +26,9 @@ export default function FiltersDisplay({ filters }: FiltersDisplayProps) {
                 <Badge
                   key={it.value}
                   className='cursor-pointer space-x-1 bg-gradient-to-tr from-purple-500/70 to-blue-500/70 px-2'
-                  onClick={() => dispatch(filter.removeOnClick(it.value))}
+                  onClick={() =>
+                    dispatch(filter.removeOnClick(Number(it.value)))
+                  }
                 >
                   <X className='h-4 w-4' />
                   <span>{it.label}</span>

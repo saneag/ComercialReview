@@ -4,13 +4,10 @@ import { Checkbox } from '@/app/components/ui/checkbox';
 import { Label } from '@/app/components/ui/label';
 import { useAppDispatch } from '@/app/redux/store';
 import { categoryFilterArray } from '@/app/types/enums/CategoryFilterEnum';
-import {
-  CategoryFilterType,
-  SetCategoryFilterType,
-} from '@/app/types/filter/EntityFilterType';
+import { SetCategoryFilterType } from '@/app/types/filter/EntityFilterType';
 
 interface CategoryAccordionItemsProps {
-  categoryFilter: CategoryFilterType;
+  categoryFilter: number[];
   setFilter: SetCategoryFilterType;
 }
 

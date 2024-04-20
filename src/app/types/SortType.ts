@@ -18,7 +18,7 @@ export enum BusinessSortByEnum {
 export enum ReviewSortByEnum {
   UpdatedDate = 0,
   Grade = 1,
-  Like = 2,
+  Recommendation = 2,
 }
 
 export interface BusinessSortType extends SortType<BusinessSortByEnum> {}

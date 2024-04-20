@@ -1,7 +1,5 @@
 import { useFormContext } from 'react-hook-form';
 
-import { ThumbsDown, ThumbsUp } from 'lucide-react';
-
 import ThumbsDownButton from '@/app/components/reviewsList/personalReviewCard/ThumbsDownButton';
 import ThumbsUpButton from '@/app/components/reviewsList/personalReviewCard/ThumbsUpButton';
 import { Button } from '@/app/components/ui/button';
@@ -11,7 +9,7 @@ import {
   FormItem,
   FormMessage,
 } from '@/app/components/ui/form';
-import { LikeType } from '@/app/types/LikeType';
+import { RecommendationType } from '@/app/types/RecommendationType';
 
 interface PersonalReviewCardActionButtonsProps {
   isDisabled: boolean;
@@ -28,7 +26,7 @@ export default function PersonalReviewCardActionButtons({
 
   return (
     <FormField
-      name='like'
+      name='recommendationType'
       control={form.control}
       render={({ field }) => (
         <FormItem>
@@ -38,14 +36,20 @@ export default function PersonalReviewCardActionButtons({
               <div className='flex justify-between'>
                 <div className='flex flex-wrap gap-2'>
                   <ThumbsUpButton
-                    onChange={(value: LikeType) => field.onChange(value)}
+                    onChange={(value: RecommendationType) =>
+                      field.onChange(value)
+                    }
                     isDisabled={isDisabled}
-                    isSelected={field.value === LikeType.LIKE}
+                    isSelected={field.value === RecommendationType.Recommended}
                   />
                   <ThumbsDownButton
-                    onChange={(value: LikeType) => field.onChange(value)}
+                    onChange={(value: RecommendationType) =>
+                      field.onChange(value)
+                    }
                     isDisabled={isDisabled}
-                    isSelected={field.value === LikeType.DISLIKE}
+                    isSelected={
+                      field.value === RecommendationType.NotRecommended
+                    }
                   />
                 </div>
                 <div className='flex flex-wrap-reverse justify-end gap-2'>

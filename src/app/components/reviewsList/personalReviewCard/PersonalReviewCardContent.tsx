@@ -15,7 +15,7 @@ import {
   useUpdateReviewMutation,
 } from '@/app/redux/features/reviewApi/reviewApi';
 import { useAppSelector } from '@/app/redux/store';
-import { LikeType } from '@/app/types/LikeType';
+import { RecommendationType } from '@/app/types/RecommendationType';
 import { ReviewCreateType, ReviewType } from '@/app/types/review/ReviewType';
 import { reviewCreateFormSchema } from '@/app/utils/formValidations/reviewCreateFormSchema';
 import { showToastSuccess } from '@/app/utils/showToastMessage';
@@ -48,7 +48,7 @@ export default function PersonalReviewCardContent({
     defaultValues: {
       grade: 0,
       reviewText: '',
-      like: LikeType.NONE,
+      recommendationType: RecommendationType.Neutral,
     },
     mode: 'onChange',
     resolver: zodResolver(reviewCreateFormSchema),
@@ -89,7 +89,7 @@ export default function PersonalReviewCardContent({
       form.reset({
         grade: review.grade,
         reviewText: review.reviewText,
-        like: review.like,
+        recommendationType: review.recommendationType,
       });
     }
   }, [form, review]);

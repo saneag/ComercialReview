@@ -29,7 +29,7 @@ export const reviewSortOptions = [
     label: 'Grade',
   },
   {
-    value: ReviewSortByEnum.Like,
-    label: 'Like',
+    value: ReviewSortByEnum.Recommendation,
+    label: 'Recommendation',
   },
 ];

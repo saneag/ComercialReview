@@ -18,7 +18,7 @@ import { SortDirectionEnum, SortType } from '@/app/types/SortType';
 interface SortDropdownProps<T> extends SortType<T> {
   sortOptions: FilterValueType[];
   sortBy: T;
-  setSortFilter: SetSortFilterType;
+  setSortFilter: SetSortFilterType | any;
 }
 
 export default function SortDropdown<T>({

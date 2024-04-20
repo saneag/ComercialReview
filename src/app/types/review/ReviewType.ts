@@ -1,9 +1,9 @@
-import { LikeType } from '@/app/types/LikeType';
+import { RecommendationType } from '@/app/types/RecommendationType';
 
 export interface BaseReviewType {
   grade: number;
   reviewText: string;
-  like: LikeType;
+  recommendationType: RecommendationType;
 }
 
 export interface ReviewAuthorType {
@@ -15,8 +15,9 @@ export interface ReviewAuthorType {
 export interface ReviewType extends BaseReviewType {
   businessId: number;
   author: ReviewAuthorType;
+  updatedDate: Date;
 }
 
 export interface ReviewCreateType extends BaseReviewType {}
 
-export interface ReviewUpdateType extends BaseReviewType {}
+export interface ReviewUpdateType extends ReviewCreateType {}
