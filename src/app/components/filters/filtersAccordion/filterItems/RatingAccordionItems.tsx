@@ -7,19 +7,18 @@ import { Checkbox } from '@/app/components/ui/checkbox';
 import { Label } from '@/app/components/ui/label';
 import { useAppDispatch } from '@/app/redux/store';
 import { ratingFilterArray } from '@/app/types/enums/RatingFilterEnum';
-import {
-  RatingFilterType,
-  SetRatingFilterType,
-} from '@/app/types/filter/EntityFilterType';
+import { SetRatingFilterType } from '@/app/types/filter/EntityFilterType';
 
 interface RatingAccordionItemsProps {
-  ratingFilter: RatingFilterType;
+  ratingFilter: number[];
   setFilter: SetRatingFilterType;
+  isRangeFilter?: boolean;
 }
 
 export default function RatingAccordionItems({
   ratingFilter,
   setFilter,
+  isRangeFilter = false,
 }: RatingAccordionItemsProps) {
   const dispatch = useAppDispatch();
 
@@ -46,7 +45,10 @@ export default function RatingAccordionItems({
             htmlFor={String(rating.value)}
             className='flex items-center space-x-2'
           >
-            <span>{rating.label}</span>
+            <span>
+              {rating.label}{' '}
+              {isRangeFilter && rating.value !== 0 && rating.value !== 5 && '+'}
+            </span>
             <span className='flex space-x-1'>
               <RatingStars starsCount={rating.value} />
             </span>

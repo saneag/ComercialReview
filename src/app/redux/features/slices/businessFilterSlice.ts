@@ -6,7 +6,7 @@ import { BusinessFilterType } from '@/app/types/filter/EntityFilterType';
 import { SortType } from '@/app/types/SortType';
 
 const initialState: BusinessFilterType = {
-  rating: [RatingFilterEnum.ALL],
+  rating: RatingFilterEnum.ALL,
   category: [CategoryFilterEnum.ALL],
   search: '',
   sort: {
@@ -21,28 +21,15 @@ const businessFilterSlice = createSlice({
   reducers: {
     setBusinessRatingFilter(state, action: PayloadAction<number>) {
       if (action.payload === RatingFilterEnum.ALL) {
-        state.rating = [RatingFilterEnum.ALL];
+        state.rating = RatingFilterEnum.ALL;
         return;
       }
 
-      if (
-        state.rating.length === 1 &&
-        state.rating[0] === RatingFilterEnum.ALL
-      ) {
-        state.rating = [];
+      if (state.rating === RatingFilterEnum.ALL) {
+        state.rating = RatingFilterEnum.ALL;
       }
 
-      const index = state.rating.indexOf(action.payload);
-
-      if (index === -1) {
-        state.rating.push(action.payload);
-      } else {
-        state.rating.splice(index, 1);
-
-        if (state.rating.length === 0) {
-          state.rating.push(RatingFilterEnum.ALL);
-        }
-      }
+      state.rating = action.payload;
     },
     setBusinessesCategoryFilter(state, action: PayloadAction<number>) {
       if (action.payload === CategoryFilterEnum.ALL) {
@@ -79,14 +66,7 @@ const businessFilterSlice = createSlice({
         return;
       }
 
-      const index = state.rating.indexOf(action.payload);
-      if (index !== -1) {
-        state.rating.splice(index, 1);
-      }
-
-      if (state.rating.length === 0) {
-        state.rating = [RatingFilterEnum.ALL];
-      }
+      state.rating = RatingFilterEnum.ALL;
     },
     removeBusinessCategoryFilter(state, action: PayloadAction<number>) {
       if (action.payload === CategoryFilterEnum.ALL) {

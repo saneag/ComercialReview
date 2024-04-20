@@ -41,7 +41,7 @@ export default function ReviewsList({
       params: {
         pageNumber: page.pageIndex,
         pageSize: page.pageSize,
-        rating: filter.rating,
+        grades: filter.rating,
         search: filter.search,
       },
     },

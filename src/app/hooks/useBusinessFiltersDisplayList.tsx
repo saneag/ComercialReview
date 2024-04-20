@@ -13,10 +13,12 @@ export default function useBusinessFiltersDisplayList() {
   const businessFiltersDisplay: DisplayFilterType[] = [
     {
       filterByLabel: 'Rating',
-      filterValues: filters.rating.map((rating) => ({
-        label: ratingEnumToText(rating),
-        value: rating,
-      })),
+      filterValues: [
+        {
+          label: `${ratingEnumToText(filters.rating)}${filters.rating !== 0 && filters.rating !== 5 ? '+' : ''}`,
+          value: filters.rating,
+        },
+      ],
       removeOnClick: removeBusinessRatingFilter,
     },
     {

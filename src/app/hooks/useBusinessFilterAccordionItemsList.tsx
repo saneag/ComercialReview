@@ -16,8 +16,9 @@ export default function useBusinessFilterAccordionItemsList() {
       triggerLabel: 'Rating',
       children: (
         <RatingAccordionItems
-          ratingFilter={filters.rating}
+          ratingFilter={[filters.rating]}
           setFilter={setBusinessRatingFilter}
+          isRangeFilter
         />
       ),
     },

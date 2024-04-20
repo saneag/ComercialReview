@@ -8,5 +8,12 @@ export interface QueryParams {
   search?: string;
   sort?: SortType;
   categories?: CategoryFilterEnum[];
-  rating?: RatingFilterEnum[];
+}
+
+export interface BusinessQueryParams extends QueryParams {
+  minGrade?: RatingFilterEnum;
+}
+
+export interface ReviewQueryParams extends QueryParams {
+  grades?: RatingFilterEnum[];
 }

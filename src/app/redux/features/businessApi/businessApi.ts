@@ -1,6 +1,6 @@
 import { apiSlice } from '@/app/redux/features/baseQuery';
 import { BusinessType } from '@/app/types/business/BusinessType';
-import { QueryParams } from '@/app/types/QueryParams';
+import { BusinessQueryParams } from '@/app/types/QueryParams';
 import { ResponseType } from '@/app/types/ResponseType';
 
 const businessApiWithTag = apiSlice.enhanceEndpoints({
@@ -9,10 +9,16 @@ const businessApiWithTag = apiSlice.enhanceEndpoints({
 
 export const businessApi = businessApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
-    getBusinesses: builder.query<ResponseType<BusinessType>, QueryParams>({
+    getBusinesses: builder.query<
+      ResponseType<BusinessType>,
+      BusinessQueryParams
+    >({
       query: (params) => ({
         url: '/businesses',
-        params,
+        params: {
+          ...params,
+          maxGrade: 5,
+        },
       }),
       providesTags: ['Businesses'],
     }),

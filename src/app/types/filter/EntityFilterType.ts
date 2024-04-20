@@ -17,18 +17,17 @@ import {
 import { SortType } from '@/app/types/SortType';
 
 export interface BaseFilterType {
-  rating: RatingFilterType;
   search: string;
   sort: SortType;
 }
 
-export type RatingFilterType = number[];
-export type CategoryFilterType = number[];
-
-export interface ReviewFilterType extends BaseFilterType {}
+export interface ReviewFilterType extends BaseFilterType {
+  rating: number[];
+}
 
 export interface BusinessFilterType extends BaseFilterType {
-  category: CategoryFilterType;
+  rating: number;
+  category: number[];
 }
 
 export type SetRatingFilterType =
@@ -49,7 +48,7 @@ export type ResetFiltersType =
   | typeof resetBusinessFilters
   | typeof resetReviewFilters;
 
-export type FilterType = RatingFilterType | CategoryFilterType;
+export type FilterType = number[];
 
 export type RemoveRatingFilterOnClickType =
   | typeof removeBusinessRatingFilter

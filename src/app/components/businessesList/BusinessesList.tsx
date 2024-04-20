@@ -50,7 +50,7 @@ export default function BusinessesList() {
       pageNumber: page.pageIndex,
       pageSize: page.pageSize,
       categories: filter.category,
-      rating: filter.rating,
+      minGrade: filter.rating,
       search: filter.search,
     },
     { refetchOnMountOrArgChange: true }
