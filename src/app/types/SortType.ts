@@ -21,6 +21,13 @@ export enum ReviewSortByEnum {
   Recommendation = 2,
 }
 
+export enum CommentSortByEnum {
+  UpdatedDate = 0,
+  CreatedDate = 1,
+}
+
 export interface BusinessSortType extends SortType<BusinessSortByEnum> {}
 
 export interface ReviewSortType extends SortType<ReviewSortByEnum> {}
+
+export interface CommentSortType extends SortType<CommentSortByEnum> {}

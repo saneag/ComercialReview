@@ -16,6 +16,9 @@ export interface ReviewType extends BaseReviewType {
   businessId: number;
   author: ReviewAuthorType;
   updatedDate: Date;
+  commentsCount: number;
+  wasEdited: boolean;
+  authorId: number;
 }
 
 export interface ReviewCreateType extends BaseReviewType {}

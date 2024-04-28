@@ -7,4 +7,5 @@ export interface BaseFieldType {
   placeholder?: string;
   isRequired?: boolean;
   isDisabled?: boolean;
+  className?: string;
 }

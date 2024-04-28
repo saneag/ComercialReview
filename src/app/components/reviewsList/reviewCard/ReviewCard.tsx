@@ -1,4 +1,5 @@
 import ReviewCardBody from '@/app/components/reviewsList/reviewCard/ReviewCardBody';
+import ReviewCardFooter from '@/app/components/reviewsList/reviewCard/ReviewCardFooter';
 import ReviewCardHeader from '@/app/components/reviewsList/reviewCard/ReviewCardHeader';
 import { Card } from '@/app/components/ui/card';
 import { ReviewType } from '@/app/types/review/ReviewType';
@@ -25,6 +26,7 @@ export default function ReviewCard({
         handleDelete={handleDelete}
       />
       <ReviewCardBody review={review} />
+      <ReviewCardFooter review={review} />
     </Card>
   );
 }

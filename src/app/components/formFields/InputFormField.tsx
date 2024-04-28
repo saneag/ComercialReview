@@ -24,6 +24,7 @@ export default function InputFormField({
   type,
   isRequired,
   isDisabled = false,
+  className,
 }: InputFormFieldProps) {
   const form = useFormContext();
 
@@ -59,7 +60,7 @@ export default function InputFormField({
                 {...field}
                 placeholder={placeholder}
                 type={type === 'password' && showPassword ? 'text' : type}
-                className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
+                className={`w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500 ${className ?? ''}`}
                 autoComplete='new-password'
               />
               {form.watch(label) !== '' && !isDisabled && (
