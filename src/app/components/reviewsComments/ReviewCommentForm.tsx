@@ -21,6 +21,8 @@ interface ReviewCommentFormProps {
   buttonLabel: string;
   buttonClassName?: string;
   isLoading?: boolean;
+  isAddingComment?: boolean;
+  setIsAddingComment?: (value: boolean) => void;
 }
 
 export default function ReviewCommentForm({
@@ -30,6 +32,8 @@ export default function ReviewCommentForm({
   buttonLabel,
   buttonClassName,
   isLoading,
+  isAddingComment,
+  setIsAddingComment,
 }: ReviewCommentFormProps) {
   const form = useForm({
     defaultValues,
@@ -57,17 +61,23 @@ export default function ReviewCommentForm({
                 textAreaClassName='nm-flat-white-sm min-h-[20px]'
               />
               <div className='flex items-center justify-end gap-2'>
-                {form.watch('text') !== '' && (
-                  <Button
-                    type='button'
-                    disabled={isLoading}
-                    variant='ghost'
-                    className='rounded-2xl'
-                    onClick={() => form.reset()}
-                  >
-                    Cancel
-                  </Button>
-                )}
+                {form.watch('text') !== '' ||
+                  (isAddingComment && (
+                    <Button
+                      type='button'
+                      disabled={isLoading}
+                      variant='ghost'
+                      className='rounded-2xl'
+                      onClick={() => {
+                        form.reset();
+                        if (setIsAddingComment) {
+                          setIsAddingComment(false);
+                        }
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  ))}
                 <Button
                   type='submit'
                   disabled={isLoading || form.watch('text') === ''}

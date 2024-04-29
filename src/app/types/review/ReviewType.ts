@@ -7,6 +7,7 @@ export interface BaseReviewType {
 }
 
 export interface ReviewAuthorType {
+  avatar: string;
   firstName: string;
   lastName: string;
   userName: string;

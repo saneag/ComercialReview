@@ -9,7 +9,7 @@ interface ReviewCardFooterProps {
 
 export default function ReviewCardFooter({ review }: ReviewCardFooterProps) {
   return (
-    <CardFooter className='flex flex-col'>
+    <CardFooter className='flex flex-col gap-5'>
       <CreateComment reviewAuthorId={review.authorId} />
       <ReviewCommentsList reviewAuthorId={review.authorId} />
     </CardFooter>

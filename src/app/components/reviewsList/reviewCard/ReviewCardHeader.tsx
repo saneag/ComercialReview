@@ -1,6 +1,11 @@
-import { Star } from 'lucide-react';
+import { Star, UserRound } from 'lucide-react';
 
 import EntityEditDropdown from '@/app/components/EntityEditDropdown';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/app/components/ui/avatar';
 import { CardHeader } from '@/app/components/ui/card';
 import { ReviewType } from '@/app/types/review/ReviewType';
 
@@ -32,9 +37,14 @@ export default function ReviewCardHeader({
   return (
     <CardHeader>
       <div className='flex justify-between'>
-        <div className='flex gap-1'>
-          <p>{review.author.firstName}</p>
-          <p>{review.author.lastName}</p>
+        <div className='flex items-center gap-1'>
+          <Avatar>
+            <AvatarImage src={review.author.avatar ?? ''} />
+            <AvatarFallback>
+              <UserRound />
+            </AvatarFallback>
+          </Avatar>
+          <p>{`${review.author.firstName} ${review.author.lastName}`}</p>
         </div>
         <div className='flex-y-center gap-2'>
           <p className='text-lg'>{review.grade}</p>

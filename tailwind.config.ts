@@ -92,8 +92,15 @@ const config: Config = {
         'spin-10': 'spin 10s linear infinite',
         'caret-blink': 'caret-blink 1.25s ease-out infinite',
       },
+      boxShadow: {
+        'lg-inner': 'inset 0px 0px 3px 3px rgba(0, 0, 0, 0.1)',
+      },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('tailwindcss-neumorphism')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('tailwindcss-neumorphism'),
+    require('tailwind-scrollbar'),
+  ],
 };
 export default config;

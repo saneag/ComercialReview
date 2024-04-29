@@ -1,6 +1,9 @@
+import { useState } from 'react';
+
 import { useParams } from 'next/navigation';
 
 import ReviewCommentForm from '@/app/components/reviewsComments/ReviewCommentForm';
+import { Button } from '@/app/components/ui/button';
 import { useCreateCommentMutation } from '@/app/redux/features/commentApi/commentApi';
 import { CommentCreateType } from '@/app/types/comment/CommentType';
 import { commentCreateFormSchema } from '@/app/utils/formValidations/commentFormSchema';
@@ -12,6 +15,7 @@ interface CreateCommentProps {
 export default function CreateComment({ reviewAuthorId }: CreateCommentProps) {
   const { businessId } = useParams();
   const [createComment, { isLoading }] = useCreateCommentMutation();
+  const [isAddingComment, setIsAddingComment] = useState(false);
 
   const defaultValues: CommentCreateType = {
     businessId: Number(businessId),
@@ -22,17 +26,31 @@ export default function CreateComment({ reviewAuthorId }: CreateCommentProps) {
   const handleSubmit = async (data: CommentCreateType) => {
     try {
       createComment(data);
+      setIsAddingComment(false);
     } catch (error) {}
   };
 
   return (
-    <ReviewCommentForm
-      defaultValues={defaultValues}
-      onSubmit={handleSubmit}
-      resolver={commentCreateFormSchema}
-      buttonLabel='Comment'
-      buttonClassName='bg-blue-500 text-white hover:bg-blue-600'
-      isLoading={isLoading}
-    />
+    <>
+      {isAddingComment ? (
+        <ReviewCommentForm
+          defaultValues={defaultValues}
+          onSubmit={handleSubmit}
+          resolver={commentCreateFormSchema}
+          buttonLabel='Comment'
+          buttonClassName='bg-blue-500 text-white hover:bg-blue-600'
+          isLoading={isLoading}
+          isAddingComment={isAddingComment}
+          setIsAddingComment={setIsAddingComment}
+        />
+      ) : (
+        <Button
+          className='flex self-end text-black nm-flat-white hover:nm-flat-white-sm'
+          onClick={() => setIsAddingComment(true)}
+        >
+          Add Comment
+        </Button>
+      )}
+    </>
   );
 }

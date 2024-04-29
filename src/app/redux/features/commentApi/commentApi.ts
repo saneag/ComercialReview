@@ -23,6 +23,18 @@ export const commentApi = commentApiWithTag.injectEndpoints({
         };
       },
       providesTags: ['Comments'],
+      // serializeQueryArgs: ({ endpointName }) => {
+      //   return endpointName;
+      // },
+      // merge: (existing, incoming) => {
+      //   return {
+      //     ...incoming,
+      //     items: [...(existing?.items ?? []), ...incoming.items],
+      //   };
+      // },
+      // forceRefetch({ currentArg, previousArg }) {
+      //   return currentArg?.pageNumber !== previousArg?.pageNumber;
+      // },
     }),
     getComment: builder.query<CommentType, { id: number }>({
       query: ({ id }) => `/comments/${id}`,

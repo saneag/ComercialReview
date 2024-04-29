@@ -29,6 +29,7 @@ export default function ReviewsList({
 }: ReviewsListProps) {
   const dispatch = useAppDispatch();
   const { businessId } = useParams();
+  const user = useAppSelector((state) => state.user);
 
   const [listType, setListType] = useState<ListType>(ListType.List);
 
@@ -94,9 +95,12 @@ export default function ReviewsList({
         className={`gap-4 ${listType === ListType.List ? 'flex w-full flex-col' : 'grid grid-cols-2 max-md:grid-cols-1'}`}
       >
         {isSuccess &&
-          reviews.items.map((review, index) => (
-            <ReviewCard key={index} review={review} />
-          ))}
+          reviews.items.map(
+            (review, index) =>
+              review.authorId !== user.user?.id && (
+                <ReviewCard key={index} review={review} />
+              )
+          )}
       </div>
       {reviews && page.pageSize > 3 && (
         <ListPagination
