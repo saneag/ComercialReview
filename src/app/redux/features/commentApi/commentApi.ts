@@ -59,16 +59,17 @@ export const commentApi = commentApiWithTag.injectEndpoints({
     }),
     updateComment: builder.mutation<void, CommentUpdateType>({
       query: (comment) => ({
-        url: `/comments/${comment.id}`,
+        url: `/review-comments/${comment.id}`,
         method: 'PUT',
         body: {
           text: comment.text,
         },
       }),
-      invalidatesTags: ['Comment'],
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        await queryFulfilled;
-        dispatch(commentApi.util.invalidateTags(['Comment']));
+      invalidatesTags: ['Comments', 'Comment'],
+      onQueryStarted(_, { dispatch, queryFulfilled }) {
+        queryFulfilled.then(() => {
+          dispatch(commentApi.util.invalidateTags(['Comment']));
+        });
       },
       extraOptions: {
         maxRetries: 0,
@@ -76,14 +77,10 @@ export const commentApi = commentApiWithTag.injectEndpoints({
     }),
     deleteComment: builder.mutation<void, { id: number }>({
       query: ({ id }) => ({
-        url: `/comments/${id}`,
+        url: `/review-comments/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Comment'],
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        await queryFulfilled;
-        dispatch(commentApi.util.invalidateTags(['Comment']));
-      },
+      invalidatesTags: ['Comments', 'Comment'],
       extraOptions: {
         maxRetries: 0,
       },

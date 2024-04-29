@@ -6,8 +6,8 @@ export const commentCreateFormSchema = z.object({
     .min(1, {
       message: 'Comment text is required',
     })
-    .max(1000, {
-      message: 'Comment text must be less than 1000 characters',
+    .max(500, {
+      message: 'Comment text must be less than 500 characters',
     }),
   businessId: z.coerce
     .number({
@@ -29,7 +29,7 @@ export const commentUpdateFormSchema = z.object({
     .min(1, {
       message: 'Comment text is required',
     })
-    .max(1000, {
-      message: 'Comment text must be less than 1000 characters',
+    .max(500, {
+      message: 'Comment text must be less than 500 characters',
     }),
 });

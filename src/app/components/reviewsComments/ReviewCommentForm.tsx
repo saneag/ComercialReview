@@ -61,23 +61,22 @@ export default function ReviewCommentForm({
                 textAreaClassName='nm-flat-white-sm min-h-[20px]'
               />
               <div className='flex items-center justify-end gap-2'>
-                {form.watch('text') !== '' ||
-                  (isAddingComment && (
-                    <Button
-                      type='button'
-                      disabled={isLoading}
-                      variant='ghost'
-                      className='rounded-2xl'
-                      onClick={() => {
-                        form.reset();
-                        if (setIsAddingComment) {
-                          setIsAddingComment(false);
-                        }
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                  ))}
+                {(form.watch('text') !== '' || isAddingComment) && (
+                  <Button
+                    type='button'
+                    disabled={isLoading}
+                    variant='ghost'
+                    className='rounded-2xl'
+                    onClick={() => {
+                      form.reset();
+                      if (setIsAddingComment) {
+                        setIsAddingComment(false);
+                      }
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                )}
                 <Button
                   type='submit'
                   disabled={isLoading || form.watch('text') === ''}
