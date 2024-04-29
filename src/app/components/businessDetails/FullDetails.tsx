@@ -16,7 +16,7 @@ export default function FullDetails() {
         {business.fullDescription ? (
           <>
             <Separator className='mb-2 bg-gray-300' />
-            <ScrollArea className='h-80'>
+            <ScrollArea className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full h-fit max-h-[20rem] overflow-y-auto pl-3 scrollbar-thin scrollbar-track-slate-100 scrollbar-thumb-slate-400'>
               <div
                 className='pr-4'
                 dangerouslySetInnerHTML={{ __html: business.fullDescription }}

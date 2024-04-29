@@ -13,7 +13,7 @@ import { showToastSuccess } from '@/app/utils/showToastMessage';
 
 export default function CreateBusiness() {
   const router = useRouter();
-  const [createBusiness, { isLoading }] = useCreateBusinessMutation();
+  const [createBusiness, { isLoading, isError }] = useCreateBusinessMutation();
 
   const defaultValues: BusinessCreateType = {
     title: '',
@@ -26,6 +26,7 @@ export default function CreateBusiness() {
       longitude: '',
     },
     category: CategoryFilterEnum.ALL,
+    galleryPhotos: [],
   };
 
   const formFields: BusinessCreateFieldType[] = [
@@ -59,6 +60,9 @@ export default function CreateBusiness() {
       formData.append('Address.Latitude', data.address.latitude);
       formData.append('Address.Longitude', data.address.longitude);
       formData.append('Category', CategoryFilterEnum[data.category]);
+      data.galleryPhotos.forEach((photo) => {
+        formData.append('GalleryPhotos', photo.file);
+      });
 
       const response = await createBusiness(formData).unwrap();
 
@@ -79,6 +83,8 @@ export default function CreateBusiness() {
         textFormFields={textFormFields}
         buttonLabel='Create Business'
         buttonClassName='bg-green-600 hover:bg-green-700'
+        isPending={isLoading}
+        isError={isError}
       />
     </div>
   );

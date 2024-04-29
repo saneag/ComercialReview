@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { Image as ImagePlaceholder } from 'lucide-react';
+import { Image as ImagePlaceholder, Trash } from 'lucide-react';
 import Image from 'next/image';
 
 import RequiredFieldStar from '@/app/components/RequiredFieldStar';
@@ -10,6 +10,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/app/components/ui/avatar';
+import { Button } from '@/app/components/ui/button';
 import {
   FormControl,
   FormField,
@@ -83,15 +84,32 @@ export default function ImageInputFormField({
 
   return (
     <div className={className}>
-      <Avatar
-        className={`h-24 w-24 ${preview !== '' && 'cursor-pointer'}`}
-        onClick={handleImageClick}
-      >
-        <AvatarImage src={preview} className='object-fill' />
-        <AvatarFallback className='bg-gray-200'>
-          <ImagePlaceholder />
-        </AvatarFallback>
-      </Avatar>
+      <div className='relative'>
+        <Avatar
+          className={`h-24 w-24 ${preview !== '' && 'cursor-pointer'}`}
+          onClick={handleImageClick}
+        >
+          <AvatarImage src={preview} className='object-fill' />
+          <AvatarFallback className='bg-gray-200'>
+            <ImagePlaceholder />
+          </AvatarFallback>
+        </Avatar>
+        {preview && form.watch(label) && (
+          <Button
+            className='absolute right-1 top-1 size-fit p-1'
+            type='button'
+            variant='destructive'
+            size='icon'
+            onClick={(e) => {
+              e.stopPropagation();
+              form.setValue(label, '');
+              setPreview('');
+            }}
+          >
+            <Trash size={16} />
+          </Button>
+        )}
+      </div>
       {showBigImage && (
         <div
           className='fixed inset-0 z-10 flex cursor-pointer items-center justify-center bg-black/80'
@@ -103,11 +121,11 @@ export default function ImageInputFormField({
             width={0}
             height={0}
             sizes='100vw'
-            className='h-[80vh] w-auto rounded-xl'
+            className='max-w-screen h-auto max-h-[90%] w-auto rounded-xl'
           />
         </div>
       )}
-      {!isDisabled && (
+      {!(isDisabled || (preview && form.watch(label))) && (
         <FormField
           control={form.control}
           name={label}

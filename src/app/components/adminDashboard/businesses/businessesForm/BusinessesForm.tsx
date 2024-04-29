@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import BusinessAddressFormField from '@/app/components/adminDashboard/businesses/businessesForm/BusinessAddressFormField';
 import BusinessAddressInputManual from '@/app/components/adminDashboard/businesses/businessesForm/BusinessAddressInputManual';
 import BusinessCategorySelect from '@/app/components/adminDashboard/businesses/businessesForm/BusinessCategorySelect';
+import BusinessImageUpload from '@/app/components/adminDashboard/businesses/businessesForm/BusinessImageUpload';
 import ImageInputFormField from '@/app/components/formFields/ImageInputFormField';
 import InputFormField from '@/app/components/formFields/InputFormField';
 import TextareaFormField from '@/app/components/formFields/TextareaFormField';
@@ -30,6 +31,8 @@ interface BusinessFormProps {
   children?: ReactNode;
   buttonLabel: string;
   buttonClassName?: string;
+  isError?: boolean;
+  isPending?: boolean;
 }
 
 export default function BusinessesForm({
@@ -41,6 +44,8 @@ export default function BusinessesForm({
   children,
   buttonLabel,
   buttonClassName,
+  isError,
+  isPending,
 }: BusinessFormProps) {
   const form = useForm<BusinessFormSchemaState>({
     defaultValues,
@@ -58,57 +63,66 @@ export default function BusinessesForm({
   };
 
   useEffect(() => {
-    if (defaultValues) {
+    if (isPending) return;
+
+    if (!isError && defaultValues) {
       form.reset(defaultValues);
     }
-  }, [defaultValues, form]);
+  }, [defaultValues, form, isError, isPending]);
 
   return (
-    <div className='w-full max-w-[600px] rounded-xl px-5 py-5 nm-flat-white md:mx-5 md:px-10'>
+    <div className='w-full max-w-screen-xl rounded-xl px-5 py-5 nm-flat-white md:mx-5 md:px-10'>
       <p className='flex-x-center mb-2 text-xl text-gray-500'>{buttonLabel}</p>
       <FormProvider {...form}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-            {formFields.map((field) => (
-              <InputFormField
-                label={field.label}
-                displayLabel={field.displayLabel}
-                isRequired={field.isRequired}
-                key={field.label}
-                placeholder={field.placeholder}
-              />
-            ))}
-            {textFormFields &&
-              textFormFields.map((field) => (
-                <TextareaFormField
-                  label={field.label}
-                  displayLabel={field.displayLabel}
-                  isRequired={field.isRequired}
-                  key={field.label}
-                  placeholder={field.placeholder}
-                  type={field.type}
-                  textAreaClassName='nm-flat-white-sm'
-                  isDisabled={field.isDisabled}
+            <div className='flex w-full flex-wrap justify-evenly gap-5'>
+              <div className='w-full space-y-4 md:w-[48%]'>
+                {formFields.map((field) => (
+                  <InputFormField
+                    label={field.label}
+                    displayLabel={field.displayLabel}
+                    isRequired={field.isRequired}
+                    key={field.label}
+                    placeholder={field.placeholder}
+                  />
+                ))}
+                {textFormFields &&
+                  textFormFields.map((field) => (
+                    <TextareaFormField
+                      label={field.label}
+                      displayLabel={field.displayLabel}
+                      isRequired={field.isRequired}
+                      key={field.label}
+                      placeholder={field.placeholder}
+                      type={field.type}
+                      textAreaClassName='nm-flat-white-sm'
+                      isDisabled={field.isDisabled}
+                    />
+                  ))}
+                {businessAddressInputType === BusinessAddressInputEnum.AUTO ? (
+                  <BusinessAddressFormField
+                    businessAddressInputType={businessAddressInputType}
+                    handleInputTypeChange={handleInputTypeChange}
+                    setIsLoading={setIsLoading}
+                  />
+                ) : (
+                  <BusinessAddressInputManual
+                    businessAddressInputType={businessAddressInputType}
+                    handleInputTypeChange={handleInputTypeChange}
+                  />
+                )}
+                <BusinessCategorySelect />
+              </div>
+              <div className='w-full space-y-4 md:w-[48%]'>
+                <ImageInputFormField
+                  label='logo'
+                  displayLabel='Business Logo'
+                  className='flex flex-wrap justify-center gap-3 max-sm:text-center'
                 />
-              ))}
-            {businessAddressInputType === BusinessAddressInputEnum.AUTO ? (
-              <BusinessAddressFormField
-                businessAddressInputType={businessAddressInputType}
-                handleInputTypeChange={handleInputTypeChange}
-                setIsLoading={setIsLoading}
-              />
-            ) : (
-              <BusinessAddressInputManual
-                businessAddressInputType={businessAddressInputType}
-                handleInputTypeChange={handleInputTypeChange}
-              />
-            )}
-            <BusinessCategorySelect />
-            <ImageInputFormField
-              label='logo'
-              displayLabel='Business Logo'
-              className='flex flex-wrap justify-center gap-3 max-sm:text-center'
-            />
+                <BusinessImageUpload />
+              </div>
+            </div>
             <div className='flex justify-center'>
               <Button
                 type='submit'

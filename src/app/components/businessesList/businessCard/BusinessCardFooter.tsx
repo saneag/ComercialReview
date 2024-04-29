@@ -1,8 +1,10 @@
 import { MapPinIcon } from 'lucide-react';
 
+import { Badge } from '@/app/components/ui/badge';
 import { CardFooter } from '@/app/components/ui/card';
 import { GoogleMapsEndpoint } from '@/app/constants/googleMapsEndpoint';
 import { BusinessType } from '@/app/types/business/BusinessType';
+import { categoryEnumToText } from '@/app/types/enums/CategoryFilterEnum';
 
 interface BusinessCardFooterProps {
   business: BusinessType;
@@ -12,7 +14,10 @@ export default function BusinessCardFooter({
   business,
 }: BusinessCardFooterProps) {
   return (
-    <CardFooter className='justify-end'>
+    <CardFooter className='justify-between'>
+      <Badge className='bg-pink-400 hover:bg-pink-500'>
+        {categoryEnumToText(business.category)}
+      </Badge>
       <div>
         <a
           href={`${GoogleMapsEndpoint}/${business.address.latitude}+${business.address.longitude}`}

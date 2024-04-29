@@ -51,4 +51,6 @@ export const businessCreateFormSchema = z.object({
     .refine((value) => value !== CategoryFilterEnum.ALL, {
       message: 'Category is required',
     }),
+  galleryPhotos: z.array(z.any()),
+  photosToDelete: z.array(z.number()).optional(),
 });

@@ -62,21 +62,27 @@ export default function ReviewCommentsList({
     }));
   };
 
-  if (comments?.totalCount === 0) {
+  if (!comments || comments?.totalCount === 0) {
     return null;
   }
 
   return (
-    <div className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full flex max-h-[300px] w-full flex-col gap-5 overflow-y-auto rounded-xl p-3 shadow-lg-inner scrollbar-thin scrollbar-track-slate-100 scrollbar-thumb-slate-400'>
-      {comments?.items?.map((comment) => (
-        <CommentContainer key={comment.id} comment={comment} />
-      ))}
+    <div className='w-full space-y-2'>
+      <p className='text-right'>
+        Number of comments: {Math.min(page.pageSize, comments?.totalCount)}/
+        {comments?.totalCount}
+      </p>
+      <div className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full flex max-h-[300px] w-full flex-col gap-5 overflow-y-auto rounded-xl p-3 shadow-lg-inner scrollbar-thin scrollbar-track-slate-100 scrollbar-thumb-slate-400'>
+        {comments?.items?.map((comment) => (
+          <CommentContainer key={comment.id} comment={comment} />
+        ))}
 
-      {comments?.hasNext && (
-        <Button onClick={handleShowMore} variant='link'>
-          Load More
-        </Button>
-      )}
+        {comments?.hasNext && (
+          <Button onClick={handleShowMore} variant='link'>
+            Load More
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

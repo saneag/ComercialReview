@@ -29,14 +29,6 @@ export default function BusinessDetails() {
     showToastError('Error fetching business');
   }
 
-  const images: string[] = [
-    '/assets/images/linella1.jpg',
-    '/assets/images/linella2.jpg',
-    '/assets/images/linella3.jpg',
-    '/assets/images/linella4.jpg',
-    '/assets/images/linella5.png',
-  ];
-
   const checkIfUserCanEdit = () => {
     return (
       user &&
@@ -63,8 +55,8 @@ export default function BusinessDetails() {
         </div>
         <div className='flex w-full flex-wrap-reverse justify-center gap-4 lg:justify-normal'>
           <div className='w-full space-y-10 lg:w-7/12 xl:w-8/12'>
-            {images.length !== 0 && (
-              <ImageCarousel images={images} includeBigImage />
+            {business.galleryPhotos.length !== 0 && (
+              <ImageCarousel images={business.galleryPhotos} includeBigImage />
             )}
             <FullDetails />
           </div>

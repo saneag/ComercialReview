@@ -8,9 +8,10 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/app/components/ui/carousel';
+import { GalleryPhotoType } from '@/app/types/business/BusinessType';
 
 interface ImageCarouselProps {
-  images: string[];
+  images: GalleryPhotoType[];
   includeBigImage?: boolean;
 }
 
@@ -48,7 +49,7 @@ export default function ImageCarousel({
       {includeBigImage && (
         <div className='flex-y-center h-full min-h-[400px]'>
           <Image
-            src={images[current]}
+            src={images[current].path}
             alt='image'
             width={0}
             height={0}
@@ -67,7 +68,7 @@ export default function ImageCarousel({
               onClick={() => handleImageClick(index)}
             >
               <Image
-                src={image}
+                src={image.path}
                 alt='image'
                 width={0}
                 height={0}
