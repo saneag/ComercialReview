@@ -32,7 +32,9 @@ export const commentApi = commentApiWithTag.injectEndpoints({
       query: (comment) => ({
         url: `/businesses/${comment.businessId}/reviews/${comment.reviewAuthorId}/comments`,
         method: 'POST',
-        body: comment.text,
+        body: {
+          text: comment.text,
+        },
       }),
       invalidatesTags: ['Comments'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
@@ -47,7 +49,9 @@ export const commentApi = commentApiWithTag.injectEndpoints({
       query: (comment) => ({
         url: `/comments/${comment.id}`,
         method: 'PUT',
-        body: comment.text,
+        body: {
+          text: comment.text,
+        },
       }),
       invalidatesTags: ['Comment'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {

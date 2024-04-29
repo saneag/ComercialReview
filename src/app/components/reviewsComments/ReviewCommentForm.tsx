@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -17,8 +18,6 @@ interface ReviewCommentFormProps {
   defaultValues: CommentCRUDType;
   onSubmit: (data: CommentFormSchemaState) => Promise<void>;
   resolver: CommentFormSchemaType;
-  formFields: CommentCRUDFieldType[];
-  textFormFields?: CommentCRUDFieldType[];
   buttonLabel: string;
   buttonClassName?: string;
   isLoading?: boolean;
@@ -28,8 +27,6 @@ export default function ReviewCommentForm({
   defaultValues,
   onSubmit,
   resolver,
-  formFields,
-  textFormFields,
   buttonLabel,
   buttonClassName,
   isLoading,
@@ -40,44 +37,45 @@ export default function ReviewCommentForm({
     resolver: zodResolver(resolver),
   });
 
+  useEffect(() => {
+    if (defaultValues) {
+      form.reset(defaultValues);
+    }
+  }, [defaultValues, form]);
+
   return (
     <div className='w-full'>
       <FormProvider {...form}>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className='w-full space-y-4'
-          >
-            {formFields.map((field) => (
-              <InputFormField
-                key={field.label}
-                label={field.label}
-                displayLabel={field.displayLabel}
-                isRequired={field.isRequired}
-                placeholder={field.placeholder}
+          <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
+            <div className='w-full space-y-2'>
+              <TextareaFormField
+                label='text'
+                displayLabel='Comment'
+                isRequired
+                isDisabled={isLoading}
+                textAreaClassName='nm-flat-white-sm min-h-[20px]'
               />
-            ))}
-            {textFormFields &&
-              textFormFields.map((field) => (
-                <TextareaFormField
-                  key={field.label}
-                  label={field.label}
-                  displayLabel={field.displayLabel}
-                  isRequired={field.isRequired}
-                  className={field.className}
-                  isDisabled={field.isDisabled}
-                  placeholder={field.placeholder}
-                  textAreaClassName='nm-flat-white-sm'
-                />
-              ))}
-            <div className='flex justify-end'>
-              <Button
-                type='submit'
-                disabled={isLoading}
-                className={buttonClassName}
-              >
-                {buttonLabel}
-              </Button>
+              <div className='flex items-center justify-end gap-2'>
+                {form.watch('text') !== '' && (
+                  <Button
+                    type='button'
+                    disabled={isLoading}
+                    variant='ghost'
+                    className='rounded-2xl'
+                    onClick={() => form.reset()}
+                  >
+                    Cancel
+                  </Button>
+                )}
+                <Button
+                  type='submit'
+                  disabled={isLoading || form.watch('text') === ''}
+                  className={`rounded-2xl ${buttonClassName}`}
+                >
+                  {buttonLabel}
+                </Button>
+              </div>
             </div>
           </form>
         </Form>

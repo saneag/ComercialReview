@@ -63,9 +63,11 @@ export default function BusinessesList() {
     { refetchOnMountOrArgChange: true }
   );
 
-  if (isError) {
-    showToastError('Error fetching businesses');
-  }
+  useEffect(() => {
+    if (isError) {
+      showToastError('Error fetching businesses');
+    }
+  }, [isError]);
 
   // useQueryParams({
   //   page,
