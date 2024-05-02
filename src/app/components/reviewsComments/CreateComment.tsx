@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import ReviewCommentForm from '@/app/components/reviewsComments/ReviewCommentForm';
 import { Button } from '@/app/components/ui/button';
 import { useCreateCommentMutation } from '@/app/redux/features/commentApi/commentApi';
+import { useAppSelector } from '@/app/redux/store';
 import { CommentCreateType } from '@/app/types/comment/CommentType';
 import { commentCreateFormSchema } from '@/app/utils/formValidations/commentFormSchema';
 
@@ -16,6 +17,8 @@ export default function CreateComment({ reviewAuthorId }: CreateCommentProps) {
   const { businessId } = useParams();
   const [createComment, { isLoading }] = useCreateCommentMutation();
   const [isAddingComment, setIsAddingComment] = useState(false);
+
+  const isAuth = useAppSelector((state) => state.user.isAuth);
 
   const defaultValues: CommentCreateType = {
     businessId: Number(businessId),
@@ -29,6 +32,8 @@ export default function CreateComment({ reviewAuthorId }: CreateCommentProps) {
       setIsAddingComment(false);
     } catch (error) {}
   };
+
+  if (!isAuth) return null;
 
   return (
     <>

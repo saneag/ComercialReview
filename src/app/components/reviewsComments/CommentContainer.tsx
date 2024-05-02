@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/app/components/ui/dropdown-menu';
 import { useDeleteCommentMutation } from '@/app/redux/features/commentApi/commentApi';
+import { useAppSelector } from '@/app/redux/store';
 import { CommentType } from '@/app/types/comment/CommentType';
 
 interface CommentContainerProps {
@@ -23,6 +24,8 @@ interface CommentContainerProps {
 }
 
 export default function CommentContainer({ comment }: CommentContainerProps) {
+  const { user, isAuth } = useAppSelector((state) => state.user);
+
   const [isUpdatingComment, setIsUpdatingComment] = useState(false);
 
   const [deleteComment] = useDeleteCommentMutation();
@@ -55,25 +58,27 @@ export default function CommentContainer({ comment }: CommentContainerProps) {
             <span className='font-semibold'>{`${comment.author.firstName} ${comment.author.lastName}`}</span>
           )}
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <MoreVertical />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem
-              onClick={handleCommentEdit}
-              className='text-blue-500 hover:text-blue-600'
-            >
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={handleCommentDelete}
-              className='text-red-500 hover:text-red-600'
-            >
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {isAuth && comment.author.id === user?.id && (
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <MoreVertical />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem
+                onClick={handleCommentEdit}
+                className='text-blue-500 hover:text-blue-600'
+              >
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={handleCommentDelete}
+                className='text-red-500 hover:text-red-600'
+              >
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
       {isUpdatingComment ? (
         <UpdateComment

@@ -1,15 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { UserRound } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
 import CommentContainer from '@/app/components/reviewsComments/CommentContainer';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/app/components/ui/avatar';
-import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { apiSlice } from '@/app/redux/features/baseQuery';
 import { useGetCommentsQuery } from '@/app/redux/features/commentApi/commentApi';
