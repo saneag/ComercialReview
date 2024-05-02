@@ -83,7 +83,7 @@ export default function CommentContainer({ comment }: CommentContainerProps) {
           setIsUpdatingComment={setIsUpdatingComment}
         />
       ) : (
-        <span className='pl-2'>{comment.text}</span>
+        <span className='pl-2 indent-2'>{comment.text}</span>
       )}
     </div>
   );
