@@ -1,8 +1,7 @@
-import { AvatarImage } from '@radix-ui/react-avatar';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import RatingStars from '@/app/components/RatingStars';
-import { Avatar } from '@/app/components/ui/avatar';
 import { CardHeader } from '@/app/components/ui/card';
 import { BusinessType } from '@/app/types/business/BusinessType';
 import { roundTo } from '@/app/utils/roundTo';
@@ -20,15 +19,16 @@ export default function BusinessCardHeader({
   return (
     <CardHeader className='flex flex-row flex-wrap gap-3'>
       <div className='max-sm:flex-x-center min-w-14 max-sm:w-full'>
-        {logoPath && (
-          <Avatar className='h-14 w-auto'>
-            <AvatarImage
-              className='object-contain'
-              src={logoPath}
-              alt={title}
-            />
-          </Avatar>
-        )}
+        <div>
+          <Image
+            src={logoPath || ''}
+            alt={business.title}
+            width={0}
+            height={0}
+            sizes='100vw'
+            className='h-14 w-auto'
+          />
+        </div>
       </div>
       <div className='flex flex-1 flex-wrap max-sm:justify-between'>
         <div className='flex flex-1 flex-col'>
