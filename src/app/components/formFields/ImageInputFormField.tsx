@@ -94,7 +94,7 @@ export default function ImageInputFormField({
             <ImagePlaceholder />
           </AvatarFallback>
         </Avatar>
-        {preview && form.watch(label) && (
+        {!isDisabled && preview && (
           <Button
             className='absolute right-1 top-1 size-fit p-1'
             type='button'
