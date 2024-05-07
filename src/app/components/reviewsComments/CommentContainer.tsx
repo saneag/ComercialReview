@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
 import { formatDistance } from 'date-fns';
-import { MoreVertical, UserRound } from 'lucide-react';
+import { UserRound } from 'lucide-react';
 
+import LikeButton from '@/app/components/LikeButton';
+import CommentDropdownMenu from '@/app/components/reviewsComments/CommentDropdownMenu';
 import UpdateComment from '@/app/components/reviewsComments/UpdateComment';
 import {
   Avatar,
@@ -11,13 +13,9 @@ import {
 } from '@/app/components/ui/avatar';
 import { Badge } from '@/app/components/ui/badge';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/app/components/ui/dropdown-menu';
-import { useDeleteCommentMutation } from '@/app/redux/features/commentApi/commentApi';
-import { useAppSelector } from '@/app/redux/store';
+  useLikeCommentMutation,
+  useUnlikeCommentMutation,
+} from '@/app/redux/features/commentApi/commentLikeApi';
 import { CommentType } from '@/app/types/comment/CommentType';
 
 interface CommentContainerProps {
@@ -25,20 +23,17 @@ interface CommentContainerProps {
 }
 
 export default function CommentContainer({ comment }: CommentContainerProps) {
-  const { user, isAuth } = useAppSelector((state) => state.user);
-
   const [isUpdatingComment, setIsUpdatingComment] = useState(false);
 
-  const [deleteComment] = useDeleteCommentMutation();
+  const [triggerLike] = useLikeCommentMutation();
+  const [triggerUnlike] = useUnlikeCommentMutation();
 
-  const handleCommentEdit = () => {
-    setIsUpdatingComment(!isUpdatingComment);
-  };
-
-  const handleCommentDelete = () => {
-    deleteComment({
-      id: comment.id,
-    });
+  const handleHeartClick = () => {
+    if (comment.currentUserLiked) {
+      triggerUnlike({ commentId: comment.id });
+    } else {
+      triggerLike({ commentId: comment.id });
+    }
   };
 
   return (
@@ -64,27 +59,12 @@ export default function CommentContainer({ comment }: CommentContainerProps) {
             })}
           </span>
         </div>
-        {isAuth && comment.author.id === user?.id && (
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <MoreVertical />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem
-                onClick={handleCommentEdit}
-                className='text-blue-500 hover:text-blue-600'
-              >
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={handleCommentDelete}
-                className='text-red-500 hover:text-red-600'
-              >
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+        <CommentDropdownMenu
+          isUpdatingComment={isUpdatingComment}
+          setIsUpdatingComment={setIsUpdatingComment}
+          commentId={comment.id}
+          authorId={comment.author.id}
+        />
       </div>
       {isUpdatingComment ? (
         <UpdateComment
@@ -94,7 +74,16 @@ export default function CommentContainer({ comment }: CommentContainerProps) {
           setIsUpdatingComment={setIsUpdatingComment}
         />
       ) : (
-        <span className='pl-2 pt-1 indent-2'>{comment.text}</span>
+        <div className='pt-1'>
+          <span className='pl-2 indent-2'>{comment.text}</span>
+          <div className='flex justify-end pr-2'>
+            <LikeButton
+              currentUserLiked={comment.currentUserLiked}
+              handleHeartClick={handleHeartClick}
+              likesCount={comment.likesCount}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

@@ -12,6 +12,8 @@ export interface CommentType extends BaseCommentType {
   author: UserType;
   createdDate: Date;
   updatedDate: Date;
+  likesCount: number;
+  currentUserLiked: boolean;
 }
 
 export interface CommentCreateType extends BaseCommentType {}
