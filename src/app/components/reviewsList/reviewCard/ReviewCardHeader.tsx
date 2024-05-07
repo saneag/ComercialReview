@@ -1,3 +1,4 @@
+import { formatDistance } from 'date-fns';
 import { Star, UserRound } from 'lucide-react';
 
 import EntityEditDropdown from '@/app/components/EntityEditDropdown';
@@ -35,16 +36,21 @@ export default function ReviewCardHeader({
   };
 
   return (
-    <CardHeader>
-      <div className='flex justify-between'>
-        <div className='flex items-center gap-1'>
+    <CardHeader className='px-6 pb-2 pt-6'>
+      <div className='flex justify-between gap-2'>
+        <div className='flex flex-wrap items-center gap-1'>
           <Avatar>
             <AvatarImage src={review.author.avatar ?? ''} />
             <AvatarFallback>
               <UserRound />
             </AvatarFallback>
           </Avatar>
-          <p>{`${review.author.firstName} ${review.author.lastName}`}</p>
+          <span>{`${review.author.firstName} ${review.author.lastName}`}</span>
+          <span className='max-2.5xs:indent-3 text-sm text-gray-500'>
+            {formatDistance(review.updatedDate, new Date(), {
+              addSuffix: true,
+            })}
+          </span>
         </div>
         <div className='flex-y-center gap-2'>
           <p className='text-lg'>{review.grade}</p>

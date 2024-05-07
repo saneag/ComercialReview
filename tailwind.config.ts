@@ -18,6 +18,7 @@ const config: Config = {
     },
     screens: {
       '2xs': '320px',
+      '2.5xs': '375px',
       xs: '475px',
       ...defaultTheme.screens,
     },

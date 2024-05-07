@@ -44,7 +44,7 @@ export default function CommentContainer({ comment }: CommentContainerProps) {
   return (
     <div key={comment.id} className='flex flex-col'>
       <div className='flex justify-between gap-4'>
-        <div className='flex items-center gap-2'>
+        <div className='flex flex-wrap items-center gap-1'>
           <Avatar>
             <AvatarImage src={comment.author.avatarPath ?? ''} />
             <AvatarFallback>
@@ -58,7 +58,7 @@ export default function CommentContainer({ comment }: CommentContainerProps) {
           ) : (
             <span className='font-semibold'>{`${comment.author.firstName} ${comment.author.lastName}`}</span>
           )}
-          <span className='text-xs text-gray-500'>
+          <span className='text-xs text-gray-500 max-xs:indent-3'>
             {formatDistance(comment.updatedDate, new Date(), {
               addSuffix: true,
             })}

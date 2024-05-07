@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 
-import { formatDistance } from 'date-fns';
 import { ThumbsDown, ThumbsUp } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/button';
@@ -19,7 +18,7 @@ export default function ReviewCardBody({ review }: ReviewCardBodyProps) {
     useIsTruncatedElement(contentRef);
 
   return (
-    <CardContent>
+    <CardContent className='indent-3'>
       <div>
         <p
           className={`${isReadingMore ? '' : 'line-clamp-2 max-h-[50px]'}`}
@@ -53,12 +52,6 @@ export default function ReviewCardBody({ review }: ReviewCardBodyProps) {
               </div>
             )}
           </div>
-          <p>
-            Last Updated:{' '}
-            {formatDistance(review.updatedDate, new Date(), {
-              addSuffix: true,
-            })}
-          </p>
         </div>
       </div>
     </CardContent>
