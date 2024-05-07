@@ -21,11 +21,7 @@ export default function UserDropdown() {
   const user = useAppSelector((state) => state.user.user);
   const userRole = useAppSelector((state) => state.user.role);
 
-  const [additionalContent, setAdditionalContent] = useState<
-    DropdownContentFields[]
-  >([]);
-
-  const contentFields: DropdownContentFields[] = [
+  const [contentFields, setContentFields] = useState<DropdownContentFields[]>([
     {
       label: <Link href='/profile'>Profile</Link>,
       value: 'profile',
@@ -34,7 +30,11 @@ export default function UserDropdown() {
       label: <Link href='/settings'>Settings</Link>,
       value: 'settings',
     },
-  ];
+  ]);
+
+  const [additionalContent, setAdditionalContent] = useState<
+    DropdownContentFields[]
+  >([]);
 
   const handleUserLogout = useCallback(() => {
     dispatch(resetUserOnLogout());
@@ -67,7 +67,7 @@ export default function UserDropdown() {
         },
       ]);
     }
-  }, [handleUserLogout, isAuth]);
+  }, [handleUserLogout, isAuth, userRole]);
 
   return (
     <div>

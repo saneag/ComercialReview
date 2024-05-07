@@ -37,7 +37,7 @@ export default function Header() {
       className='sticky top-0 z-10 flex h-16 w-full items-center justify-between px-5 transition-transform nm-flat-white'
     >
       <HomeLogoLink className='w-12' />
-      <div className='max-sm:hidden'>
+      <div>
         <Links />
       </div>
       <UserDropdown />
