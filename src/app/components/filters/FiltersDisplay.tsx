@@ -30,7 +30,7 @@ export default function FiltersDisplay({ filters }: FiltersDisplayProps) {
                     dispatch(filter.removeOnClick(Number(it.value)))
                   }
                 >
-                  <X className='h-4 w-4' />
+                  {it.value !== 0 && <X className='h-4 w-4' />}
                   <span>{it.label}</span>
                 </Badge>
               ))}
