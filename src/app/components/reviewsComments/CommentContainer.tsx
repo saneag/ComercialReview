@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { formatDistance } from 'date-fns';
 import { MoreVertical, UserRound } from 'lucide-react';
 
 import UpdateComment from '@/app/components/reviewsComments/UpdateComment';
@@ -57,6 +58,11 @@ export default function CommentContainer({ comment }: CommentContainerProps) {
           ) : (
             <span className='font-semibold'>{`${comment.author.firstName} ${comment.author.lastName}`}</span>
           )}
+          <span className='text-xs text-gray-500'>
+            {formatDistance(comment.updatedDate, new Date(), {
+              addSuffix: true,
+            })}
+          </span>
         </div>
         {isAuth && comment.author.id === user?.id && (
           <DropdownMenu>
