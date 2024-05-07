@@ -11,12 +11,17 @@ import { commentCreateFormSchema } from '@/app/utils/formValidations/commentForm
 
 interface CreateCommentProps {
   reviewAuthorId: number;
+  isAddingComment: boolean;
+  setIsAddingComment: (isAddingComment: boolean) => void;
 }
 
-export default function CreateComment({ reviewAuthorId }: CreateCommentProps) {
+export default function CreateComment({
+  reviewAuthorId,
+  isAddingComment,
+  setIsAddingComment,
+}: CreateCommentProps) {
   const { businessId } = useParams();
   const [createComment, { isLoading }] = useCreateCommentMutation();
-  const [isAddingComment, setIsAddingComment] = useState(false);
 
   const isAuth = useAppSelector((state) => state.user.isAuth);
 

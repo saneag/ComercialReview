@@ -3,7 +3,7 @@ import { fromAddress, setKey, setLanguage, setRegion } from 'react-geocode';
 import { useFormContext } from 'react-hook-form';
 
 import { debounce } from 'lodash';
-import { Hand } from 'lucide-react';
+import { Hand, Loader2 } from 'lucide-react';
 
 import BusinessAddressTooltip from '@/app/components/adminDashboard/businesses/businessesForm/BusinessAddressTooltip';
 import RequiredFieldStar from '@/app/components/RequiredFieldStar';
@@ -27,12 +27,14 @@ interface BusinessAddressFormFieldProps {
   businessAddressInputType: BusinessAddressInputEnum;
   handleInputTypeChange: (type: BusinessAddressInputEnum) => void;
   setIsLoading: (isLoading: boolean) => void;
+  isLoading: boolean;
 }
 
 export default function BusinessAddressFormField({
   handleInputTypeChange,
   businessAddressInputType,
   setIsLoading,
+  isLoading,
 }: BusinessAddressFormFieldProps) {
   const form = useFormContext();
 
@@ -41,6 +43,8 @@ export default function BusinessAddressFormField({
     onChange(address);
     if (address.length) {
       debounceSearch(address);
+    } else {
+      setIsLoading(false);
     }
   };
 
@@ -91,14 +95,22 @@ export default function BusinessAddressFormField({
             </Button>
           </FormLabel>
           <FormControl>
-            <Input
-              id='street'
-              value={field.value}
-              className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
-              onChange={({ target }) =>
-                handleAddressSearch(target.value, field.onChange)
-              }
-            />
+            <div className='relative'>
+              <Input
+                id='street'
+                value={field.value}
+                className='w-full nm-flat-white-sm focus-visible:ring-1 focus-visible:ring-blue-500'
+                onChange={({ target }) =>
+                  handleAddressSearch(target.value, field.onChange)
+                }
+              />
+              {isLoading && (
+                <Loader2
+                  size={20}
+                  className='absolute right-2.5 top-2.5 animate-spin'
+                />
+              )}
+            </div>
           </FormControl>
           <FormMessage />
         </FormItem>

@@ -1,3 +1,4 @@
+import { ImageOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -20,14 +21,20 @@ export default function BusinessCardHeader({
     <CardHeader className='flex flex-row flex-wrap gap-3'>
       <div className='max-sm:flex-x-center min-w-14 max-sm:w-full'>
         <div>
-          <Image
-            src={logoPath || ''}
-            alt={business.title}
-            width={0}
-            height={0}
-            sizes='100vw'
-            className='h-14 w-auto'
-          />
+          {logoPath ? (
+            <Image
+              src={logoPath || ''}
+              alt={business.title}
+              width={0}
+              height={0}
+              sizes='100vw'
+              className='h-14 w-auto'
+            />
+          ) : (
+            <div className='flex h-16 w-16 items-center justify-center rounded-full bg-gray-200'>
+              <ImageOff />
+            </div>
+          )}
         </div>
       </div>
       <div className='flex flex-1 flex-wrap max-sm:justify-between'>

@@ -67,6 +67,7 @@ export default function BusinessesForm({
 
     if (!isError && defaultValues) {
       form.reset(defaultValues);
+      setIsLoading(false);
     }
   }, [defaultValues, form, isError, isPending]);
 
@@ -105,6 +106,7 @@ export default function BusinessesForm({
                     businessAddressInputType={businessAddressInputType}
                     handleInputTypeChange={handleInputTypeChange}
                     setIsLoading={setIsLoading}
+                    isLoading={isLoading}
                   />
                 ) : (
                   <BusinessAddressInputManual

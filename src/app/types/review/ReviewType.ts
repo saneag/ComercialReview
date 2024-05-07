@@ -20,6 +20,8 @@ export interface ReviewType extends BaseReviewType {
   commentsCount: number;
   wasEdited: boolean;
   authorId: number;
+  likesCount: number;
+  currentUserLiked: boolean;
 }
 
 export interface ReviewCreateType extends BaseReviewType {}
