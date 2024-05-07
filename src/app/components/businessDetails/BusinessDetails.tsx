@@ -1,7 +1,5 @@
 'use client';
 
-import { Pen } from 'lucide-react';
-import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 
 import FullDetails from '@/app/components/businessDetails/FullDetails';
