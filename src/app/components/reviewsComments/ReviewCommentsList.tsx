@@ -4,9 +4,7 @@ import { useParams } from 'next/navigation';
 
 import CommentContainer from '@/app/components/reviewsComments/CommentContainer';
 import { Button } from '@/app/components/ui/button';
-import { apiSlice } from '@/app/redux/features/baseQuery';
 import { useGetCommentsQuery } from '@/app/redux/features/commentApi/commentApi';
-import { useAppDispatch } from '@/app/redux/store';
 import { PaginationType } from '@/app/types/PaginationType';
 import { CommentSortByEnum, SortDirectionEnum } from '@/app/types/SortType';
 import { showToastError } from '@/app/utils/showToastMessage';
@@ -18,7 +16,6 @@ interface ReviewCommentsListProps {
 export default function ReviewCommentsList({
   reviewAuthorId,
 }: ReviewCommentsListProps) {
-  const dispatch = useAppDispatch();
   const { businessId } = useParams();
 
   const [page, setPage] = useState<PaginationType>({
@@ -26,11 +23,7 @@ export default function ReviewCommentsList({
     pageSize: 3,
   });
 
-  const {
-    data: comments,
-    isLoading,
-    isError,
-  } = useGetCommentsQuery({
+  const { data: comments, isError } = useGetCommentsQuery({
     businessId: Number(businessId),
     reviewAuthorId,
     pageNumber: page.pageIndex,
@@ -51,9 +44,8 @@ export default function ReviewCommentsList({
         pageIndex: 1,
         pageSize: 3,
       });
-      dispatch(apiSlice.util.resetApiState());
     };
-  }, [dispatch]);
+  }, []);
 
   const handleShowMore = () => {
     setPage((prev) => ({
