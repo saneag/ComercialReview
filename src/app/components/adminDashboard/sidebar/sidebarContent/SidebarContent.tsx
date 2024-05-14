@@ -27,7 +27,7 @@ export default function SidebarContent({
       <div
         className={`h-full flex-col lg:flex ${
           isSidebarOpen
-            ? 'fixed left-10 top-0 z-10 flex w-1/4 bg-white px-5 py-4 animate-in slide-in-from-left-10'
+            ? 'fixed left-10 top-0 z-10 flex bg-white px-5 py-4 animate-in slide-in-from-left-10'
             : 'hidden'
         }`}
       >
