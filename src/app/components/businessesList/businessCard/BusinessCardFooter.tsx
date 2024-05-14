@@ -14,7 +14,7 @@ export default function BusinessCardFooter({
   business,
 }: BusinessCardFooterProps) {
   return (
-    <CardFooter className='justify-between'>
+    <CardFooter className='flex-wrap justify-between gap-2'>
       <Badge className='bg-pink-400 hover:bg-pink-500'>
         {categoryEnumToText(business.category)}
       </Badge>
@@ -22,9 +22,9 @@ export default function BusinessCardFooter({
         <a
           href={`${GoogleMapsEndpoint}/${business.address.latitude}+${business.address.longitude}`}
           target='_blank'
-          className='group flex items-center gap-1 transition-colors hover:text-black/80'
+          className='group flex items-start gap-1 transition-colors hover:text-black/80'
         >
-          <div>
+          <div className='mt-1'>
             <MapPinIcon
               size={16}
               className='transition-colors group-hover:text-red-400'

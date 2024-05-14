@@ -37,7 +37,7 @@ export default function BusinessCardHeader({
           )}
         </div>
       </div>
-      <div className='flex flex-1 flex-wrap max-sm:justify-between'>
+      <div className='flex flex-1 flex-wrap gap-x-4 max-sm:justify-between'>
         <div className='flex flex-1 flex-col'>
           <Link
             href={`/businesses/${id}`}
