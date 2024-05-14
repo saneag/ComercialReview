@@ -9,7 +9,7 @@ import {
 } from '@/app/types/review/ReviewType';
 
 const reviewApiWithTag = apiSlice.enhanceEndpoints({
-  addTagTypes: ['Review', 'Reviews'],
+  addTagTypes: ['Review', 'Reviews', 'Comments', 'Comment'],
 });
 
 export const reviewApi = reviewApiWithTag.injectEndpoints({
@@ -43,7 +43,8 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         method: 'POST',
         body: review,
       }),
-      invalidatesTags: (result, error) => (error ? [] : ['Review', 'Reviews']),
+      invalidatesTags: (result, error) =>
+        error ? [] : ['Review', 'Reviews', 'Comments', 'Comment'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         dispatch(businessApi.util.invalidateTags(['Business']));
@@ -61,7 +62,8 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         method: 'PUT',
         body: review,
       }),
-      invalidatesTags: (result, error) => (error ? [] : ['Review', 'Reviews']),
+      invalidatesTags: (result, error) =>
+        error ? [] : ['Review', 'Reviews', 'Comments', 'Comment'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         dispatch(businessApi.util.invalidateTags(['Business']));
@@ -75,7 +77,8 @@ export const reviewApi = reviewApiWithTag.injectEndpoints({
         url: `/businesses/${businessId}/reviews`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error) => (error ? [] : ['Review', 'Reviews']),
+      invalidatesTags: (result, error) =>
+        error ? [] : ['Review', 'Reviews', 'Comment', 'Comments'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         dispatch(businessApi.util.invalidateTags(['Business']));
