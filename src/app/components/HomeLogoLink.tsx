@@ -38,7 +38,7 @@ export default function HomeLogoLink({
         sizes='100vw'
         placeholder='blur'
         blurDataURL='/assets/images/intercon-logo-no-text.png'
-        className={`h-auto min-w-12 cursor-pointer ${className}`}
+        className={`h-auto cursor-pointer md:min-w-12 ${className}`}
       />
       {children}
     </Link>
