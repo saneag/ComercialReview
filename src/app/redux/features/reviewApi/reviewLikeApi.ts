@@ -17,7 +17,7 @@ export const reviewLikeApi = reviewLikeApiWithTag.injectEndpoints({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
-        dispatch(reviewApi.util.invalidateTags(['Reviews']));
+        dispatch(reviewApi.util.invalidateTags(['Reviews', 'Review']));
       },
       extraOptions: {
         maxRetries: 0,
@@ -33,7 +33,7 @@ export const reviewLikeApi = reviewLikeApiWithTag.injectEndpoints({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
-        dispatch(reviewApi.util.invalidateTags(['Reviews']));
+        dispatch(reviewApi.util.invalidateTags(['Reviews', 'Review']));
       },
       extraOptions: {
         maxRetries: 0,
