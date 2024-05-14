@@ -15,12 +15,14 @@ export const rtkQueryErrorLogger: Middleware =
         if (action.payload.status === 500) {
           showToastError('Something went wrong');
         } else {
-          if (action.payload.status !== 404) {
+          if (action.payload.status === 401) {
+            showToastError('Please login first');
+          } else if (action.payload.status !== 404) {
             showToastError(action.payload.data.errors);
           }
         }
       } else if (action.payload.status === 401) {
-        showToastError('Unauthorized');
+        showToastError('Please login first');
       }
     }
 
