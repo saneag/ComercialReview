@@ -23,7 +23,7 @@ export default function ShortDetails() {
               width={0}
               height={0}
               sizes='100vw'
-              className='w-auto'
+              className='w-auto min-w-28'
             />
           ) : (
             <div className='flex-center h-52 w-full bg-gray-300'>
