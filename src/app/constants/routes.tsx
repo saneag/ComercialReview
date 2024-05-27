@@ -1,5 +1,6 @@
 import {
   Building,
+  FileClock,
   LucideLayoutDashboard,
   MessageCircle,
   Settings,
@@ -31,5 +32,10 @@ export const adminLinksDashboard: LinkType[] = [
     label: 'Settings',
     path: '/dashboard/settings',
     icon: <Settings size={20} />,
+  },
+  {
+    label: 'Logs',
+    path: '/dashboard/logs',
+    icon: <FileClock size={20} />,
   },
 ];

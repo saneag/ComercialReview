@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { ArrowDownNarrowWide, ArrowUpNarrowWide } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/button';
@@ -27,9 +29,31 @@ export default function SortDropdown<T>({
   sortOptions,
   setSortFilter,
 }: SortDropdownProps<T>) {
+  const [audio] = useState(new Audio('/assets/shit.mp3'));
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleSelectChange = (value: string) => {
+    if (value === '-1') {
+      if (!isMusicPlaying) {
+        const start = () => {
+          audio.play();
+          setIsMusicPlaying(true);
+        };
+
+        start();
+      } else {
+        const stop = () => {
+          audio.pause();
+          setIsMusicPlaying(false);
+        };
+
+        stop();
+      }
+
+      return;
+    }
+
     dispatch(setSortFilter({ sortBy: Number(value), sortDirection }));
   };
 
@@ -44,6 +68,14 @@ export default function SortDropdown<T>({
       })
     );
   };
+
+  useEffect(() => {
+    audio.addEventListener('ended', () => setIsMusicPlaying(false));
+
+    return () => {
+      audio.removeEventListener('ended', () => setIsMusicPlaying(false));
+    };
+  }, []);
 
   return (
     <div className='flex items-center gap-2'>

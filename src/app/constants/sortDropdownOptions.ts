@@ -17,6 +17,10 @@ export const businessSortOptions = [
     value: BusinessSortByEnum.Rating,
     label: 'Rating',
   },
+  {
+    value: -1,
+    label: 'Best biznes ever!',
+  },
 ];
 
 export const reviewSortOptions = [

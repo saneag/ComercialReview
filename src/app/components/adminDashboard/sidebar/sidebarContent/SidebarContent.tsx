@@ -16,7 +16,7 @@ export default function SidebarContent({
       {!isSidebarOpen && (
         <div className='mt-2 flex w-full flex-col items-center gap-3 lg:hidden'>
           <div className='flex'>
-            <HomeLogoLink className='w-7' />
+            <HomeLogoLink className='w-7 md:min-w-7' />
           </div>
           <SidebarLinks
             setIsSidebarOpen={setIsSidebarOpen}
