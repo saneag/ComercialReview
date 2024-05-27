@@ -55,10 +55,18 @@ export default function UserProfileForm() {
 
       await updateUser({
         body: formData,
-      });
+      }).unwrap();
 
       setIsEdit(false);
-    } catch (error) {}
+    } catch (error) {
+      form.reset({
+        firstName: user?.firstName ?? '',
+        lastName: user?.lastName ?? '',
+        email: user?.email ?? '',
+        userName: user?.userName ?? '',
+        avatar: user?.avatarPath ?? '',
+      });
+    }
   };
 
   return (
@@ -90,12 +98,14 @@ export default function UserProfileForm() {
                 isRequired
                 isDisabled={!isEdit}
               />
-              <InputFormField
-                label='email'
-                displayLabel='Email'
-                isRequired
-                isDisabled={!isEdit}
-              />
+              <div className='hidden'>
+                <InputFormField
+                  label='email'
+                  displayLabel='Email'
+                  isRequired
+                  isDisabled={!isEdit}
+                />
+              </div>
               <InputFormField
                 label='userName'
                 displayLabel='User Name'

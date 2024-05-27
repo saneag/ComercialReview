@@ -29,12 +29,14 @@ export default function SortDropdown<T>({
   sortOptions,
   setSortFilter,
 }: SortDropdownProps<T>) {
-  const [audio] = useState(new Audio('/assets/shit.mp3'));
+  const [audio, setAudio] = useState<HTMLAudioElement>();
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleSelectChange = (value: string) => {
     if (value === '-1') {
+      if (!audio) return;
+
       if (!isMusicPlaying) {
         const start = () => {
           audio.play();
@@ -70,11 +72,17 @@ export default function SortDropdown<T>({
   };
 
   useEffect(() => {
+    if (!audio) return;
+
     audio.addEventListener('ended', () => setIsMusicPlaying(false));
 
     return () => {
       audio.removeEventListener('ended', () => setIsMusicPlaying(false));
     };
+  }, [audio]);
+
+  useEffect(() => {
+    setAudio(new Audio('/assets/shit.mp3'));
   }, []);
 
   return (

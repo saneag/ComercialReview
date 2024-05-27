@@ -45,7 +45,7 @@ export default function RatingAccordionItems({
             htmlFor={String(rating.value)}
             className='flex items-center space-x-2'
           >
-            <span>
+            <span className='w-6'>
               {rating.label}{' '}
               {isRangeFilter && rating.value !== 0 && rating.value !== 5 && '+'}
             </span>
