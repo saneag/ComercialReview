@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import type { Metadata } from 'next';
 import { Nunito as FontSans } from 'next/font/google';
@@ -35,7 +35,9 @@ export default function RootLayout({
         )}
       >
         <ReduxProvider>
-          <AppWrapper>{children}</AppWrapper>
+          <Suspense fallback={null}>
+            <AppWrapper>{children}</AppWrapper>
+          </Suspense>
         </ReduxProvider>
       </body>
     </html>

@@ -8,6 +8,13 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  experimental: { cpus: 1 },
+  async rewrites() {
+    return [
+      { source: '/api/:path*', destination: 'http://commercial-review-api:8080/api/:path*' },
+      { source: '/uploads/:path*', destination: 'http://commercial-review-api:8080/uploads/:path*' },
+    ];
+  },
   async redirects() {
     return [
       {
